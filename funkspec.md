@@ -1,0 +1,133 @@
+# [Projekt neve] funkcionális specifikáció
+
+## 1. Bevezetés
+A dokumentum célja, hogy részletesen bemutassa a rendszer működését, funkcióit, felhasználói interakcióit és az adatáramlást.  
+A leírás a fejlesztés alapjául szolgál, a követelményspecifikációban megfogalmazott igények alapján.
+
+---
+
+## 2. A rendszer célja
+[Röviden írd le, mit szeretne elérni a rendszer, mi a fejlesztés fő célja.]
+
+---
+
+## 3. Rendszeráttekintés
+[Magas szintű leírás a rendszer fő komponenseiről és működéséről – például frontend, backend, adatbázis, külső szolgáltatások.]
+
+**Fő modulok:**
+- [Felhasználói modul]
+- [Admin modul]
+- [Adatkezelő modul]
+- [Statisztikai vagy AI modul, ha van]
+
+---
+
+## 4. Rendszerszereplők
+| Szereplő | Leírás |
+|-----------|--------|
+| [Felhasználó] | [Pl. böngészheti az adatokat, használhat funkciókat] |
+| [Admin] | [Pl. adatokat kezelhet, módosíthat] |
+| [Vendég] | [Pl. regisztráció nélkül megtekinthet bizonyos oldalakat] |
+
+---
+
+## 5. Rendszerhasználati esetek (Use Case-ek)
+
+### 5.1 Használati esetek áttekintése
+[Listázd a fő funkciókat, amelyeket a rendszernek teljesítenie kell.]
+
+| ID | Név | Szereplő | Rövid leírás |
+|----|-----|-----------|---------------|
+| UC1 | [Funkció neve] | [Szereplő] | [Mit csinál a szereplő és mi történik] |
+| UC2 | [Funkció neve] | [Szereplő] | [Rövid leírás] |
+
+### 5.2 Használati eset részletes leírása
+#### UC1 – [Funkció neve]
+- **Szereplő:** [Ki hajtja végre]  
+- **Cél:** [Mit akar elérni]  
+- **Előfeltétel:** [Mi szükséges hozzá]  
+- **Lefolyás:**
+  1. [Felhasználó lépése]
+  2. [Rendszer reakciója]
+  3. [Eredmény]
+- **Utófeltétel:** [Mi történik a sikeres végrehajtás után]
+- **Alternatív folyamatok:** [Hibák, elágazások, kivételek]
+
+---
+
+## 6. Funkcionális követelmények
+[A rendszer mit tudjon – részletesen funkciónként.]
+
+| Azonosító | Funkció | Leírás | Prioritás |
+|------------|----------|---------|------------|
+| F1 | [Regisztráció] | [Felhasználó regisztrálhat új fiókot] | Magas |
+| F2 | [Bejelentkezés] | [Felhasználó hitelesítése, token kezelése] | Magas |
+| F3 | [Adatlekérés] | [Adatok megjelenítése a felhasználó számára] | Közepes |
+| F4 | [Admin funkciók] | [Adatok szerkesztése, törlése] | Magas |
+
+---
+
+## 7. Nem-funkcionális követelmények
+| Típus | Leírás |
+|--------|--------|
+| Teljesítmény | [Pl. válaszidő < 2 másodperc] |
+| Biztonság | [Hash-elt jelszavak, HTTPS kommunikáció] |
+| Megbízhatóság | [Rendszer működjön 99% rendelkezésre állással] |
+| Felhasználói élmény | [Reszponzív, mobilbarát felület] |
+
+---
+
+## 8. Adatkezelés és adatáramlás
+[Írd le, milyen adatokat kezel a rendszer, honnan jönnek, hová mennek.]
+
+**Fő adatok:**
+- [Felhasználói adatok]
+- [Rendelések, bejegyzések stb.]
+- [Logok, statisztikák]
+
+**Adatáramlás:**
+1. [Felhasználó kérés → Frontend → Backend → Adatbázis]
+2. [Backend válasz → Frontend → Felhasználó megjelenítés]
+
+---
+
+## 9. Felhasználói felület (UI)
+[Röviden írd le a fő oldalakat, képernyőket, és azok funkcióit.]
+
+| Oldal | Leírás | Funkciók |
+|--------|--------|-----------|
+| Főoldal | [Rövid leírás] | [Gombok, linkek, űrlapok] |
+| Admin oldal | [Leírás] | [CRUD műveletek] |
+| Profil oldal | [Leírás] | [Felhasználói adatok kezelése] |
+
+---
+
+## 10. Hibakezelés és kivételek
+- [Mit csinál a rendszer, ha hiba történik pl. adatbázis-hiba, üres input, 404, 500 stb.]  
+- [Felhasználónak visszajelzés: pl. hibaüzenet megjelenítése.]  
+- [Logolás a backend oldalon.]
+
+---
+
+## 11. Tesztelési javaslatok
+- **Egységtesztek:** [Egyes funkciók működésének ellenőrzése]
+- **Integrációs tesztek:** [Frontend–backend adatkapcsolat]
+- **Felhasználói tesztek:** [Használhatósági és UX tesztelés]
+- **Hibakezelés tesztelése:** [Hibás inputok és kivételes helyzetek vizsgálata]
+
+---
+
+## 12. Függőségek és feltételek
+- [Milyen külső könyvtárakat, API-kat, adatbázist használ a rendszer.]
+- [Pl. Flask, React, MySQL, OpenAI API stb.]
+
+---
+
+## 13. Korlátozások
+- [Hardver vagy szoftver korlátozások]
+- [Időkeret, projekt hatókörének korlátai]
+
+---
+
+## 14. Összefoglalás
+A dokumentum meghatározza a rendszer működésének logikai alapját, a funkciókat, és a felhasználói interakciók részletes leírását, amelyek alapján a fejlesztés megkezdhető.
