@@ -1,7 +1,7 @@
-# [Projekt neve] követelményspecifikáció
+# Étterem Webshop követelményspecifikáció
 
 ## 1. Jelenlegi helyzet
-[Ismertesd a jelenlegi állapotot, problémákat, hiányosságokat, amelyek indokolják a rendszer létrehozását.]
+Jelenleg az étterem nem rendelkezik online rendelési felülettel. A rendeléseket telefonon vagy személyesen veszik fel, ami lassú, hibalehetőségekkel teli folyamat. Nincs egységes rendszer az ételek megjelenítésére, a rendelés nyomon követésére vagy az adminisztrációra. A cél egy modern, online rendelőplatform létrehozása, amely egyszerűsíti a rendelési folyamatot mind a vendégek, mind az étterem személyzete számára.
 
 ## 2. Vágyálom rendszer
 [Írd le, hogy milyen működést, funkciókat és élményt szeretne a megrendelő vagy a felhasználó a fejlesztés végén.]
