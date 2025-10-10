@@ -38,11 +38,9 @@ A rendszer több fő oldalt tartalmaz:
 - [Fejlesztési korlátozások]
 
 ## 6. Követelménylista
-- [Pl. Reszponzív dizájn]
-- [Egyszerű, letisztult UI]
-- [Gyors betöltés]
-- [Biztonságos adatkezelés]
-- [Egyedi funkciók, pl. toplista, keresés, szűrés stb.]
+- Reszponzív dizájn
+- Egyszerű, letisztult és konzisztens UI
+- [TODO]
 
 ## 7. Fogalomszótár
 | Fogalom | Jelentés |
