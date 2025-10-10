@@ -4,7 +4,9 @@
 Jelenleg az étterem nem rendelkezik online rendelési felülettel. A rendeléseket telefonon vagy személyesen veszik fel, ami lassú, hibalehetőségekkel teli folyamat. Nincs egységes rendszer az ételek megjelenítésére, a rendelés nyomon követésére vagy az adminisztrációra. A cél egy modern, online rendelőplatform létrehozása, amely egyszerűsíti a rendelési folyamatot mind a vendégek, mind az étterem személyzete számára.
 
 ## 2. Vágyálom rendszer
-[Írd le, hogy milyen működést, funkciókat és élményt szeretne a megrendelő vagy a felhasználó a fejlesztés végén.]
+A cél egy letisztult, gyors és könnyen kezelhető online éttermi rendelőfelület létrehozása.
+A felhasználók egyszerűen böngészhetik a menüt, kosárba tehetik az ételeket, és leadhatják rendelésüket regisztráció után.
+Az adminisztrátorok kezelhetik a termékeket és a beérkezett rendeléseket, míg egy integrált AI chatbot segíti a felhasználókat a rendelésben és az információk megválaszolásában.
 
 ## 3. Jelenlegi üzleti folyamatok
 [Ha léteznek korábbi folyamatok, írd le. Ha nem volt, jelezd, hogy nincs formalizált folyamat.]
