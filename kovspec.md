@@ -15,7 +15,19 @@ A rendeléseket jelenleg manuálisan kezelik.
 ## 4. Igényelt üzleti feladatok
 
 ### 4.1 Felhasználói felület
-[Mit szeretnénk, hogy a felhasználó lásson, mit tudjon csinálni?]
+A rendszer több fő oldalt tartalmaz:  
+
+- **Bejelentkezés / Regisztráció oldal:**  
+  A felhasználók új fiókot hozhatnak létre vagy bejelentkezhetnek meglévő adataikkal.  
+
+- **Menü oldal:**  
+  Az ételek listázva jelennek meg képpel, névvel, leírással és árral. A felhasználó az ételeket kosárba teheti.  
+
+- **Kosár oldal:**  
+  A felhasználó megtekintheti a kosarában lévő tételeket, módosíthatja a mennyiséget, és leadhatja a rendelést.  
+
+- **AI Chat oldal:**  
+  Egy beépített chatbot segít a rendelésben, válaszol a gyakori kérdésekre és javaslatot ad ételekre.  
 
 ### 4.2 Backend logika
 [Milyen adatokat kezel a rendszer? Hogyan kommunikál a backend és a frontend?]
