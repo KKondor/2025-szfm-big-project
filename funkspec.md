@@ -1,4 +1,4 @@
-# [Projekt neve] funkcionális specifikáció
+# Étterem Webshop funkcionális specifikáció
 
 ## 1. Bevezetés
 A dokumentum célja, hogy részletesen bemutassa a rendszer működését, funkcióit, felhasználói interakcióit és az adatáramlást.  
@@ -7,7 +7,10 @@ A leírás a fejlesztés alapjául szolgál, a követelményspecifikációban me
 ---
 
 ## 2. A rendszer célja
-[Röviden írd le, mit szeretne elérni a rendszer, mi a fejlesztés fő célja.]
+
+A rendszer célja egy modern, könnyen használható online éttermi rendelőplatform létrehozása, amely megkönnyíti a rendelési folyamatot mind a felhasználók, mind az étterem dolgozói számára.  
+A webes alkalmazás lehetővé teszi az ételek böngészését, a kosárba helyezést és a rendelés leadását, miközben az adminisztrátorok kezelhetik a termékeket és a rendeléseket.  
+A rendszer része egy AI alapú chatfelület is, amely segíti a felhasználót a rendelésben, információt ad az ételekről, és válaszol a gyakori kérdésekre.
 
 ---
 
