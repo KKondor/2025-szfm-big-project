@@ -9,7 +9,8 @@ A felhasználók egyszerűen böngészhetik a menüt, kosárba tehetik az étele
 Az adminisztrátorok kezelhetik a termékeket és a beérkezett rendeléseket, míg egy integrált AI chatbot segíti a felhasználókat a rendelésben és az információk megválaszolásában.
 
 ## 3. Jelenlegi üzleti folyamatok
-[Ha léteznek korábbi folyamatok, írd le. Ha nem volt, jelezd, hogy nincs formalizált folyamat.]
+A fejlesztés előtt nincs formalizált üzleti folyamat.
+A rendeléseket jelenleg manuálisan kezelik.
 
 ## 4. Igényelt üzleti feladatok
 
