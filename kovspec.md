@@ -1,4 +1,4 @@
-# Étterem Webshop követelményspecifikáció
+# Restaurant Webshop követelményspecifikáció
 
 ## 1. Jelenlegi helyzet
 Jelenleg az étterem nem rendelkezik online rendelési felülettel. A rendeléseket telefonon vagy személyesen veszik fel, ami lassú, hibalehetőségekkel teli folyamat. Nincs egységes rendszer az ételek megjelenítésére, a rendelés nyomon követésére vagy az adminisztrációra. A cél egy modern, online rendelőplatform létrehozása, amely egyszerűsíti a rendelési folyamatot mind a vendégek, mind az étterem személyzete számára.
