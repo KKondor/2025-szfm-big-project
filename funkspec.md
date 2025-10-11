@@ -1,4 +1,4 @@
-# Étterem Webshop funkcionális specifikáció
+# Restaurant Webshop funkcionális specifikáció
 
 ## 1. Bevezetés
 A dokumentum célja, hogy részletesen bemutassa a rendszer működését, funkcióit, felhasználói interakcióit és az adatáramlást.  
