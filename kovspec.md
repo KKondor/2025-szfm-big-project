@@ -54,7 +54,9 @@ A rendszer több fő oldalt tartalmaz:
    - Ételajánlás az adatbázis adatai alapján
 
 ## 5. Rendszerre vonatkozó szabályok
-- [Technológiák, keretrendszerek (pl. Python Flask, JavaScript, stb.)]
+### Technológiák, keretrendszerek
+- **Backend keretrendszer:** Python Flask
+- **API felépítés:** RESTful architektúra JSON alapú adatcserével
 - [Adatbázis típusa és kezelése]
 - [Fejlesztési korlátozások]
 
