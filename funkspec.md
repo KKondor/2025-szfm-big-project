@@ -41,20 +41,25 @@ A rendszer része egy AI alapú chatfelület is, amely segíti a felhasználót 
 
 | ID | Név | Szereplő | Rövid leírás |
 |----|-----|-----------|---------------|
-| UC1 | [Funkció neve] | [Szereplő] | [Mit csinál a szereplő és mi történik] |
+| UC1 | Regisztráció | Felhasználó | Új fiók létrehozása |
 | UC2 | [Funkció neve] | [Szereplő] | [Rövid leírás] |
 
 ### 5.2 Használati eset részletes leírása
-#### UC1 – [Funkció neve]
-- **Szereplő:** [Ki hajtja végre]  
-- **Cél:** [Mit akar elérni]  
-- **Előfeltétel:** [Mi szükséges hozzá]  
-- **Lefolyás:**
-  1. [Felhasználó lépése]
-  2. [Rendszer reakciója]
-  3. [Eredmény]
-- **Utófeltétel:** [Mi történik a sikeres végrehajtás után]
-- **Alternatív folyamatok:** [Hibák, elágazások, kivételek]
+#### UC1 – Regisztráció
+- **Szereplő:** Felhasználó 
+- **Cél:** Új fiók létrehozása
+- **Előfeltétel:** Felhasználó nem rendelkezik regisztrált fiókkal, érvényes e-mail cím és jelszó rendelkezésre áll.
+- **Lépések:**
+  1. Felhasználó megnyitja a regisztrációs oldalt  
+  2. Adatok megadása (név, e-mail, jelszó)  
+  3. Backend validálja az adatokat
+  4. Jelszó hash-elése, adatok mentése az adatbázisba
+  5. Visszaigazolás a felhasználónak
+- **Utófeltétel:** Felhasználó fiókja létrejön, be tud lépni a rendszerbe.
+- **Alternatív folyamatok:**
+  - Ha a megadott e-mail már regisztrált, hibaüzenet jelenik meg.  
+  - Ha a jelszó nem elég erős, felhasználót figyelmezteti a rendszer.  
+  - Hibás adatbevitel esetén a rendszer újra kéri a helyes adatokat.
 
 ---
 
