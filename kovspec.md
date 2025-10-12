@@ -35,6 +35,10 @@ A rendszer több fő oldalt tartalmaz:
    - Regisztráció (jelszó hash-eléssel)
    - Bejelentkezés
    - Jogosultság-szintek kezelése (felhasználó / admin)
+2. **Adatkezelés és API réteg**
+   - RESTful API biztosítja a kapcsolatot a frontend és az adatbázis között  
+   - CRUD műveletek az entitásokon
+   - Minden adat JSON formátumban kerül küldésre/visszaadásra
 
 ## 5. Rendszerre vonatkozó szabályok
 - [Technológiák, keretrendszerek (pl. Python Flask, JavaScript, stb.)]
