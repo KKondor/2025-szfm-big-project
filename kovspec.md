@@ -61,7 +61,12 @@ A rendszer több fő oldalt tartalmaz:
 ## 6. Követelménylista
 - Reszponzív dizájn
 - Egyszerű, letisztult és konzisztens UI
-- [TODO]
+- Felhasználói regisztráció és bejelentkezés  
+- Menü megjelenítése 
+- Ételek kosárba helyezése és rendelés leadása  
+- Rendelések megtekintése 
+- Admin termék- és rendeléskezelés  
+- AI chat funkció
 
 ## 7. Fogalomszótár
 | Fogalom | Jelentés |
