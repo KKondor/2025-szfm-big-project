@@ -39,6 +39,11 @@ A rendszer több fő oldalt tartalmaz:
    - RESTful API biztosítja a kapcsolatot a frontend és az adatbázis között  
    - CRUD műveletek az entitásokon
    - Minden adat JSON formátumban kerül küldésre/visszaadásra
+3. **Rendeléskezelési logika**
+   - Kosár tartalmának mentése rendelésként  
+   - Teljes ár kiszámítása
+   - Rendelés státuszainak kezelése
+   - Admin jogosult módosítani a rendelés státuszát
 
 ## 5. Rendszerre vonatkozó szabályok
 - [Technológiák, keretrendszerek (pl. Python Flask, JavaScript, stb.)]
