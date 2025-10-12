@@ -55,7 +55,7 @@ A rendszer több fő oldalt tartalmaz:
 
 ## 5. Rendszerre vonatkozó szabályok
 ### Technológiák, keretrendszerek
-- **Backend keretrendszer:** Python Flask
+- **Backend keretrendszer:** Python Flask, teszteléshez pytest
 - **API felépítés:** RESTful architektúra JSON alapú adatcserével
 - [Adatbázis típusa és kezelése]
 - [Fejlesztési korlátozások]
