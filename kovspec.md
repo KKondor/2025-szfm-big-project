@@ -48,6 +48,10 @@ A rendszer több fő oldalt tartalmaz:
    - Minden végpont validálja a bemenő adatokat  
    - Hibák JSON formátumban kerülnek visszaadásra
    - Adatbázis-lekérdezések biztonságos formában történnek
+6. **AI Chat modul integráció**
+   - Chat kezelése backend oldalon  
+   - API használata válaszgeneráláshoz  
+   - Ételajánlás az adatbázis adatai alapján
 
 ## 5. Rendszerre vonatkozó szabályok
 - [Technológiák, keretrendszerek (pl. Python Flask, JavaScript, stb.)]
