@@ -30,7 +30,11 @@ A rendszer több fő oldalt tartalmaz:
   Egy beépített chatbot segít a rendelésben, válaszol a gyakori kérdésekre és javaslatot ad ételekre.  
 
 ### 4.2 Backend logika
-[Milyen adatokat kezel a rendszer? Hogyan kommunikál a backend és a frontend?]
+#### **Főbb feladatok és funkciók**
+1. **Autentikáció és jogosultságkezelés**
+   - Regisztráció (jelszó hash-eléssel)
+   - Bejelentkezés
+   - Jogosultság-szintek kezelése (felhasználó / admin)
 
 ## 5. Rendszerre vonatkozó szabályok
 - [Technológiák, keretrendszerek (pl. Python Flask, JavaScript, stb.)]
