@@ -71,5 +71,7 @@ A rendszer több fő oldalt tartalmaz:
 ## 7. Fogalomszótár
 | Fogalom | Jelentés |
 |----------|-----------|
-| [Fogalom] | [Definíció] |
-| [Fogalom] | [Definíció] |
+| API | Application Programming Interface – frontend és backend közötti kommunikáció |
+| REST | Representational State Transfer – architektúra-stílus API-khoz |
+| AI Chatbot | Automatikus asszisztens, amely válaszokat ad |
+| CRUD | Create, Read, Update, Delete – alap adatkezelési műveletek |
