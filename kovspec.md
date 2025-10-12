@@ -53,12 +53,10 @@ A rendszer több fő oldalt tartalmaz:
    - API használata válaszgeneráláshoz  
    - Ételajánlás az adatbázis adatai alapján
 
-## 5. Rendszerre vonatkozó szabályok
-### Technológiák, keretrendszerek
-- **Backend keretrendszer:** Python Flask, teszteléshez pytest
-- **API felépítés:** RESTful architektúra JSON alapú adatcserével
-- [Adatbázis típusa és kezelése]
-- [Fejlesztési korlátozások]
+## 5. A rendszerre vonatkozó szabványok és ajánlások
+- **Adatbiztonság:** jelszavak biztonságos (hash-elt) tárolása
+- **Webes szabványok:** W3C HTML5, CSS3 és ECMAScript szabványok betartása  
+- **REST API ajánlások:** JSON formátum, HTTP státuszkódok konzisztens használata
 
 ## 6. Követelménylista
 - Reszponzív dizájn
