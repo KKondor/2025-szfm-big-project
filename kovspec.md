@@ -44,6 +44,10 @@ A rendszer több fő oldalt tartalmaz:
    - Teljes ár kiszámítása
    - Rendelés státuszainak kezelése
    - Admin jogosult módosítani a rendelés státuszát
+5. **Hibakezelés és biztonság**
+   - Minden végpont validálja a bemenő adatokat  
+   - Hibák JSON formátumban kerülnek visszaadásra
+   - Adatbázis-lekérdezések biztonságos formában történnek
 
 ## 5. Rendszerre vonatkozó szabályok
 - [Technológiák, keretrendszerek (pl. Python Flask, JavaScript, stb.)]
