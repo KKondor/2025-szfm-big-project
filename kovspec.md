@@ -44,11 +44,11 @@ A rendszer több fő oldalt tartalmaz:
    - Teljes ár kiszámítása
    - Rendelés státuszainak kezelése
    - Admin jogosult módosítani a rendelés státuszát
-5. **Hibakezelés és biztonság**
+4. **Hibakezelés és biztonság**
    - Minden végpont validálja a bemenő adatokat  
    - Hibák JSON formátumban kerülnek visszaadásra
    - Adatbázis-lekérdezések biztonságos formában történnek
-6. **AI Chat modul integráció**
+5. **AI Chat modul integráció**
    - Chat kezelése backend oldalon  
    - API használata válaszgeneráláshoz  
    - Ételajánlás az adatbázis adatai alapján
