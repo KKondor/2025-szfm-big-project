@@ -43,7 +43,6 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 ## 4. Rendszerhasználati esetek (Use Case-ek)
 
 ### 4.1 Használati esetek áttekintése
-[Listázd a fő funkciókat, amelyeket a rendszernek teljesítenie kell.]
 
 | ID | Név | Szereplő | Rövid leírás |
 |----|-----|-----------|---------------|
@@ -84,7 +83,6 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 ---
 
 ## 5. Funkcionális követelmények
-[A rendszer mit tudjon – részletesen funkciónként.]
 
 | Azonosító | Funkció | Leírás | Prioritás |
 |------------|----------|---------|------------|
@@ -113,7 +111,6 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 | Bejelentkezés | Felhasználói azonosítás (K2) |
 
 ## 8. Felhasználói felület (UI)
-[Röviden írd le a fő oldalakat, képernyőket, és azok funkcióit.]
 
 | Oldal | Leírás | Funkciók |
 |--------|--------|-----------|
