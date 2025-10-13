@@ -6,7 +6,7 @@ A leírás a fejlesztés alapjául szolgál, a követelményspecifikációban me
 
 ---
 
-## 2. A rendszer célja
+## 2. Vágyálomrendszer
 
 A rendszer célja egy modern, könnyen használható online éttermi rendelőplatform létrehozása, amely megkönnyíti a rendelési folyamatot mind a felhasználók, mind az étterem dolgozói számára.  
 A webes alkalmazás lehetővé teszi az ételek böngészését, a kosárba helyezést és a rendelés leadását, miközben az adminisztrátorok kezelhetik a termékeket és a rendeléseket.  
