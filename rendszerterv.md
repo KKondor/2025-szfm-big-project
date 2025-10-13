@@ -37,7 +37,7 @@
 ### 7.2. Absztrakt komponensek, ezek kapcsolatai
 
 ## 8. Architekturális terv
-### 8.1. Egy architekturális tervezési minta (pl. MVC, 3-rétegű alkalmazás, …)
+### 8.1. Architekturális tervezési minta (pl. MVC, 3-rétegű alkalmazás, …)
 ### 8.2. Az alkalmazás rétegei, fő komponensei, ezek kapcsolatai
 ### 8.3. Változások kezelése
 ### 8.4. Rendszer bővíthetősége
