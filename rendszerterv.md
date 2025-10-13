@@ -34,4 +34,27 @@
 
 ## 7. Absztrakt domain modell
 ### 7.1. Domain specifikáció, fogalmak
-### 7.2. Absztrakt komponense
+### 7.2. Absztrakt komponensek, ezek kapcsolatai
+
+## 8. Architekturális terv
+### 8.1. Egy architekturális tervezési minta (pl. MVC, 3-rétegű alkalmazás, …)
+### 8.2. Az alkalmazás rétegei, fő komponensei, ezek kapcsolatai
+### 8.3. Változások kezelése
+### 8.4. Rendszer bővíthetősége
+### 8.5. Biztonsági funkciók
+
+## 9. Adatbázis terv
+### 9.1. Logikai adatmodell
+### 9.2. Tárolt eljárások
+### 9.3. Fizikai adatmodellt legeneráló SQL szkript
+
+## 10. Implementációs terv
+### 10.1. Perzisztencia-osztályok
+### 10.2. Üzleti logika osztályai
+### 10.3. Kliensoldal osztályai
+
+## 11. Tesztterv
+
+## 12. Telepítési terv
+
+## 13. Karbantartási terv
