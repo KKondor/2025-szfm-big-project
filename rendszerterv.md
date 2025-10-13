@@ -17,6 +17,7 @@ A rendszer támogatja az étterem dolgozóit is azáltal, hogy egyszerű és át
 - Nem helyettesíti a teljes éttermi ügyviteli rendszert (pl. könyvelés, munkaidő-nyilvántartás).
 
 ## 2. Projekt terv
+
 ### 2.1. Projektszerepkörök, felelősségek
 | Szerepkör | Felelősség |
 |-----------|------------|
@@ -26,6 +27,14 @@ A rendszer támogatja az étterem dolgozóit is azáltal, hogy egyszerű és át
 | Adatbázis fejlesztő | Adatbázis tervezése, táblák létrehozása, kapcsolatok és lekérdezések biztosítása |
 
 ### 2.2. Projektmunkások és felelősségeik
+
+| Név | Szerepkör | Főbb feladatok |
+|-----|-----------|----------------|
+| Kondor Kristóf | Frontend UI | Felhasználói felület HTML/CSS tervezése és implementációja |
+| Nyiri László | Frontend JS | Kosárkezelés, rendelés leadás, interaktív UI elemek, AI chatbot integráció |
+| Sebestyén Bence | Backend fejlesztő | API-k készítése, rendeléskezelés, felhasználói autentikáció, backend logika |
+| Kacsó Melinda | Adatbázis | Adatbázis struktúra, táblák létrehozása, SQL lekérdezések, adatbiztonság |
+
 ### 2.3. Ütemterv
 ### 2.4. Mérföldkövek
 
