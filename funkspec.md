@@ -141,7 +141,7 @@ A rendszer része egy AI alapú chatfelület is, amely segíti a felhasználót 
 
 ## 12. Függőségek és feltételek
 - [Milyen külső könyvtárakat, API-kat, adatbázist használ a rendszer.]
-- [Pl. Flask, React, MySQL, OpenAI API stb.]
+- Backend: Python Flask keretrendszer használatával, pytest a teszteléshez
 
 ---
 
