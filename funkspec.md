@@ -111,21 +111,7 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 | Regisztráció | Felhasználói fiók létrehozása (K1) |
 | Bejelentkezés | Felhasználói azonosítás (K2) |
 
-## 8. Adatkezelés és adatáramlás
-[Írd le, milyen adatokat kezel a rendszer, honnan jönnek, hová mennek.]
-
-**Fő adatok:**
-- [Felhasználói adatok]
-- [Rendelések, bejegyzések stb.]
-- [Logok, statisztikák]
-
-**Adatáramlás:**
-1. [Felhasználó kérés → Frontend → Backend → Adatbázis]
-2. [Backend válasz → Frontend → Felhasználó megjelenítés]
-
----
-
-## 9. Felhasználói felület (UI)
+## 8. Felhasználói felület (UI)
 [Röviden írd le a fő oldalakat, képernyőket, és azok funkcióit.]
 
 | Oldal | Leírás | Funkciók |
@@ -136,14 +122,14 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 
 ---
 
-## 10. Hibakezelés és kivételek
+## 9. Hibakezelés és kivételek
 - [Mit csinál a rendszer, ha hiba történik pl. adatbázis-hiba, üres input, 404, 500 stb.]  
 - [Felhasználónak visszajelzés: pl. hibaüzenet megjelenítése.]  
 - [Logolás a backend oldalon.]
 
 ---
 
-## 11. Tesztelési javaslatok
+## 10. Tesztelési javaslatok
 - **Egységtesztek:** [Egyes funkciók működésének ellenőrzése]
 - **Integrációs tesztek:** [Frontend–backend adatkapcsolat]
 - **Felhasználói tesztek:** [Használhatósági és UX tesztelés]
@@ -151,17 +137,17 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 
 ---
 
-## 12. Függőségek és feltételek
+## 11. Függőségek és feltételek
 - [Milyen külső könyvtárakat, API-kat, adatbázist használ a rendszer.]
 - Backend: Python Flask keretrendszer használatával, pytest a teszteléshez
 
 ---
 
-## 13. Korlátozások
+## 12. Korlátozások
 - [Hardver vagy szoftver korlátozások]
 - [Időkeret, projekt hatókörének korlátai]
 
 ---
 
-## 14. Összefoglalás
+## 13. Összefoglalás
 A dokumentum meghatározza a rendszer működésének logikai alapját, a funkciókat, és a felhasználói interakciók részletes leírását, amelyek alapján a fejlesztés megkezdhető.
