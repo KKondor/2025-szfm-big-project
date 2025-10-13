@@ -2,6 +2,20 @@
 
 ## 1. A rendszer célja
 
+A rendszer célja egy modern, felhasználóbarát online éttermi rendelőplatform létrehozása, amely lehetővé teszi a felhasználók számára az ételek böngészését, kiválasztását és online történő megrendelését.  
+A rendszer támogatja az étterem dolgozóit is azáltal, hogy egyszerű és átlátható felületen kezelhetik a rendeléseket, az ételeket és a rendelés státuszokat.
+
+### Amit a rendszer meg akar oldani
+- Teljesen online rendelési folyamat biztosítása: regisztráció, bejelentkezés, kosárkezelés, rendelés leadása.
+- Adminisztrációs felület biztosítása az étterem számára: rendelés kezelés, ételek szerkesztése, státuszfrissítés.
+- AI alapú chatbot integrálása a felhasználói élmény javítására: ajánlások, gyakori kérdések megválaszolása.
+- Valós idejű rendeléskövetés a felhasználók számára.
+
+### Amit a rendszer **nem** csinál
+- Nem kezeli offline rendeléseket (telefonon vagy személyesen leadott rendeléseket).
+- Nem biztosít fizikai szállítási logisztikát vagy készletkezelést az étterem részére.
+- Nem helyettesíti a teljes éttermi ügyviteli rendszert (pl. könyvelés, munkaidő-nyilvántartás).
+
 ## 2. Projekt terv
 ### 2.1. Projektszerepkörök, felelősségek
 ### 2.2. Projektmunkások és felelősségeik
