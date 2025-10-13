@@ -18,6 +18,13 @@ A rendszer támogatja az étterem dolgozóit is azáltal, hogy egyszerű és át
 
 ## 2. Projekt terv
 ### 2.1. Projektszerepkörök, felelősségek
+| Szerepkör | Felelősség |
+|-----------|------------|
+| Frontend UI/UX fejlesztő | HTML és CSS alapú felhasználói felületek tervezése és implementálása |
+| Frontend JavaScript fejlesztő | JavaScript alapú interaktív funkciók fejlesztése, API hívások kezelése |
+| Backend fejlesztő | Szerveroldali logika, API-k, adatfeldolgozás és üzleti logika megvalósítása |
+| Adatbázis fejlesztő | Adatbázis tervezése, táblák létrehozása, kapcsolatok és lekérdezések biztosítása |
+
 ### 2.2. Projektmunkások és felelősségeik
 ### 2.3. Ütemterv
 ### 2.4. Mérföldkövek
