@@ -6,7 +6,12 @@ A leírás a fejlesztés alapjául szolgál, a követelményspecifikációban me
 
 ---
 
-## 2. Vágyálomrendszer
+## 2.1 Jelenlegi helyzet leírása
+Az étterem rendeléseit jelenleg telefonon és személyesen fogadják.  
+A folyamat papíron történik, ami lassú, hibalehetőségekkel jár és nem átlátható.  
+Nincs egységes digitális rendszer a rendelések és a felhasználói adatok nyilvántartására.
+
+## 2.2 Vágyálomrendszer
 
 A rendszer célja egy modern, könnyen használható online éttermi rendelőplatform létrehozása, amely megkönnyíti a rendelési folyamatot mind a felhasználók, mind az étterem dolgozói számára.  
 A webes alkalmazás lehetővé teszi az ételek böngészését, a kosárba helyezést és a rendelés leadását, miközben az adminisztrátorok kezelhetik a termékeket és a rendeléseket.  
