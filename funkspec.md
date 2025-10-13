@@ -122,26 +122,5 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 
 ---
 
-## 9. Hibakezelés és kivételek
-- [Mit csinál a rendszer, ha hiba történik pl. adatbázis-hiba, üres input, 404, 500 stb.]  
-- [Felhasználónak visszajelzés: pl. hibaüzenet megjelenítése.]  
-- [Logolás a backend oldalon.]
-
----
-
-## 10. Tesztelési javaslatok
-- **Egységtesztek:** [Egyes funkciók működésének ellenőrzése]
-- **Integrációs tesztek:** [Frontend–backend adatkapcsolat]
-- **Felhasználói tesztek:** [Használhatósági és UX tesztelés]
-- **Hibakezelés tesztelése:** [Hibás inputok és kivételes helyzetek vizsgálata]
-
----
-
-## 11. Függőségek és feltételek
-- [Milyen külső könyvtárakat, API-kat, adatbázist használ a rendszer.]
-- Backend: Python Flask keretrendszer használatával, pytest a teszteléshez
-
----
-
 ## 12. Összefoglalás
 A dokumentum meghatározza a rendszer működésének logikai alapját, a funkciókat, és a felhasználói interakciók részletes leírását, amelyek alapján a fejlesztés megkezdhető.
