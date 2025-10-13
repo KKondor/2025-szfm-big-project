@@ -143,11 +143,5 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 
 ---
 
-## 12. Korlátozások
-- [Hardver vagy szoftver korlátozások]
-- [Időkeret, projekt hatókörének korlátai]
-
----
-
-## 13. Összefoglalás
+## 12. Összefoglalás
 A dokumentum meghatározza a rendszer működésének logikai alapját, a funkciókat, és a felhasználói interakciók részletes leírását, amelyek alapján a fejlesztés megkezdhető.
