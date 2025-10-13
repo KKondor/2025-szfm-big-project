@@ -122,5 +122,15 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 
 ---
 
-## 12. Összefoglalás
-A dokumentum meghatározza a rendszer működésének logikai alapját, a funkciókat, és a felhasználói interakciók részletes leírását, amelyek alapján a fejlesztés megkezdhető.
+## 9. Fogalomszótár
+
+| Fogalom | Meghatározás |
+|----------|---------------|
+| **Felhasználó** | A rendszer használója, aki regisztrál, bejelentkezik és rendelést ad le. |
+| **Adminisztrátor** | A rendszer kezelője, aki ételeket és rendeléseket módosíthat. |
+| **Rendelés** | A felhasználó által kiválasztott ételek listája és adatai. |
+| **Kosár** | Ideiglenes rendeléslista, amelyben a felhasználó véglegesítés előtt szerkesztheti a tételeket. |
+| **Backend** | A szerveroldali rendszer, amely kezeli az adatokat és a logikát. |
+| **Frontend** | A felhasználói felület, ahol az adatok megjelennek és a műveletek történnek. |
+| **Adatbázis** | Az adatok (felhasználók, ételek, rendelések) tárolására szolgáló rendszer. |
+| **AI Chatbot** | Intelligens segéd, amely válaszol a felhasználó kérdéseire és ajánlásokat ad. |
