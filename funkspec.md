@@ -35,18 +35,9 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 
 ---
 
-## 4. Rendszerszereplők
-| Szereplő | Leírás |
-|-----------|--------|
-| [Felhasználó] | [Pl. böngészheti az adatokat, használhat funkciókat] |
-| [Admin] | [Pl. adatokat kezelhet, módosíthat] |
-| [Vendég] | [Pl. regisztráció nélkül megtekinthet bizonyos oldalakat] |
+## 4. Rendszerhasználati esetek (Use Case-ek)
 
----
-
-## 5. Rendszerhasználati esetek (Use Case-ek)
-
-### 5.1 Használati esetek áttekintése
+### 4.1 Használati esetek áttekintése
 [Listázd a fő funkciókat, amelyeket a rendszernek teljesítenie kell.]
 
 | ID | Név | Szereplő | Rövid leírás |
@@ -55,7 +46,7 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 | UC2 | Bejelentkezés | Felhasználó | Bejelentkezés a rendszerbe meglévő adatokkal |
 
 
-### 5.2 Használati eset részletes leírása
+### 4.2 Használati eset részletes leírása
 #### UC1 – Regisztráció
 - **Szereplő:** Felhasználó 
 - **Cél:** Új fiók létrehozása
@@ -87,7 +78,7 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
   - Ha a backend nem elérhető, a rendszer értesíti a felhasználót.
 ---
 
-## 6. Funkcionális követelmények
+## 5. Funkcionális követelmények
 [A rendszer mit tudjon – részletesen funkciónként.]
 
 | Azonosító | Funkció | Leírás | Prioritás |
@@ -99,7 +90,7 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 
 ---
 
-## 7. Nem-funkcionális követelmények
+## 6. Nem-funkcionális követelmények
 | Típus | Leírás |
 |--------|--------|
 | Teljesítmény | [Pl. válaszidő < 2 másodperc] |
@@ -108,6 +99,12 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 | Felhasználói élmény | [Reszponzív, mobilbarát felület] |
 
 ---
+
+## 7. Funkció – követelmény megfeleltetés
+| Funkció | Kapcsolódó követelmény |
+|----------|-----------------------|
+| Regisztráció | Felhasználói fiók létrehozása (K1) |
+| Bejelentkezés | Felhasználói azonosítás (K2) |
 
 ## 8. Adatkezelés és adatáramlás
 [Írd le, milyen adatokat kezel a rendszer, honnan jönnek, hová mennek.]
