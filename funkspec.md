@@ -14,14 +14,24 @@ A rendszer része egy AI alapú chatfelület is, amely segíti a felhasználót 
 
 ---
 
-## 3. Rendszeráttekintés
-[Magas szintű leírás a rendszer fő komponenseiről és működéséről – például frontend, backend, adatbázis, külső szolgáltatások.]
+## 3.1 Jelenlegi üzleti folyamatok modellje
+Az étterem jelenleg manuálisan kezeli a rendeléseket.  
+A vendégek telefonon vagy személyesen adják le rendelésüket, amelyet az alkalmazottak kézzel rögzítenek.  
+A folyamat során gyakoriak a félreértések, hibás adatok és késedelmek, mivel nincs központi digitális rendszer a rendelési adatok tárolására és kezelésére.  
+A rendelések státuszának követése nehézkes, a visszajelzések pedig csak szóban vagy telefonon történnek.
 
-**Fő modulok:**
-- [Felhasználói modul]
-- [Admin modul]
-- [Adatkezelő modul]
-- [Statisztikai vagy AI modul, ha van]
+## 3.2 Igényelt üzleti folyamatok modellje
+A fejlesztendő rendszer célja, hogy a rendelési folyamat teljesen online, automatizált módon működjön.  
+
+**Folyamatleírás:**
+1. A felhasználó regisztrál és bejelentkezik a webalkalmazásba.  
+2. A menüoldalon böngészi az ételeket, majd a kiválasztott tételeket a kosárba helyezi.  
+3. A kosárban ellenőrzi és véglegesíti a rendelést.  
+4. A backend rendszer eltárolja a rendelést és kiszámolja a végösszeget.  
+5. Az adminisztrátor a kezelőfelületen megtekinti az új rendeléseket és módosíthatja azok státuszát (pl. „Folyamatban”, „Kiszállítva”).  
+6. A felhasználó a profiloldalán követheti a rendelése státuszát, és AI chatbot segítségével kérhet információt vagy ajánlást.
+
+Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosít mindkét fél számára.
 
 ---
 
