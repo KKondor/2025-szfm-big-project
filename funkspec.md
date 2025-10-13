@@ -98,10 +98,11 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 ## 6. Nem-funkcionális követelmények
 | Típus | Leírás |
 |--------|--------|
-| Teljesítmény | [Pl. válaszidő < 2 másodperc] |
-| Biztonság | [Hash-elt jelszavak, HTTPS kommunikáció] |
-| Megbízhatóság | [Rendszer működjön 99% rendelkezésre állással] |
-| Felhasználói élmény | [Reszponzív, mobilbarát felület] |
+| Teljesítmény | válaszidő < 2 másodperc |
+| Biztonság | Hash-elt jelszavak |
+| Skálázhatóság | A rendszer képes legyen növekvő számú felhasználót és rendelést kiszolgálni |
+| Felhasználói élmény | Reszponzív, mobilbarát felület |
+| Felhasználhatóság | Az oldal egyszerű, intuitív, minden korosztály számára könnyen kezelhető legyen |
 
 ---
 
