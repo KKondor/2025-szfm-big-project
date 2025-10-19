@@ -35,13 +35,39 @@ A rendszer támogatja az étterem dolgozóit is azáltal, hogy egyszerű és át
 | Sebestyén Bence | Backend fejlesztő | API-k készítése, rendeléskezelés, felhasználói autentikáció, backend logika |
 | Kacsó Melinda | Adatbázis | Adatbázis struktúra, táblák létrehozása, SQL lekérdezések, adatbiztonság |
 
-### 2.3. Ütemterv
-### 2.4. Mérföldkövek
-
 ## 3. Üzleti folyamatok modellje
+
 ### 3.1. Üzleti szereplők
+
+| Szereplő | Leírás | Fő cél |
+|-----------|---------|--------|
+| **Felhasználó (vásárló)** | Regisztrált vagy vendégként böngésző látogató, aki ételeket keres és rendel. | Ételek kiválasztása és online rendelés leadása. |
+| **Adminisztrátor / Étterem dolgozó** | Az étterem munkatársa, aki az online rendeléseket kezeli. | Rendelések megtekintése, státuszfrissítés, étlap karbantartása. |
+| **Rendszer (backend)** | A központi szerver és adatbázis, amely a rendeléseket, felhasználókat és ételeket kezeli. | Adatok tárolása, API biztosítása, logika működtetése. |
+
+---
+
 ### 3.2. Üzleti folyamatok
+
+| Folyamat | Leírás | Szereplők | Eredmény |
+|-----------|---------|------------|-----------|
+| **Regisztráció / Bejelentkezés** | A felhasználó fiókot hoz létre, vagy meglévő adataival bejelentkezik. | Felhasználó, Rendszer | Személyes fiók létrejön vagy aktívvá válik. |
+| **Étlap böngészése** | A felhasználó áttekinti a kínálatot, szűrhet és kereshet. | Felhasználó, Rendszer | A felhasználó megtalálja a kívánt ételeket. |
+| **Kosárkezelés és rendelés leadása** | A felhasználó kosárba teszi az ételeket, majd leadja a rendelést. | Felhasználó, Rendszer | Új rendelés rögzítve az adatbázisban. |
+| **Rendelés feldolgozása** | Az adminisztrátor látja az új rendelést, és frissíti annak státuszát (pl. „Elkészítés alatt”, „Kiszállítva”). | Adminisztrátor, Rendszer | A rendelés státusza frissül. |
+| **Rendeléskövetés** | A felhasználó valós időben látja a rendelés aktuális állapotát. | Felhasználó, Rendszer | Felhasználó értesül a státuszváltozásról. |
+
+---
+
 ### 3.3. Üzleti entitások
+
+| Entitás | Leírás | Fő attribútumok |
+|----------|----------|----------------|
+| **Felhasználó** | Az alkalmazás regisztrált használója. | felhasználó_id, név, email, jelszó, cím |
+| **Étel** | Az étterem által kínált termék. | étel_id, név, leírás, ár, kategória, kép_url |
+| **Rendelés** | Egy felhasználó által leadott rendelés. | rendelés_id, felhasználó_id, dátum, összeg, státusz |
+| **Rendelés_tétel** | Egy rendeléshez tartozó konkrét étel és mennyiség. | rendelés_tétel_id, rendelés_id, étel_id, mennyiség |
+
 
 ## 4. Követelmények
 ### 4.1. Funkcionális követelmények
@@ -61,6 +87,7 @@ A rendszer támogatja az étterem dolgozóit is azáltal, hogy egyszerű és át
 ### 6.3. Fizikai alrendszerek
 ### 6.4. Fejlesztő eszközök
 ### 6.5. Keretrendszer (pl. Spring)
+Flask
 
 ## 7. Absztrakt domain modell
 ### 7.1. Domain specifikáció, fogalmak
