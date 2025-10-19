@@ -70,9 +70,40 @@ A rendszer támogatja az étterem dolgozóit is azáltal, hogy egyszerű és át
 
 
 ## 4. Követelmények
+
 ### 4.1. Funkcionális követelmények
+
+A rendszer funkcionális követelményei azokra a működési képességekre vonatkoznak, amelyeket a felhasználók közvetlenül érzékelnek vagy használnak.
+
+| Azonosító | Követelmény | Leírás |
+|------------|--------------|--------|
+| F1 | **Regisztráció és bejelentkezés** | A felhasználó létrehozhat fiókot vagy bejelentkezhet meglévő adataival. |
+| F2 | **Felhasználói adatok kezelése** | A felhasználó módosíthatja profiladatait (név, cím, jelszó). |
+| F3 | **Étlap böngészése** | A rendszer megjeleníti az étterem aktuális kínálatát kategóriák szerint. |
+| F4 | **Keresés és szűrés** | A felhasználó név, ár vagy kategória alapján kereshet az ételek között. |
+| F5 | **Kosárkezelés** | A felhasználó hozzáadhat, eltávolíthat vagy módosíthat tételeket a kosárban. |
+| F6 | **Rendelés leadása** | A felhasználó megerősítheti a kosár tartalmát, és rendelést adhat le. |
+| F7 | **Rendelés státusz megtekintése** | A felhasználó valós időben láthatja a rendelése állapotát. |
+| F8 | **Adminisztrációs felület** | Az étterem dolgozói új ételeket vehetnek fel, rendeléseket kezelhetnek, státuszokat frissíthetnek. |
+
+---
+
 ### 4.2. Nemfunkcionális követelmények
-### 4.3. Törvényi előírások, szabványok
+
+Ezek a követelmények a rendszer **minőségi jellemzőit** határozzák meg: teljesítmény, biztonság, használhatóság stb.
+
+| Azonosító | Követelmény | Leírás |
+|------------|--------------|--------|
+| N1 | **Használhatóság** | A felhasználói felület legyen intuitív, reszponzív és könnyen kezelhető. |
+| N2 | **Megbízhatóság** | A rendszer képes legyen hibatűrő működésre és adatvesztés elkerülésére. |
+| N3 | **Teljesítmény** | A rendszer átlagos válaszideje ne haladja meg az 1 másodpercet API-hívások esetén. |
+| N4 | **Biztonság** | Az adatok titkosítva legyenek (pl. jelszavak hash-elése, HTTPS kapcsolat). |
+| N5 | **Skálázhatóság** | A rendszer képes legyen több felhasználót kiszolgálni párhuzamosan. |
+| N6 | **Karbantarthatóság** | A kód legyen moduláris, jól dokumentált, könnyen bővíthető. |
+| N7 | **Kompatibilitás** | A rendszer működjön modern böngészőkön (Chrome, Firefox, Edge, Safari). |
+| N8 | **Elérhetőség** | A rendszer legalább 99% rendelkezésre állással működjön. |
+
+---
 
 ## 5. Funkcionális terv
 ### 5.1. Rendszerszereplők
