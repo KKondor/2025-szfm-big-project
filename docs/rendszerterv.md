@@ -106,9 +106,65 @@ Ezek a követelmények a rendszer **minőségi jellemzőit** határozzák meg: t
 ---
 
 ## 5. Funkcionális terv
+
 ### 5.1. Rendszerszereplők
-### 5.2. Rendszerhasználati esetek és lefutásaik
+
+| Szereplő | Leírás | Jogosultságok |
+|-----------|---------|----------------|
+| **Felhasználó** | A rendszer végfelhasználója, aki böngészi az étlapot és rendeléseket ad le. | Rendelés leadása, rendelés megtekintése, profiladatok módosítása. |
+| **Adminisztrátor (étterem dolgozó)** | Az étterem munkatársa, aki az online rendeléseket és az étlapot kezeli. | Rendelés státusz módosítása, új étel hozzáadása, ételek szerkesztése/törlése. |
+| **Rendszer** | A háttérrendszer, amely az adatokat kezeli és a logikai folyamatokat végzi. | API hívások kezelése, adatbázis műveletek, jogosultság ellenőrzés. |
+| **AI Chatbot** | Automatizált asszisztens, amely támogatja a felhasználót. | Ajánlások adása, kérdések megválaszolása, információk lekérése. |
+
+---
+
+### 5.2. Rendszerhasználati esetek
+
+#### F1 – Regisztráció és bejelentkezés
+- **Szereplő:** Felhasználó  
+- **Előfeltétel:** A felhasználó még nem regisztrált / nincs bejelentkezve.  
+- **Lefutás:**  
+  1. A felhasználó megadja az adatait (név, email, jelszó).  
+  2. A rendszer ellenőrzi az email-címet.  
+  3. Sikeres regisztráció után a felhasználó bejelentkezik.  
+- **Utófeltétel:** A felhasználó fiókja aktív.
+
+#### F2 – Étlap böngészése és keresés
+- **Szereplő:** Felhasználó  
+- **Előfeltétel:** A rendszer elérhető és az étlap betöltött.  
+- **Lefutás:**  
+  1. A felhasználó kategóriák szerint böngészi az ételeket.  
+  2. Keresést vagy szűrést végez (pl. ár, név, kategória).  
+- **Utófeltétel:** A felhasználó kiválaszthat egy ételt a rendeléshez.
+
+#### F3 – Kosárkezelés és rendelés leadása
+- **Szereplő:** Felhasználó  
+- **Lefutás:**  
+  1. A felhasználó kosárba helyezi a kiválasztott ételeket.  
+  2. Ellenőrzi a kosár tartalmát és megerősíti a rendelést.  
+  3. A rendszer elmenti a rendelést az adatbázisba és visszaigazolja.  
+- **Utófeltétel:** A rendelés rögzítve és feldolgozás alatt.
+
+#### F4 – Rendelés státusz kezelése
+- **Szereplő:** Adminisztrátor  
+- **Lefutás:**  
+  1. Az adminisztrátor megnyitja a rendeléskezelő panelt.  
+  2. Kiválaszt egy rendelést és módosítja a státuszát.  
+  3. A rendszer frissíti az adatbázist, és értesíti a felhasználót.  
+- **Utófeltétel:** A rendelés státusza naprakész.
+
+---
+
 ### 5.3. Határosztályok
+
+| Osztály | Leírás |
+|----------|--------|
+| **Felhasználói felület (UI)** | Kliensoldali HTML/CSS/JS réteg, ahol a felhasználó interakcióba lép a rendszerrel. |
+| **Alkalmazáslogika (Backend)** | API végpontok és üzleti logika megvalósítása szerveroldalon (pl. Flask/Spring). |
+| **Adatkezelő réteg (Database)** | Az adatbázis, amely az ételeket, felhasználókat, rendeléseket és státuszokat tárolja. |
+
+---
+
 ### 5.4. Menü-hierarchiák
 ### 5.5. Képernyőtervek
 
