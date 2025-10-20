@@ -4,6 +4,8 @@
   --text: #e8eaf6;
   --border: #262b36;
   --brand: #5b9cff;
+  --cardbg: rgba(255, 255, 255, 0.05);
+  --box_shadow: rgba(0,0,0,0.2);
 }
 
 html, body{
@@ -58,18 +60,44 @@ body {
   gap: 1.5rem;
 }
 
+.add-btn {
+  position: absolute;
+  bottom: 0.8rem;
+  right: 0.8rem;
+  background: var(--brand);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px var(--box_shadow);
+}
+
+.add-btn:hover {
+  background: var(--brand-2, #52d6a8);
+  transform: translateY(-2px);
+}
+
+.add-btn:active {
+  transform: scale(0.95);
+}
+
 .item-card {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--cardbg);
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px var(--box_shadow);
   transition: transform 0.2s ease, border-color 0.2s ease;
-  min-height: 160px;
+  min-height: 180px;
 }
+
 
 
 .item-card:hover {
@@ -105,19 +133,27 @@ body {
   .item-card {
     flex-direction: column;
     text-align: center;
+    position: relative;
+    padding-bottom: 3rem;
   }
 
   .item-card img {
     width: 100%;
+    height: auto;
   }
 
   .item-card .info {
     padding: 1rem;
   }
-}
-
-/* --- Responsive --- */
-@media (max-width: 768px) {
+  .add-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 0 12px 12px;
+    width: 100%;
+    padding: 0.8rem;
+  }
   .site-header {
     flex-direction: column;
     align-items: flex-start;
@@ -131,3 +167,5 @@ body {
     padding: 1rem;
   }
 }
+
+
