@@ -4,8 +4,10 @@
   --text: #e8eaf6;
   --border: #262b36;
   --brand: #5b9cff;
+  --brand-2: #52d6a8;
   --cardbg: rgba(255, 255, 255, 0.05);
   --box_shadow: rgba(0,0,0,0.2);
+  --danger: #ff6b6b;
 }
 
 html, body{
@@ -21,7 +23,6 @@ body {
   line-height: 1.5;
 }
 
-/* --- Header --- */
 .site-header {
   display: flex;
   justify-content: space-between;
@@ -45,7 +46,6 @@ body {
   color: var(--brand);
 }
 
-/* --- Main content --- */
 .content {
   
   padding: 2rem;
@@ -53,7 +53,6 @@ body {
   margin: 0 auto;
 }
 
-/* --- Item List --- */
 .item-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -76,7 +75,7 @@ body {
 }
 
 .add-btn:hover {
-  background: var(--brand-2, #52d6a8);
+  background: var(--brand-2);
   transform: translateY(-2px);
 }
 
@@ -128,6 +127,123 @@ body {
   font-weight: 600;
 }
 
+.basket-sidebar {
+  position: fixed;
+  margin-top: 10vh;
+  top: 0;
+  left: 0;
+  width: min(80vw, 320px);
+  height: 87vh;
+  background: var(--bg_from);
+  backdrop-filter: blur(8px);
+  border-right: 1px solid var(--border);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  z-index: 90;
+}
+
+.basket-sidebar.active {
+  transform: translateX(0);
+}
+
+.basket-sidebar h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  border-bottom: thick  solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.basket-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.basket-items {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.basket-item {
+  display: flex;
+  align-items: center;
+  background: var(--bg_from);
+  border: medium solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.basket-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.basket-item .basket-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.basket-item .basket-price {
+  color: var(--brand);
+  font-weight: bold;
+  text-align: right;
+}
+
+.basket-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-top: thick solid var(--border);
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.checkout-btn {
+  background: var(--brand);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.checkout-btn:hover {
+  background: var(--brand-2);
+  transform: translateY(-2px);
+}
+
+.remove-btn:hover {
+  color: var(--danger);
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.remove-btn {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto;
+  opacity: 0.7;
+  transition: color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .item-card {
@@ -165,6 +281,63 @@ body {
 
   .content {
     padding: 1rem;
+  }
+  .basket-sidebar {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px; 
+    border-right: none;
+    border-top: 1px solid var(--border);
+    flex-direction: row;
+    padding: 0.5rem;
+    transform: translateY(100%);
+  }
+  .basket-sidebar h2 {
+    display: none;
+  }
+
+
+  .basket-sidebar.active {
+    transform: translateY(0);
+  }
+
+  .basket-items {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+    padding-bottom: 1.3rem;
+  }
+
+  .basket-item {
+    flex: 0 0 auto;
+    width: 15rem;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+
+  .basket-item h3{
+    line-height: 1;
+  }
+
+  .basket-item img {
+
+    width: 60px;
+    height: 60px;
+  }
+
+  .basket-item .basket-info {
+    text-align: center;
+  }
+
+  .basket-total,
+  .checkout-btn {
+    display: none;
   }
 }
 

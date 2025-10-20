@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../static/css/item-list.css">
 </head>
 <body>
+
   <header class="site-header">
     <h1 class="logo">My Restaurant</h1>
     <nav>
@@ -15,8 +16,32 @@
       <a href="">Contact</a>
     </nav>
   </header>
-  <main class="content">
+
+  <aside id="basket-sidebar" class="basket-sidebar active">
+  <h2>Your Basket</h2>
+  <div class="basket-items">
+    <div class="basket-item">
+      <img src="../static/images/food.jpg" alt="Dish">
+      <div class="basket-info">
+        <h3>Pizza Margherita</h3>
+        <div class="basket-details">
+          <span class="basket-amount">x1</span>
+          <span class="basket-price">$12.00</span>
+        </div>
+      </div>
+      <button class="remove-btn" aria-label="Remove item">&times;</button>
+    </div>
+  </div>
+  <div class="basket-total">
+    <span>Total:</span>
+    <span>$24.00</span>
+  </div>
+  <button class="checkout-btn">Checkout</button>
+</aside>
+
+ <main class="content">
   <div class="item-list">
+
     <div class="item-card">
       <img src="../static/images/food.jpg" alt="Creamy Pasta">
       <div class="info">
@@ -41,6 +66,7 @@
         <p class="price">$7.20</p>
       </div>
     </div>
+
   </div>
 </main>
   <script src=""></script>
