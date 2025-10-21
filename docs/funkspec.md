@@ -114,9 +114,11 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 
 | Oldal | Leírás | Funkciók |
 |--------|--------|-----------|
-| Főoldal | [Rövid leírás] | [Gombok, linkek, űrlapok] |
-| Admin oldal | [Leírás] | [CRUD műveletek] |
-| Profil oldal | [Leírás] | [Felhasználói adatok kezelése] |
+| Login | Egy oldal ahol be tud jelentkezni a felhasználó  | Bejelentkezés |
+| Food list | Az oldal ahol a felhasználó nézheti az ételek listáját és hozzáadhatja őket a kosárhoz. | Ételek megtekíntése, ételek kosárba helyezése |
+| Admin | Az oldal ahol a dolgozók feltölthetnek ételeket | Étel feltöltés |
+| Checkout | Az oldal ahol a felhasználó leteheti rendelését | Rendelés |
+| AI | Az oldal ahol a felhasználó beszélhet az AI chatbottal | AI Chat |
 
 ---
 
