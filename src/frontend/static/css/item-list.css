@@ -37,9 +37,9 @@ body {
 
 .site-header a {
   color: var(--text);
+  font-weight: bold;
   text-decoration: none;
   margin-left: 1rem;
-  font-weight: 500;
 }
 
 .site-header a:hover {

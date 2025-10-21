@@ -19,7 +19,6 @@ body {
   line-height: 1.5;
 }
 
-/* --- Header --- */
 .site-header {
   display: flex;
   justify-content: space-between;
@@ -34,24 +33,21 @@ body {
 
 .site-header a {
   color: var(--text);
+  font-weight: bold;
   text-decoration: none;
   margin-left: 1rem;
-  font-weight: 500;
 }
 
 .site-header a:hover {
   color: var(--brand);
 }
 
-/* --- Main content --- */
 .content {
-  
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* --- Responsive --- */
 @media (max-width: 768px) {
   .site-header {
     flex-direction: column;
