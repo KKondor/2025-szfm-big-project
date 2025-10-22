@@ -205,6 +205,18 @@ A rendszer architektúrája az `MVC` (Model - View - Controller) mintát követi
 
 ### 8.2. Az alkalmazás rétegei, fő komponensei, ezek kapcsolatai
 
+- **Model (adatkezelés):**  
+  Az adatbázisban tárolt entitások (felhasználók, ételek, rendelések) leképezése Python osztályok segítségével.
+  A Model réteg felelős az adatok konzisztenciájáért és az üzleti logikai szabályok betartásáért.
+
+- **View (megjelenítés):**  
+  A felhasználóval történő interakciót biztosítja HTML, CSS és JavaScript segítségével.  
+  A cél egy **reszponzív, könnyen kezelhető és gyors felület** kialakítása (nemfunkcionális követelmény: N1 – Használhatóság).
+
+- **Controller (irányítás):**  
+  A Flask útvonalak (`@app.route`) fogadják a felhasználói kéréseket, feldolgozzák azokat, majd a megfelelő modellekhez és nézetekhez irányítják az adatokat.  
+  Biztosítja a **logikai folyamatok elkülönítését** és az **adatbiztonságot** (N4 – Biztonság).
+
 ### 8.3. Változások kezelése
 
 ### 8.4. Rendszer bővíthetősége
