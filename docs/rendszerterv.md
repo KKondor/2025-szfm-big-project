@@ -196,6 +196,18 @@ A rendszer a **kliens–szerver architektúrát** követi: a Flask alapú backen
 
 ### 6.4. Fejlesztő eszközök
 
+A projekt fejlesztése a következő eszközökkel történik:
+
+| Eszköz                    | Leírás                                  |
+| ------------------------- | --------------------------------------- |
+| **Visual Studio Code**    | Forráskód-szerkesztés és projektkezelés |
+| **Git + GitHub**          | Verziókövetés és csapatmunka            |
+| **Postman**               | API végpontok tesztelése                |
+| **phpMyAdmin**            | MySQL adatbázis kezelése                |
+| **Python**                | Backend fejlesztés                      |
+| **Flask**                 | Webszerver és REST API keretrendszer    |
+| **HTML, CSS, JavaScript** | Frontend fejlesztés                     |
+
 ### 6.5. Keretrendszer (pl. Spring)
 
 Flask
