@@ -194,6 +194,12 @@ A rendszer a **kliens–szerver architektúrát** követi: a Flask alapú backen
 
 ### 6.3. Fizikai alrendszerek
 
+A rendszer három fő fizikai alrendszerből épül fel:
+
+- **Kliensoldal (webböngésző):** a felhasználó eszközén fut, ahol a HTML, CSS és JavaScript alapú felület jelenik meg.
+- **Alkalmazásszerver:** a Flask backend, amely a helyi fejlesztői környezetben működik, és kezeli az üzleti logikát.
+- **Adatbázis-szerver:** az AlwaysData által biztosított MySQL adatbázis, ahol az ételek, felhasználók és rendelések adatai tárolódnak.
+
 ### 6.4. Fejlesztő eszközök
 
 A projekt fejlesztése a következő eszközökkel történik:
