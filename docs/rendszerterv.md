@@ -188,6 +188,10 @@ Ez a komponens a felhasználói kérdések megválaszolását és az ajánlások
 
 ### 6.2. Hardver és hálózati topológia
 
+A fejlesztés és tesztelés **lokális fejlesztői környezetben** történik, amely lehetővé teszi a gyors iterációt és a hibák korai felismerését.
+
+A rendszer a **kliens–szerver architektúrát** követi: a Flask alapú backend alkalmazás a fejlesztői gépen fut, miközben a **MySQL adatbázis** az **AlwaysData** szerverein kerül tárolásra és futtatásra.
+
 ### 6.3. Fizikai alrendszerek
 
 ### 6.4. Fejlesztő eszközök
