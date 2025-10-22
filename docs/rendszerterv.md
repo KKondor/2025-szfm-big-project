@@ -253,6 +253,16 @@ Ez biztosítja a **rendszer jövőbeli fejleszthetőségét és rugalmasságát*
 
 ### 8.5. Biztonsági funkciók
 
+- **Felhasználói autentikáció és jogosultságkezelés:**
+  - Regisztrált felhasználók csak a saját profiljukat és rendeléseiket láthatják.
+  - Admin jogosultság szükséges az étlap és rendelésstátusz kezeléséhez.
+- **Adatbiztonság:**
+  - Jelszavak hash-elve kerülnek tárolásra az adatbázisban.
+- **Input validálás:**
+  - Az űrlapadatokat a backend oldalon ellenőrzi a rendszer a hibás vagy rosszindulatú adatok kiszűrése érdekében.
+
+Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonság**) nemfunkcionális követelményeket.
+
 ## 9. Adatbázis terv
 
 ### 9.1. Logikai adatmodell
