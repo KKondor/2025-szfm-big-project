@@ -221,6 +221,19 @@ A rendszer architektúrája az `MVC` (Model - View - Controller) mintát követi
 
 ### 8.4. Rendszer bővíthetősége
 
+A rendszer **moduláris felépítésének** köszönhetően könnyen bővíthető:
+
+- **Új funkciók hozzáadása:**  
+  Például új rendelési státusz („Úton van”), hűségpont rendszer vagy fizetési modul egyszerűen integrálható új route és model hozzáadásával.
+- **Adatbázis bővítése:**  
+  Új táblák (pl. értékelések, kedvenc ételek) felvétele lehetséges a meglévő kapcsolatok megtartása mellett.
+
+- **Frontend bővítése:**  
+  Az új funkciókhoz könnyen hozzáadhatók új oldalak vagy felhasználói felületi elemek.  
+  A HTML sablonok és a statikus fájlok (CSS, JavaScript) külön mappákban találhatók, így a kinézet vagy a navigáció módosítása nem érinti az alkalmazás logikáját.
+
+Ez biztosítja a **rendszer jövőbeli fejleszthetőségét és rugalmasságát**, megfelelve a **karbantarthatósági (N6)** és **skálázhatósági (N5)** követelményeknek.
+
 ### 8.5. Biztonsági funkciók
 
 ## 9. Adatbázis terv
