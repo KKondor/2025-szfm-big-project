@@ -243,6 +243,20 @@ A rendszer egy **online ételrendelő platform**, amely lehetővé teszi a felha
 
 ### 7.2. Absztrakt komponensek, ezek kapcsolatai
 
+A rendszer **négy fő komponensből** épül fel:
+
+1. **Felhasználói réteg (Frontend):**  
+   Webes felület HTML, CSS, JS segítségével.
+
+2. **Alkalmazáslogikai réteg (Backend):**  
+   Flask alapú szerver, amely kezeli az üzleti logikát, API hívásokat, jogosultságokat.
+
+3. **Adatkezelő réteg (Database):**  
+   MySQL adatbázis, ahol a felhasználók, rendelések és ételek adatai tárolódnak.
+
+4. **Külső AI komponens (OpenAI API):**  
+   Chatbot, amely felhasználói kérdésekre válaszol és ajánlásokat ad.
+
 ## 8. Architekturális terv
 
 ### 8.1. Architekturális tervezési minta
