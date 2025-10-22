@@ -222,6 +222,25 @@ A rendszer fejlesztése a `Flask` keretrendszerben történik, amely könnyű, m
 
 ### 7.1. Domain specifikáció, fogalmak
 
+A rendszer egy **online ételrendelő platform**, amely lehetővé teszi a felhasználók számára, hogy **böngésszenek az étterem kínálatában**, **kosárba tegyék a kiválasztott ételeket**, majd **rendelést adjanak le**. A rendszer másik fő szereplője az **adminisztrátor**, aki az étterem oldaláról **kezeli a rendeléseket és az étlapot**.
+
+**Fő fogalmak:**
+
+- **Felhasználó:**  
+  A rendszer végfelhasználója, aki regisztrálhat, bejelentkezhet, és rendelést adhat le.
+
+- **Étel:**  
+  Az étterem által kínált termék.
+
+- **Rendelés:**  
+  Egy felhasználó által létrehozott tranzakció, amely tartalmazza a kiválasztott ételeket és mennyiségüket.
+
+- **Adminisztrátor:**  
+  Az étterem dolgozója, aki kezelheti a rendeléseket és az étlapot.
+
+- **AI Chatbot:**  
+  Az OpenAI API-ra épülő intelligens asszisztens, amely segíti a felhasználókat a rendelésben és ajánlásokat ad.
+
 ### 7.2. Absztrakt komponensek, ezek kapcsolatai
 
 ## 8. Architekturális terv
