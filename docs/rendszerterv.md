@@ -179,6 +179,13 @@ Ezek a követelmények a rendszer **minőségi jellemzőit** határozzák meg: t
 
 ### 6.1. Vásárolt szoftverkomponensek és külső rendszerek
 
+A rendszer az **AlwaysData** szolgáltatás által biztosított **MySQL adatbázist** használja,  
+amelyhez a hozzáférést a beépített **phpMyAdmin** felület biztosítja.  
+Ez lehetővé teszi az adatok biztonságos kezelését, valamint a táblák karbantartását és felügyeletét böngészőből.
+
+Továbbá a rendszer az **OpenAI API**-t is integrálja, amely egy **AI chatbot** funkciót valósít meg.
+Ez a komponens a felhasználói kérdések megválaszolását és az ajánlások dinamikus generálását teszi lehetővé, ezáltal javítva a felhasználói élményt és az interaktivitást.
+
 ### 6.2. Hardver és hálózati topológia
 
 ### 6.3. Fizikai alrendszerek
