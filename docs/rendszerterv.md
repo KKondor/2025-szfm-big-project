@@ -208,9 +208,9 @@ A projekt fejlesztése a következő eszközökkel történik:
 | **Flask**                 | Webszerver és REST API keretrendszer    |
 | **HTML, CSS, JavaScript** | Frontend fejlesztés                     |
 
-### 6.5. Keretrendszer (pl. Spring)
+### 6.5. Keretrendszer
 
-Flask
+A rendszer fejlesztése a `Flask` keretrendszerben történik, amely könnyű, moduláris és jól illeszkedik kisebb webalkalmazásokhoz. A Flask `REST API`-k, sablonkezelés és adatbázis-kapcsolatok egyszerű megvalósítását teszi lehetővé.
 
 ## 7. Absztrakt domain modell
 
