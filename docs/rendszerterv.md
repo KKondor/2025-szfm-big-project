@@ -219,6 +219,23 @@ A rendszer architektúrája az `MVC` (Model - View - Controller) mintát követi
 
 ### 8.3. Változások kezelése
 
+A rendszer célja, hogy a fejlesztés és későbbi módosítás során is **rugalmasan kezelje a változásokat**, anélkül, hogy a teljes alkalmazást újra kellene szervezni.
+
+- **Követelmények és függőségek kezelése:**  
+  A projektben egy `requirements.txt` fájl tartalmazza az összes Python függőséget.  
+  Így a környezet bármikor egyszerűen újraépíthető (`pip install -r requirements.txt`).
+
+- **Moduláris kódstruktúra:**  
+  A kód külön fájlokba van szervezve (`app.py`, `templates/` stb.), így egy-egy funkció (pl. kosárkezelés, rendeléslogika) módosítása nem érinti a teljes rendszert.
+
+- **Egyszerű konfigurálhatóság:**  
+  Az alapvető beállítások (adatbázis, debug mód) közvetlenül az `app.py` fájlban találhatók, így könnyen módosíthatók fejlesztés közben.
+
+- **Git verziókezelés:**  
+  A forráskód verziókezelése biztosítja a módosítások nyomon követését.
+
+Ezek a megoldások biztosítják, hogy a rendszer **könnyen frissíthető és karbantartható** maradjon, megfelelve a **N6 – Karbantarthatóság** követelménynek.
+
 ### 8.4. Rendszer bővíthetősége
 
 A rendszer **moduláris felépítésének** köszönhetően könnyen bővíthető:
