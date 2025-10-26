@@ -388,3 +388,14 @@ Az alkalmazás és a MySQL adatbázis az **AlwaysData** szerverén kerül elhely
 - Frontend: HTML, CSS, JavaScript (böngésző alapú)
 
 ## 13. Karbantartási terv
+
+A rendszer karbantartása a hibák javítására, biztonsági frissítések telepítésére és kisebb fejlesztések bevezetésére irányul.  
+A módosításokat először fejlesztői környezetben teszteljük, majd sikeres működés esetén kerülnek véglegesítésre.
+
+A karbantartás fő lépései:
+
+1. Hibák és fejlesztési igények rögzítése.
+2. Javítás és tesztelés lokális környezetben.
+3. Frissített verzió feltöltése és alapfunkciók ellenőrzése.
+
+A karbantartás célja a rendszer stabil, biztonságos és folyamatos működésének fenntartása.
