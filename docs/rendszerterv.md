@@ -372,4 +372,19 @@ A Service osztályokat a **Controller** hívja meg, azok pedig a **Model** réte
 
 ## 12. Telepítési terv
 
+A rendszer fejlesztése és futtatása **Flask** alapú környezetben történik.  
+Az alkalmazás és a MySQL adatbázis az **AlwaysData** szerverén kerül elhelyezésre.
+
+**Telepítési lépések:**
+
+1. Függőségek telepítése: `pip install -r requirements.txt`
+2. Adatbázis-kapcsolat adatok beállítása.
+3. Flask alkalmazás indítása (`python app.py`).
+
+**Fizikai környezet:**
+
+- Backend: Flask (Python)
+- Adatbázis: MySQL (AlwaysData)
+- Frontend: HTML, CSS, JavaScript (böngésző alapú)
+
 ## 13. Karbantartási terv
