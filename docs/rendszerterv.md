@@ -276,8 +276,12 @@ A rendszer architektúrája az `MVC` (Model - View - Controller) mintát követi
   A cél egy **reszponzív, könnyen kezelhető és gyors felület** kialakítása (nemfunkcionális követelmény: N1 – Használhatóság).
 
 - **Controller (irányítás):**  
-  A Flask útvonalak (`@app.route`) fogadják a felhasználói kéréseket, feldolgozzák azokat, majd a megfelelő modellekhez és nézetekhez irányítják az adatokat.  
-  Biztosítja a **logikai folyamatok elkülönítését** és az **adatbiztonságot** (N4 – Biztonság).
+   A Flask útvonalak (`@app.route`) fogadják a felhasználói kéréseket, feldolgozzák azokat, majd a megfelelő modellekhez és nézetekhez irányítják az adatokat.  
+   Biztosítja a **logikai folyamatok elkülönítését** és az **adatbiztonságot** (N4 – Biztonság).
+
+- **Service (üzleti logika):**  
+   A **Service réteg** a Controller és a Model között helyezkedik el.  
+   Feladata az alkalmazás üzleti folyamatait kezelni, például rendelés létrehozása, státuszváltás, vagy több adatmodell közötti műveletek koordinálása.
 
 ### 8.3. Változások kezelése
 
