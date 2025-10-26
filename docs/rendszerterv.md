@@ -350,6 +350,22 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 
 ### 10.2. Üzleti logika osztályai
 
+Az üzleti logika (Service réteg) az alkalmazás működésének fő szabályait valósítja meg, a Controller és a Model réteg között helyezkedik el.
+
+- **UserService:**  
+  Felhasználók kezelése (regisztráció, bejelentkezés, jelszókezelés, jogosultságok ellenőrzése).
+
+- **MenuService:**  
+  Ételek és kategóriák kezelése (lekérdezés, hozzáadás, módosítás, törlés).
+
+- **OrderService:**  
+  Rendelések kezelése (létrehozás, státuszváltás, tételek mentése, rendeléslekérdezés).
+
+- **ChatbotService:**  
+  AI-alapú ajánlások és ügyfélszolgálati funkciók az OpenAI API segítségével.
+
+A Service osztályokat a **Controller** hívja meg, azok pedig a **Model** rétegen keresztül érik el az adatbázist.
+
 ### 10.3. Kliensoldal osztályai
 
 ## 11. Tesztterv
