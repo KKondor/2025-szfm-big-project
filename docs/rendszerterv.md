@@ -370,6 +370,22 @@ A Service osztályokat a **Controller** hívja meg, azok pedig a **Model** réte
 
 ## 11. Tesztterv
 
+A tesztelés célja a rendszer funkcionalitásának, megbízhatóságának és biztonságának ellenőrzése.  
+A tesztelés lokális fejlesztői környezetben történik.
+
+### Főbb tesztesetek
+
+- Felhasználói regisztráció és bejelentkezés érvényes és hibás adatokkal.
+- Rendelés létrehozása és státuszváltás.
+- Jogosultságkezelés (felhasználó / admin).
+- Adatbázis kapcsolat és hibakezelés.
+- Oldalak helyes megjelenítése és navigáció.
+
+### Tesztelési elv
+
+Minden funkciót a specifikációnak megfelelően kell működnie, hibák vagy adatvesztés nélkül.  
+A sikeres teszt kritériuma, hogy a rendszer stabilan és biztonságosan üzemeljen minden alapfunkció esetén.
+
 ## 12. Telepítési terv
 
 A rendszer fejlesztése és futtatása **Flask** alapú környezetben történik.  
