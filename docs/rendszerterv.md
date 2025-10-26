@@ -337,6 +337,13 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 
 ### 10.1. Perzisztencia-osztályok
 
+| Osztály     | Leírás                                                  | Attribútumok                                       |
+| ----------- | ------------------------------------------------------- | -------------------------------------------------- |
+| `User`      | A regisztrált felhasználókat tárolja.                   | `id`, `name`, `email`, `phone`, `role`, `password` |
+| `Food`      | Az étterem kínálatában szereplő ételek adatait tárolja. | `id`, `name`, `type`, `img_url`, `price`           |
+| `Order`     | Egy felhasználó által leadott rendelést reprezentál.    | `id`, `user_id`, `order_date`, `status`, `note`    |
+| `OrderItem` | A rendeléshez tartozó egyes ételeket tárolja.           | `id`, `order_id`, `food_id`, `quantity`, `price`   |
+
 ### 10.2. Üzleti logika osztályai
 
 ### 10.3. Kliensoldal osztályai
