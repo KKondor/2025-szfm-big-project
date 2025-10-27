@@ -348,7 +348,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 |`name`         | Szöveg, VARCHAR(100)   | A felhasználó teljes neve.                                      |
 |`email`        | Szöveg, VARCHAR(100)   | A felhasználó e-mail címe. Egyedi azonosításra is szolgálhat.   |
 |`password`     | Szöveg, VARCHAR(100)   | A felhsználó jelszava titkosított formában.                     |
-|`role`         | Szöveg, VARCHAR(100)   | A felhasználó jogosultsága: user, admin.                        |
+|`role`         | Előre definiált szöveg,<br> ENUM   | A felhasználó jogosultsága: <br>user, admin         |
 
 <br><br>
 **Foods tábla**
