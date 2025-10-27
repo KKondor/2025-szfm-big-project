@@ -414,6 +414,21 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
     `ON UPDATE CASCADE`<br>
 `);`
 
+- **order_items tábla létrehozása:**<br>
+`CREATE TABLE order_items (`<br>
+  `id INT AUTO_INCREMENT PRIMARY KEY,`<br>
+  `order_id INT NOT NULL,`<br>
+  `food_id INT NOT NULL,`<br>
+  `quantity INT NOT NULL,`<br>
+  `price INT NOT NULL,`<br>
+  `FOREIGN KEY (order_id) REFERENCES orders(id)`<br>
+    `ON DELETE CASCADE`<br>
+    `ON UPDATE CASCADE,`<br>
+  `FOREIGN KEY (food_id) REFERENCES foods(id)`<br>
+    `ON DELETE CASCADE`<br>
+    `ON UPDATE CASCADE`<br>
+`);`
+
 
 ## 10. Implementációs terv
 
