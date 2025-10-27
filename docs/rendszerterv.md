@@ -369,6 +369,16 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 |`status`       | Előre definiált szöveg,<br> ENUM| A rendelés aktuális állapota: <br>pending, completed, cancelled|
 |`note`         | Szöveg, TEXT           | Ocionális megjegyzés a rendeléshez.                             |
 
+<br><br>
+**Order_items tábla**
+|Attribútum     |Adattípus               |Leírás                                                           |
+| ------------- | ---------------------- | --------------------------------------------------------------- |
+|`id`           | Egész szám, INT        | Elsődleges kulcs. Egyedi azonosító minden rendelési tételhez.   |
+|`order_id`     | Egész szám, INT        | Külső kulcs. A megrendelt tételhez tartozó rendelés azonosítója.|
+|`food_id`      | Egész szám, INT        | Külső kulcs. A megrendelt tételhez tartozó étel azonosítója.    |
+|`quantity`     | Egész szám, INT        | A megrendelt étel darabszáma.                                   |
+|`price`        | Egész szám, INT        | A rendelés értéke a darabszámtol függően.                       |
+
 ### 9.2. Tárolt eljárások
 
 ### 9.3. Fizikai adatmodellt legeneráló SQL szkript
