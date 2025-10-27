@@ -401,6 +401,19 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
   `price INT NOT NULL`<br>
 `);`
 
+- **foods tábla létrehozása:**<br>
+`CREATE TABLE orders (`<br>
+  `id INT AUTO_INCREMENT PRIMARY KEY,`<br>
+  `user_id INT NOT NULL,`<br>
+  `order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,`<br>
+  `status ENUM('pending', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',`<br>
+  `note TEXT,`<br>
+  `price INT NOT NULL,`<br>
+  `FOREIGN KEY (user_id) REFERENCES users(id)`<br>
+    `ON DELETE CASCADE`<br>
+    `ON UPDATE CASCADE`<br>
+`);`
+
 
 ## 10. Implementációs terv
 
