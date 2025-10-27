@@ -350,6 +350,15 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 |`password`     | Szöveg, VARCHAR(100)   | A felhsználó jelszava titkosított formában.                     |
 |`role`         | Szöveg, VARCHAR(100)   | A felhasználó jogosultsága: user, admin.                        |
 
+<br><br>
+**Foods tábla**
+|Attribútum     |Adattípus               |Leírás                                                           |
+| ------------- | ---------------------- | --------------------------------------------------------------- |
+|`id`           | Egész szám, INT        | Elsődleges kulcs.                                               |
+|`name`         | Szöveg, VARCHAR(50)    | Az étel neve.                                                   |
+|`image`        | Szöveg, TEXT           | Az ételhet tartozó kép URL-je.                                  |
+|`price`        | Egész szám, INT        | Az étel aktuális ára.                                           |
+
 ### 9.2. Tárolt eljárások
 
 ### 9.3. Fizikai adatmodellt legeneráló SQL szkript
