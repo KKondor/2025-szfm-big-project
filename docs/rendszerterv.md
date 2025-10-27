@@ -332,12 +332,23 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 ## 9. Adatbázis terv
 
 ### 9.1. Logikai adatmodell
+
 |Entitások neve      |Leírás                                                                 |
 | ------------------ | --------------------------------------------------------------------- |
 | `users`            | A felhasználók adatait tartalmazza, akik rendelést adhatnak le.       |
 | `foods`            | Az elérhető ételeket tartalmazza, amit a felhsználók megrendelhetnek. |
 | `orders`           | A felhasználók álltal leadott megrendeléseket reprezentálja.          |
 | `order_items`      | A rendeléseken belül a konkrét tételeket tartalmazza.                 |
+
+<br><br>
+**Users tábla**
+|Attribútum     |Adattípus               |Leírás                                                           |
+| ------------- | ---------------------- | --------------------------------------------------------------- |
+|`id`           | Egész szám, INT        | Elsődleges kulcs.                                               |
+|`name`         | Szöveg, VARCHAR(100)   | A felhasználó teljes neve.                                      |
+|`email`        | Szöveg, VARCHAR(100)   | A felhasználó e-mail címe. Egyedi azonosításra is szolgálhat.   |
+|`password`     | Szöveg, VARCHAR(100)   | A felhsználó jelszava titkosított formában.                     |
+|`role`         | Szöveg, VARCHAR(100)   | A felhasználó jogosultsága: user, admin.                        |
 
 ### 9.2. Tárolt eljárások
 
