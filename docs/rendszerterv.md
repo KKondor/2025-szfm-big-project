@@ -387,6 +387,13 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
   -`update_user_password`: Jelszó felülírása email cím alapján.<br>
   -`get_user_by_email`: Email cím alapján visszaadja az adott felhasználó adatait.<br>
 
+- **Az ételek kezeléséhez szükséges eljárások:**<br>
+  -`create_food`: Új étel létrehozása.<br>
+  -`delete_food`: Étel törlése id alapján.<br>
+  -`udate_food`: Étel adatainak módosítása.<br>
+  -`get_food`: Id alapján visszaadja az adott étel adatait.<br>
+  -`get_all_food`: Visszadja az összes étel adatát.<br>
+
 ### 9.3. Fizikai adatmodellt legeneráló SQL szkript
 
 - **users tábla létrehozása:**<br>
