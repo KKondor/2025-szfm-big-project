@@ -393,6 +393,15 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
   `role ENUM('user', 'admin') NOT NULL`<br>
 `);`
 
+- **foods tábla létrehozása:**<br>
+`CREATE TABLE foods (`<br>
+  `id INT AUTO_INCREMENT PRIMARY KEY,`<br>
+  `name VARCHAR(50) NOT NULL,`<br>
+  `image TEXT,`<br>
+  `price INT NOT NULL`<br>
+`);`
+
+
 ## 10. Implementációs terv
 
 ### 10.1. Perzisztencia-osztályok
