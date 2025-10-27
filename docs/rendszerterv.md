@@ -332,6 +332,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 ## 9. Adatbázis terv
 
 ### 9.1. Logikai adatmodell
+
 |Entitások neve      |Leírás                                                                 |
 | ------------------ | --------------------------------------------------------------------- |
 | `users`            | A felhasználók adatait tartalmazza, akik rendelést adhatnak le.       |
@@ -339,9 +340,95 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 | `orders`           | A felhasználók álltal leadott megrendeléseket reprezentálja.          |
 | `order_items`      | A rendeléseken belül a konkrét tételeket tartalmazza.                 |
 
+<br><br>
+**Users tábla**
+|Attribútum     |Adattípus               |Leírás                                                           |
+| ------------- | ---------------------- | --------------------------------------------------------------- |
+|`id`           | Egész szám, INT        | Elsődleges kulcs.                                               |
+|`name`         | Szöveg, VARCHAR(100)   | A felhasználó teljes neve.                                      |
+|`email`        | Szöveg, VARCHAR(100)   | A felhasználó e-mail címe. Egyedi azonosításra is szolgálhat.   |
+|`password`     | Szöveg, VARCHAR(100)   | A felhsználó jelszava titkosított formában.                     |
+|`role`         | Előre definiált szöveg,<br> ENUM   | A felhasználó jogosultsága: <br>user, admin         |
+
+<br><br>
+**Foods tábla**
+|Attribútum     |Adattípus               |Leírás                                                           |
+| ------------- | ---------------------- | --------------------------------------------------------------- |
+|`id`           | Egész szám, INT        | Elsődleges kulcs.                                               |
+|`name`         | Szöveg, VARCHAR(50)    | Az étel neve.                                                   |
+|`image`        | Szöveg, TEXT           | Az ételhet tartozó kép URL-je.                                  |
+|`price`        | Egész szám, INT        | Az étel aktuális ára.                                           |
+
+<br><br>
+**Orders tábla**
+|Attribútum     |Adattípus               |Leírás                                                           |
+| ------------- | ---------------------- | --------------------------------------------------------------- |
+|`id`           | Egész szám, INT        | Elsődleges kulcs. Egyedi azonosító minden rendeléshez.          |
+|`user_id`      | Egész szám, INT        | Külső kulcs. A rendelést leadó felhasználó azonosítója.         |
+|`order_date`   | Dátum, DATETIME        | Az ételhet tartozó kép URL-je.                                  |
+|`status`       | Előre definiált szöveg,<br> ENUM| A rendelés aktuális állapota: <br>pending, completed, cancelled|
+|`note`         | Szöveg, TEXT           | Ocionális megjegyzés a rendeléshez.                             |
+|`price`        | Egész szám, INT        | A megrendelt ételek összértéke.                                 |
+
+<br><br>
+**Order_items tábla**
+|Attribútum     |Adattípus               |Leírás                                                           |
+| ------------- | ---------------------- | --------------------------------------------------------------- |
+|`id`           | Egész szám, INT        | Elsődleges kulcs. Egyedi azonosító minden rendelési tételhez.   |
+|`order_id`     | Egész szám, INT        | Külső kulcs. A megrendelt tételhez tartozó rendelés azonosítója.|
+|`food_id`      | Egész szám, INT        | Külső kulcs. A megrendelt tételhez tartozó étel azonosítója.    |
+|`quantity`     | Egész szám, INT        | A megrendelt étel darabszáma.                                   |
+|`price`        | Egész szám, INT        | A megrendelt tétel értéke a darabszámtol függően.               |
+
 ### 9.2. Tárolt eljárások
 
 ### 9.3. Fizikai adatmodellt legeneráló SQL szkript
+
+- **users tábla létrehozása:**<br>
+`CREATE TABLE users (`<br>
+  `id INT AUTO_INCREMENT PRIMARY KEY,`<br>
+  `name VARCHAR(100) NOT NULL,`<br>
+  `email VARCHAR(100) NOT NULL UNIQUE,`<br>
+  `password VARCHAR(100) NOT NULL,`<br>
+  `role ENUM('user', 'admin') NOT NULL`<br>
+`);`
+
+- **foods tábla létrehozása:**<br>
+`CREATE TABLE foods (`<br>
+  `id INT AUTO_INCREMENT PRIMARY KEY,`<br>
+  `name VARCHAR(50) NOT NULL,`<br>
+  `image TEXT,`<br>
+  `price INT NOT NULL`<br>
+`);`
+
+- **foods tábla létrehozása:**<br>
+`CREATE TABLE orders (`<br>
+  `id INT AUTO_INCREMENT PRIMARY KEY,`<br>
+  `user_id INT NOT NULL,`<br>
+  `order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,`<br>
+  `status ENUM('pending', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',`<br>
+  `note TEXT,`<br>
+  `price INT NOT NULL,`<br>
+  `FOREIGN KEY (user_id) REFERENCES users(id)`<br>
+    `ON DELETE CASCADE`<br>
+    `ON UPDATE CASCADE`<br>
+`);`
+
+- **order_items tábla létrehozása:**<br>
+`CREATE TABLE order_items (`<br>
+  `id INT AUTO_INCREMENT PRIMARY KEY,`<br>
+  `order_id INT NOT NULL,`<br>
+  `food_id INT NOT NULL,`<br>
+  `quantity INT NOT NULL,`<br>
+  `price INT NOT NULL,`<br>
+  `FOREIGN KEY (order_id) REFERENCES orders(id)`<br>
+    `ON DELETE CASCADE`<br>
+    `ON UPDATE CASCADE,`<br>
+  `FOREIGN KEY (food_id) REFERENCES foods(id)`<br>
+    `ON DELETE CASCADE`<br>
+    `ON UPDATE CASCADE`<br>
+`);`
+
 
 ## 10. Implementációs terv
 
