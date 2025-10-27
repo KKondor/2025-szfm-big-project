@@ -394,6 +394,11 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
   -`get_food`: Id alapján visszaadja az adott étel adatait.<br>
   -`get_all_food`: Visszadja az összes étel adatát.<br>
 
+- **A rendelések kezeléséhez szükséges eljárások:**<br>
+  -`create_order`: Új rendelést hoz létrehozása.<br>
+  -`get_all_orders`: Visszadja az összes rendelés adatát.<br>
+  -`update_order_status`: Módosítja egy rendelés állapotát.<br>
+
 ### 9.3. Fizikai adatmodellt legeneráló SQL szkript
 
 - **users tábla létrehozása:**<br>
