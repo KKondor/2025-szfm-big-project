@@ -368,6 +368,15 @@ A Service osztályokat a **Controller** hívja meg, azok pedig a **Model** réte
 
 ### 10.3. Kliensoldal osztályai
 
+| Osztály / Modul | Leírás | Fő funkciók |
+|------------------|---------|-------------|
+| `LoginPage` | A bejelentkezési oldal logikáját kezeli. | Felhasználói adatok bekérése, hitelesítési kérés küldése az API-nak, hibakezelés. |
+| `RegisterPage` | A regisztrációs oldal funkcióiért felelős modul. | Új felhasználó adatainak bekérése, jelszóellenőrzés, regisztrációs kérés az API felé. |
+| `FoodListPage` | Az étlap megjelenítését és az ételek böngészését biztosítja. | Ételek betöltése az API-ból, kategória szerinti szűrés, “Kosárba” gomb kezelése. |
+| `BasketPage` | A kosárban lévő ételek listáját és rendelés leadását kezeli. | Tételek megjelenítése, mennyiség módosítása, végösszeg számítása, rendelés elküldése. |
+| `AdminPage` | Az adminisztrátori felület logikáját valósítja meg. | Rendelések megjelenítése, státusz módosítása, új ételek felvitele, törlés és szerkesztés. |
+| `ProfilePage` | A felhasználói profil megtekintését és módosítását kezeli. | Felhasználói adatok megjelenítése, módosítás, jelszóváltás, kijelentkezés. |
+
 ## 11. Tesztterv
 
 A tesztelés célja a rendszer funkcionalitásának, megbízhatóságának és biztonságának ellenőrzése.  
