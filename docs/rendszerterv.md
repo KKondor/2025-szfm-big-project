@@ -382,6 +382,11 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 
 ### 9.2. Tárolt eljárások
 
+- **A felhasználók kezeléséhez szükséges eljárások:**<br>
+  -`create_user`: Új felhasználó létrehozása.<br>
+  -`update_user_password`: Jelszó felülírása email cím alapján.<br>
+  -`get_user_by_email`: Email cím alapján visszaadja az adott felhasználó adatait.<br>
+
 ### 9.3. Fizikai adatmodellt legeneráló SQL szkript
 
 - **users tábla létrehozása:**<br>
