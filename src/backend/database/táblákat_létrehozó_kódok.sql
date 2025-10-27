@@ -29,3 +29,18 @@ CREATE TABLE orders (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
+-- order_items tábla létrehozása
+CREATE TABLE order_items (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  order_id INT NOT NULL,
+  food_id INT NOT NULL,
+  quantity INT NOT NULL,
+  price INT NOT NULL,
+  FOREIGN KEY (order_id) REFERENCES orders(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (food_id) REFERENCES foods(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
