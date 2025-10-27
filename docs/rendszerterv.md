@@ -359,6 +359,16 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 |`image`        | Szöveg, TEXT           | Az ételhet tartozó kép URL-je.                                  |
 |`price`        | Egész szám, INT        | Az étel aktuális ára.                                           |
 
+<br><br>
+**Orders tábla**
+|Attribútum     |Adattípus               |Leírás                                                           |
+| ------------- | ---------------------- | --------------------------------------------------------------- |
+|`id`           | Egész szám, INT        | Elsődleges kulcs. Egyedi azonosító minden rendeléshez.          |
+|`user_id`      | Egész szám, INT        | Külső kulcs. A rendelést leadó felhasználó azonosítója.         |
+|`order_date`   | Dátum, DATETIME        | Az ételhet tartozó kép URL-je.                                  |
+|`status`       | Előre definiált szöveg,<br> ENUM| A rendelés aktuális állapota: <br>pending, completed, cancelled|
+|`note`         | Szöveg, TEXT           | Ocionális megjegyzés a rendeléshez.                             |
+
 ### 9.2. Tárolt eljárások
 
 ### 9.3. Fizikai adatmodellt legeneráló SQL szkript
