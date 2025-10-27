@@ -368,6 +368,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 |`order_date`   | Dátum, DATETIME        | Az ételhet tartozó kép URL-je.                                  |
 |`status`       | Előre definiált szöveg,<br> ENUM| A rendelés aktuális állapota: <br>pending, completed, cancelled|
 |`note`         | Szöveg, TEXT           | Ocionális megjegyzés a rendeléshez.                             |
+|`price`        | Egész szám, INT        | A megrendelt ételek összértéke.                                 |
 
 <br><br>
 **Order_items tábla**
@@ -377,7 +378,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 |`order_id`     | Egész szám, INT        | Külső kulcs. A megrendelt tételhez tartozó rendelés azonosítója.|
 |`food_id`      | Egész szám, INT        | Külső kulcs. A megrendelt tételhez tartozó étel azonosítója.    |
 |`quantity`     | Egész szám, INT        | A megrendelt étel darabszáma.                                   |
-|`price`        | Egész szám, INT        | A rendelés értéke a darabszámtol függően.                       |
+|`price`        | Egész szám, INT        | A megrendelt tétel értéke a darabszámtol függően.               |
 
 ### 9.2. Tárolt eljárások
 
