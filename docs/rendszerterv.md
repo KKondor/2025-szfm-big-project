@@ -384,6 +384,15 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 
 ### 9.3. Fizikai adatmodellt legeneráló SQL szkript
 
+- **users tábla létrehozása:**<br>
+`CREATE TABLE users (`<br>
+  `id INT AUTO_INCREMENT PRIMARY KEY,`<br>
+  `name VARCHAR(100) NOT NULL,`<br>
+  `email VARCHAR(100) NOT NULL UNIQUE,`<br>
+  `password VARCHAR(100) NOT NULL,`<br>
+  `role ENUM('user', 'admin') NOT NULL`<br>
+`);`
+
 ## 10. Implementációs terv
 
 ### 10.1. Perzisztencia-osztályok
