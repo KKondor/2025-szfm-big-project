@@ -4,6 +4,10 @@
   --text: #e8eaf6;
   --border: #262b36;
   --brand: #5b9cff;
+  --brand-2: #52d6a8;
+  --cardbg: rgba(255, 255, 255, 0.05);
+  --box_shadow: rgba(0, 0, 0, 0.2);
+  --danger: #ff6b6b;
 }
 
 html,

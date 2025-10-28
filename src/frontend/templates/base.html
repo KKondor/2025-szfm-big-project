@@ -3,22 +3,25 @@
 
 <head>
   <meta charset="utf-8">
-  <title>My Restaurant</title>
+  <title>{% block title%}My Restaurant{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  {% block head %}{% endblock %}
 </head>
 
 <body>
   <header class="site-header">
     <h1 class="logo">My Restaurant</h1>
     <nav>
-      <a href="">Home</a>
-      <a href="">Basket</a>
+      <a href="{{ url_for('main.item_list', filename='item-list.html') }}">Home</a>
+      <a href="{{ url_for('main.basket', filename='basket.html') }}">Basket</a>
     </nav>
   </header>
+  {% block body %} {% endblock %}
   <main class="content">
+    {% block content %}
+    {% endblock %}
   </main>
-  <script src=""></script>
 </body>
 
 </html>
