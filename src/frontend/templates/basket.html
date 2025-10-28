@@ -1,24 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Basket</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../static/css/basket.css">
-</head>
-<body>
-  <header class="site-header">
-    <h1 class="logo">My Restaurant</h1>
-    <nav>
-      <a href="">Home</a>
-      <a href="">Basket</a>
-    </nav>
-  </header>
-  <main class="content">
+{% extends "base.html" %}
 
-    <div class="basket-items">
-     <div class="basket-item">
-      <img src="../static/images/food.jpg" alt="Dish">
+{% block title %}Basket{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/basket.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="basket-items">
+    <div class="basket-item">
+      <img src="{{ url_for('static', filename='images/food.jpg') }}" alt="Dish">
       <div class="basket-info">
         <h3>Pizza Margherita</h3>
         <div class="basket-details">
@@ -27,15 +18,13 @@
         </div>
       </div>
       <button class="remove-btn" aria-label="Remove item">&times;</button>
-     </div>
     </div>
+  </div>
 
   <div class="basket-total">
     <span>Total:</span>
     <span>$24.00</span>
   </div>
+  
   <button class="checkout-btn">Checkout</button>
-  </main>
-  <script src=""></script>
-</body>
-</html>
+{% endblock %}
