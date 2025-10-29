@@ -14,6 +14,10 @@ def basket():
 def login():
     return render_template('login.html')
 
+@main_bp.route('/register')
+def register():
+    return render_template('register.html')
+
 @main_bp.route('/item-list')
 def item_list():
     return render_template('item-list.html')
