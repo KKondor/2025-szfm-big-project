@@ -71,3 +71,28 @@ class UserManager:
         finally:
             cursor.close()
             conn.close()
+
+#Viszzaadja egy felhasználó összes adatát
+#Bemenetkénk megkapja:
+#a felhasználó email címét
+#Ha az adatbázisban nem szerepel az adott email cím akkor None ad vissza
+    def get_user_by_email(self, email: str) -> Optional[User]:
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.callproc("get_user_by_email", [email])
+            for result in cursor.stored_results():
+                row = result.fetchone()
+                if row:
+                    return User(
+                        id=row[0],
+                        name=row[1],
+                        email=row[2],
+                        password=row[3],
+                        role=Role(row[4])
+                    )
+            print("Nincs ilyen email című felhasználó")
+            return None
+        finally:
+            cursor.close()
+            conn.close()
