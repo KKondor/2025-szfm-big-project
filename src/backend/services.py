@@ -31,6 +31,7 @@ def hash_password(password: str) -> str:
         print(f"Hiba történt a jelszó titkosítása során: {e}")
         return "Hiba a jelszó titkosításakor"
 
+
 #Bejelentkezés email cím és jelszó kapott adatokkal.
 #Ha a bejelentkezés sikeres akkor visszaadja a felhasználó adatait users.py User class alapján.
 #Ha a bejelentkezés sikertelen akkor egy szöveget ad vissza.
@@ -45,3 +46,35 @@ def login(email: str, password: str) -> str:
     except Exception as e:
         print(f"Hiba történt a bejelentkezés során: {e}")
         return "Hiba a bejelentkezés során"
+
+
+#A regisztráció kapott adatai: név, email, jelszó
+#Ellenörzi az email formátumát, a jelszó erősségét.
+#Titkosítja a jelszót.
+#Hozzáadja a felhasználót az adatbázishoz.
+#Visszatérési érték pedig egy szöveg:
+#a sikeres regisztrációról vagy esetleges hibákról
+def register(name: str, email: str, password: str) -> str:
+    try:
+        if not is_valid_email(email):
+            print("Hibás email formátum.")
+            return "Hibás email formátum."
+
+        if not is_strong_password(password):
+            print("A jelszó nem elég erős.")
+            return "A jelszó nem elég erős."
+
+        if user_manager.get_user_by_email(email):
+            print("Ilyen email már létezik.")
+            return "Ilyen email már létezik."
+
+        hashed_password = hash_password(password)
+        if "Hiba" in hashed_password:
+            return hashed_password
+
+        user_manager.create_user(name, email, hashed_password)
+        print("Regisztráció sikeres.")
+        return "Regisztráció sikeres."
+    except Exception as e:
+        print(f"Hiba történt a regisztráció során: {e}")
+        return "Hiba a regisztráció során"
