@@ -386,6 +386,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
   -`create_user`: Új felhasználó létrehozása.<br>
   -`update_user_password`: Jelszó felülírása email cím alapján.<br>
   -`get_user`: Email cím és jelszó alapján visszaadja az adott felhasználó adatait.<br>
+  -`get_user_by_email`: Email cím alapján visszaadja az adott felhasználó adatait.<br>
 
 - **Az ételek kezeléséhez szükséges eljárások:**<br>
   -`create_food`: Új étel létrehozása.<br>
