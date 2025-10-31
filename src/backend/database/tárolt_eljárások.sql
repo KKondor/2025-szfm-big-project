@@ -14,3 +14,17 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- Jelszó lecserélése email cím alapján
+DELIMITER //
+CREATE PROCEDURE update_user_password(
+    IN p_email VARCHAR(100),
+    IN p_new_password VARCHAR(100)
+)
+BEGIN
+    UPDATE USERS
+    SET password = p_new_password
+    WHERE email = p_email;
+END;
+//
+DELIMITER ;
