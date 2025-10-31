@@ -28,3 +28,17 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- A felhasználó adatainak visszaadása email cím és jelszó alapján
+DELIMITER //
+CREATE PROCEDURE get_user(
+    IN p_email VARCHAR(100),
+    IN p_password VARCHAR(100)
+)
+BEGIN
+    SELECT id, name, password, email, role
+    FROM USERS
+    WHERE email = p_email AND password = p_password;
+END;
+//
+DELIMITER ;
