@@ -31,3 +31,17 @@ class UserManager:
         finally:
             cursor.close()
             conn.close()
+
+#Lecseréli egy adott felhasználó jelszavát
+#Megkapja bemenetbe:
+#az email címet, hogy melyík felhasználót kell módosítania
+#és megkapja az új jelszót már titkosított formában
+    def update_user_password(self, email: str, new_password: str):
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.callproc("update_user_password", [email, new_password])
+            conn.commit()
+        finally:
+            cursor.close()
+            conn.close()
