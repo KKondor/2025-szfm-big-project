@@ -78,3 +78,33 @@ def register(name: str, email: str, password: str) -> str:
     except Exception as e:
         print(f"Hiba történt a regisztráció során: {e}")
         return "Hiba a regisztráció során"
+
+
+#A jelszó megváltoztatásához szügséges adatok:
+#az email cím, az új jelszó
+#Ellenörni, hogy az új jelszó elég erős e.
+#Ellenörni, hogy a megadott email cím létezik e.
+#Titkosítja az új jelszót és kicseréli az adatbázisban.
+#Visszatérési érték pedig egy szöveg:
+#a sikeres jelszó módosításról vagy esetleges hibákról
+def change_password(email: str, new_password: str) -> str:
+    try:
+        if not is_strong_password(new_password):
+            print("A jelszó nem elég erős.")
+            return "A jelszó nem elég erős."
+
+        user = user_manager.get_user_by_email(email)
+        if not user:
+            print("Az email nem létezik.")
+            return "Az email nem létezik."
+
+        hashed_password = hash_password(new_password)
+        if "Hiba" in hashed_password:
+            return hashed_password
+
+        user_manager.update_user_password(email, hashed_password)
+        print("A jelszó sikeresen megváltozott.")
+        return "A jelszó sikeresen megváltozott."
+    except Exception as e:
+        print(f"Hiba történt a jelszó módosítása során: {e}")
+        return "Hiba a jelszó módosítása során"
