@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="admin-container">
+    <h2>Admin Dashboard</h2>
+
+    <div class="admin-tabs">
+        <button class="tab-btn active" data-target="add-item">Add Item</button>
+        <button class="tab-btn" data-target="manage-users">Manage Users</button>
+        <button class="tab-btn" data-target="view-orders">View Orders</button>
+    </div>
+
+    <div class="admin-sections">
+        <!-- Add Item -->
+        <div class="admin-section active" id="add-item">
+            <h3>Add New Menu Item</h3>
+            <form class="admin-form">
+                <label>Name</label>
+                <input type="text" placeholder="Item name">
+                <label>Price</label>
+                <input type="number" step="5" placeholder="Item price">
+                <label>Image</label>
+                <input type="file" accept="image/*" required>
+                <button class="btn">Add Item</button>
+            </form>
+        </div>
+
+        <!-- Manage Users -->
+        <div class="admin-section" id="manage-users">
+            <h3>Manage Users</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#001</td>
+                        <td>Alice</td>
+                        <td>
+                            <select class="role-select">
+                                <option selected>Admin</option>
+                                <option>User</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#002</td>
+                        <td>Bob</td>
+                        <td>
+                            <select class="role-select">
+                                <option>Admin</option>
+                                <option selected>User</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- View Orders -->
+        <div class="admin-section" id="view-orders">
+            <h3>View Orders</h3>
+
+            <div class="orders-list">
+                <div class="order-card">
+                    <div class="order-info">
+                        <span class="order-id">#1023</span>
+                        <span class="user-id">User #45</span>
+                        <span class="order-date">2025-11-01</span>
+                    </div>
+                    <div class="order-progress">
+                        <label>Progress</label>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%;" data-status="preparing">Preparing</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-info">
+                        <span class="order-id">#1024</span>
+                        <span class="user-id">User #52</span>
+                        <span class="order-date">2025-11-01</span>
+                    </div>
+                    <div class="order-progress">
+                        <label>Progress</label>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;" data-status="completed">Completed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-info">
+                        <span class="order-id">#1025</span>
+                        <span class="user-id">User #52</span>
+                        <span class="order-date">2025-11-01</span>
+                    </div>
+                    <div class="order-progress">
+                        <label>Progress</label>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;" data-status="cancelled">Cancelled</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Tab button states
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Section visibility
+            document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(btn.dataset.target).classList.add('active');
+        });
+    });
+</script>
+{% endblock %}

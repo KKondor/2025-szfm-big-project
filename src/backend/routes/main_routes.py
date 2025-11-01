@@ -18,6 +18,10 @@ def login():
 def register():
     return render_template('register.html')
 
+@main_bp.route('/admin')
+def admin():
+    return render_template('admin.html')
+
 @main_bp.route('/item-list')
 def item_list():
     return render_template('item-list.html')
