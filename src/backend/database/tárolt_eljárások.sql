@@ -111,3 +111,12 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- Visszaadja az összes étel összes adatát
+DELIMITER //
+CREATE PROCEDURE get_all_food()
+BEGIN
+    SELECT id, name, image, price FROM FOODS;
+END;
+//
+DELIMITER ;
