@@ -4,3 +4,5 @@ src/backend/.venv/
 src/backend/routes/__pycache__/
 
 *.pyc
+
+.env
