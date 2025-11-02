@@ -69,3 +69,14 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- Étel törlése id alapján
+DELIMITER //
+CREATE PROCEDURE delete_food(
+    IN p_id INT
+)
+BEGIN
+    DELETE FROM FOODS WHERE id = p_id;
+END;
+//
+DELIMITER ;
