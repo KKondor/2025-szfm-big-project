@@ -169,3 +169,25 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- Visszaadja az összes rendelés összes adatát
+DELIMITER //
+CREATE PROCEDURE get_all_orders()
+BEGIN
+    SELECT 
+        o.id AS order_id,
+        o.user_id,
+        o.order_date,
+        o.status,
+        o.note,
+        o.price AS total_price,
+        oi.id AS item_id,
+        oi.food_id,
+        oi.quantity,
+        oi.price AS item_price
+    FROM orders o
+    LEFT JOIN order_items oi ON o.id = oi.order_id
+    ORDER BY o.order_date DESC;
+END;
+//
+DELIMITER ;
