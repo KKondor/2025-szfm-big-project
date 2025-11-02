@@ -120,3 +120,52 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- Rögzíti a rendelést az orders és order_items táblákba
+-- Megkapja bemenetbe a felhasználó id, az ételek id és a megjegyzést
+DELIMITER //
+CREATE PROCEDURE create_order(
+    IN p_user_id INT,
+    IN p_items JSON,
+    IN p_note TEXT
+)
+BEGIN
+    DECLARE new_order_id INT;
+    DECLARE i INT DEFAULT 0;
+    DECLARE item_count INT;
+    DECLARE total_price INT DEFAULT 0;
+    DECLARE item_price INT;
+
+    SET item_count = JSON_LENGTH(p_items);
+
+    WHILE i < item_count DO
+        SET item_price = JSON_UNQUOTE(JSON_EXTRACT(p_items, CONCAT('$[', i, '].price')));
+        SET total_price = total_price + item_price;
+        SET i = i + 1;
+    END WHILE;
+
+    INSERT INTO orders (user_id, order_date, status, note, price)
+    VALUES (
+        p_user_id,
+        NOW(),
+        'pending',
+        p_note,
+        total_price
+    );
+
+    SET new_order_id = LAST_INSERT_ID();
+    SET i = 0;
+
+    WHILE i < item_count DO
+        INSERT INTO order_items (order_id, food_id, quantity, price)
+        VALUES (
+            new_order_id,
+            JSON_UNQUOTE(JSON_EXTRACT(p_items, CONCAT('$[', i, '].food_id'))),
+            JSON_UNQUOTE(JSON_EXTRACT(p_items, CONCAT('$[', i, '].quantity'))),
+            JSON_UNQUOTE(JSON_EXTRACT(p_items, CONCAT('$[', i, '].price')))
+        );
+        SET i = i + 1;
+    END WHILE;
+END;
+//
+DELIMITER ;
