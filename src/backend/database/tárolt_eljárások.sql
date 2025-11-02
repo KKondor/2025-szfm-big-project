@@ -55,3 +55,17 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- Új étel létrehozása 
+DELIMITER //
+CREATE PROCEDURE create_food(
+    IN p_name VARCHAR(50),
+    IN p_image TEXT,
+    IN p_price INT
+)
+BEGIN
+    INSERT INTO FOODS (name, image, price)
+    VALUES (p_name, p_image, p_price);
+END;
+//
+DELIMITER ;
