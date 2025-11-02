@@ -98,3 +98,16 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- Visszaadja egy étel összes adatát id alapján
+DELIMITER //
+CREATE PROCEDURE get_food(
+    IN p_id INT
+)
+BEGIN
+    SELECT id, name, image, price
+    FROM FOODS
+    WHERE id = p_id;
+END;
+//
+DELIMITER ;
