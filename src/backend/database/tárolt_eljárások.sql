@@ -120,7 +120,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE get_all_food()
 BEGIN
-    SELECT id, name, image, price FROM FOODS;
+    SELECT id, name, description, image, price FROM FOODS;
 END;
 //
 DELIMITER ;
