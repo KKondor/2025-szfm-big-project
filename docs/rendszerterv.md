@@ -356,6 +356,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 | ------------- | ---------------------- | --------------------------------------------------------------- |
 |`id`           | Egész szám, INT        | Elsődleges kulcs.                                               |
 |`name`         | Szöveg, VARCHAR(50)    | Az étel neve.                                                   |
+|`description`  | Szöveg, TEXT           | Az étel leírása.                                                |
 |`image`        | Szöveg, TEXT           | Az ételhet tartozó kép URL-je.                                  |
 |`price`        | Egész szám, INT        | Az étel aktuális ára.                                           |
 
