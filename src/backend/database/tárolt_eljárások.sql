@@ -109,7 +109,7 @@ CREATE PROCEDURE get_food(
     IN p_id INT
 )
 BEGIN
-    SELECT id, name, image, price
+    SELECT id, name, description, image, price
     FROM FOODS
     WHERE id = p_id;
 END;
