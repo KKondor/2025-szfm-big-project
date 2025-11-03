@@ -38,8 +38,8 @@ CREATE PROCEDURE get_user(
     IN p_password VARCHAR(100)
 )
 BEGIN
-    SELECT id, name, password, email, role
-    FROM USERS
+    SELECT id, name, password, email, phone, address, role
+    FROM users
     WHERE email = p_email AND password = p_password;
 END;
 //
