@@ -416,6 +416,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 `CREATE TABLE foods (`<br>
   `id INT AUTO_INCREMENT PRIMARY KEY,`<br>
   `name VARCHAR(50) NOT NULL,`<br>
+  `description TEXT,` <br>
   `image TEXT,`<br>
   `price INT NOT NULL`<br>
 `);`
