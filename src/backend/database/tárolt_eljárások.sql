@@ -6,11 +6,13 @@ CREATE PROCEDURE create_user(
     IN p_name VARCHAR(100),
     IN p_email VARCHAR(100),
     IN p_password VARCHAR(100),
+    IN p_phone VARCHAR(50),
+    IN p_address TEXT,
     IN p_role ENUM('user', 'admin')
 )
 BEGIN
-    INSERT INTO USERS (name, email, password, role)
-    VALUES (p_name, p_email, p_password, p_role);
+    INSERT INTO users (name, email, password, phone, address, role)
+    VALUES (p_name, p_email, p_password, p_phone, p_address, p_role);
 END;
 //
 DELIMITER ;
