@@ -88,12 +88,14 @@ DELIMITER //
 CREATE PROCEDURE update_food(
     IN p_id INT,
     IN p_name VARCHAR(50),
+    IN p_description TEXT,
     IN p_image TEXT,
     IN p_price INT
 )
 BEGIN
     UPDATE FOODS
     SET name = p_name,
+        description = p_description,
         image = p_image,
         price = p_price
     WHERE id = p_id;
