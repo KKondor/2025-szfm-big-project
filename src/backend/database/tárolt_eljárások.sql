@@ -51,8 +51,8 @@ CREATE PROCEDURE get_user_by_email(
     IN p_email VARCHAR(100)
 )
 BEGIN
-    SELECT id, name, email, password, role
-    FROM USERS
+    SELECT id, name, email, password, phone, address, role
+    FROM users
     WHERE email = p_email;
 END;
 //
