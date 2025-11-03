@@ -13,6 +13,7 @@ CREATE TABLE users (
 CREATE TABLE foods (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
+  description TEXT,
   image TEXT,
   price INT NOT NULL
 );
