@@ -25,3 +25,7 @@ def admin():
 @main_bp.route('/item-list')
 def item_list():
     return render_template('item-list.html')
+
+@main_bp.route('/profile')
+def profile():
+    return render_template('profile.html')

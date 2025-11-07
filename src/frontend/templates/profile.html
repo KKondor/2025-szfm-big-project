@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="profile-container">
+  <h2>Your Profile</h2>
+
+  <div class="profile-card">
+    <div class="profile-info">
+      <p><strong>Name: </strong>Example Name</p>
+      <p><strong>Email: </strong>example@email.com</p>
+      <p><strong>Phone: </strong> 11111111111111</p>
+      <p><strong>Role: </strong> Customer</p>
+    </div>
+  </div>
+
+  <div class="profile-tabs">
+    <button class="tab-btn active" data-target="view-orders">View Orders</button>
+    <button class="tab-btn" data-target="change-password">Change Password</button>
+  </div>
+
+  <div class="profile-sections">
+    <div class="profile-section active" id="view-orders">
+      <h3>Your Orders</h3>
+      <div class="orders-list">
+        <div class="order-card">
+          <div class="order-info">
+            <span class="order-id">#2042</span>
+            <span class="order-date">2025-11-01</span>
+          </div>
+          <div class="order-progress">
+            <label>Status</label>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 80%;" data-status="preparing">Preparing</div>
+            </div>
+          </div>
+          <div class="order-items">
+          <h4>Ordered Foods</h4>
+          <ul>
+            <li>
+              <span class="item-name">Classic Burger</span>
+              <span class="item-qty">x2</span>
+              <span class="item-price">2400 Ft</span>
+            </li>
+            <li>
+              <span class="item-name">French Fries</span>
+              <span class="item-qty">x1</span>
+              <span class="item-price">900 Ft</span>
+            </li>
+          </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-section" id="change-password">
+      <h3>Change Password</h3>
+      <form class="profile-form">
+        <label>Current Password</label>
+        <input type="password" placeholder="Enter current password" required>
+        <label>New Password</label>
+        <input type="password" placeholder="Enter new password" required>
+        <label>Confirm New Password</label>
+        <input type="password" placeholder="Confirm new password" required>
+        <button class="btn">Update Password</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.profile-section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(btn.dataset.target).classList.add('active');
+  });
+});
+</script>
+{% endblock %}
