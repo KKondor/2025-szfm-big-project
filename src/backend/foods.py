@@ -8,3 +8,4 @@ class Food:
     description: Optional[str]
     image: Optional[str]
     price: int
+    category: Optional[str]
