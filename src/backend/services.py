@@ -50,13 +50,13 @@ def login(email: str, password: str) -> Union[User, str]:
         return "Hiba a bejelentkezés során"
 
 
-#A regisztráció kapott adatai: név, email, jelszó
+#A regisztráció kapott adatai: név, email, jelszó, telefon, cím
 #Ellenörzi az email formátumát, a jelszó erősségét.
 #Titkosítja a jelszót.
 #Hozzáadja a felhasználót az adatbázishoz.
 #Visszatérési érték pedig egy szöveg:
 #a sikeres regisztrációról vagy esetleges hibákról
-def register(name: str, email: str, password: str) -> str:
+def register(name: str, email: str, password: str, phone: str = "", address: str = "") -> str:
     try:
         if not is_valid_email(email):
             print("Hibás email formátum.")
@@ -74,7 +74,7 @@ def register(name: str, email: str, password: str) -> str:
         if "Hiba" in hashed_password:
             return hashed_password
 
-        user_manager.create_user(name, email, hashed_password)
+        user_manager.create_user(name, email, hashed_password, phone, address)
         print("Regisztráció sikeres.")
         return "Regisztráció sikeres."
     except Exception as e:
