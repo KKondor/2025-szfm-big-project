@@ -49,3 +49,26 @@ class FoodManager:
         finally:
             cursor.close()
             conn.close()
+
+#Visszaadja egy étel minden adatát az adatbázisból
+#Bemenetkénk megkapja: id
+    def get_food(self, food_id: int) -> Optional[Food]:
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.callproc("get_food", [food_id])
+            for result in cursor.stored_results():
+                row = result.fetchone()
+                if row:
+                    return Food(
+                        id=row[0],
+                        name=row[1],
+                        description=row[2],
+                        image=row[3],
+                        price=row[4],
+                        category=row[5]
+                    )
+            return None
+        finally:
+            cursor.close()
+            conn.close()
