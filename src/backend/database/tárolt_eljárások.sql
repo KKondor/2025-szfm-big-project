@@ -79,14 +79,16 @@ CREATE PROCEDURE update_food(
     IN p_name VARCHAR(50),
     IN p_description TEXT,
     IN p_image TEXT,
-    IN p_price INT
+    IN p_price INT,
+    IN p_category VARCHAR(50)
 )
 BEGIN
     UPDATE FOODS
     SET name = p_name,
         description = p_description,
         image = p_image,
-        price = p_price
+        price = p_price,
+        category = p_category
     WHERE id = p_id;
 END;
 //
