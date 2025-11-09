@@ -36,3 +36,16 @@ class FoodManager:
         finally:
             cursor.close()
             conn.close()
+
+#Frissíti egy adott étel adatait az adatbázisban id alapján
+#Bemenetként minden adatot meg kell neki adni azt is amit nem akarunk módosítani:
+#az id, a nevet, a leírást, a kép liknjét, az ár, a típus
+    def update_food(self, food_id: int, name: str, description: str, image: str, price: int, category: str):
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.callproc("update_food", [food_id, name, description, image, price, category])
+            conn.commit()
+        finally:
+            cursor.close()
+            conn.close()
