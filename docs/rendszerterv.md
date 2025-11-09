@@ -359,6 +359,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
 |`description`  | Szöveg, TEXT           | Az étel leírása.                                                |
 |`image`        | Szöveg, TEXT           | Az ételhet tartozó kép URL-je.                                  |
 |`price`        | Egész szám, INT        | Az étel aktuális ára.                                           |
+|`category`     | Szöveg, VARCHAR(50)    | Az étel típusa.                                                 |
 
 <br><br>
 **Orders tábla**
