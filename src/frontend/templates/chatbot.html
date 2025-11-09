@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}AI Chatbot{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="chatbot-container">
+  <h2>AI Chatbot</h2>
+
+  <div class="chat-window" id="chat-window">
+    <div class="message bot">Hello! How can I help you today?</div>
+    <div class="message user">Hi! I have a question about your services.</div>
+  </div>
+
+  <form id="chat-form">
+    <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off" />
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+<script src=""></script>
+{% endblock %}

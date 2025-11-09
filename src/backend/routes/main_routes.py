@@ -29,3 +29,7 @@ def item_list():
 @main_bp.route('/profile')
 def profile():
     return render_template('profile.html')
+
+@main_bp.route('/chatbot')
+def chatbot():
+    return render_template('chatbot.html')
