@@ -50,34 +50,6 @@ class UserManager:
 
 #Viszzaadja egy felhasználó összes adatát
 #Bemenetkénk megkapja:
-#a felhasználó mail címét
-#a felhasználó jelszavát már titkosított formátumba
-#Ha az email cím vagy jelszó nincs az adatbázisban akkor None ad vissza
-    def get_user(self, email: str, password: str) -> Optional[User]:
-        conn = get_connection()
-        cursor = conn.cursor()
-        try:
-            cursor.callproc("get_user", [email, password])
-            for result in cursor.stored_results():
-                row = result.fetchone()
-                if row:
-                    return User(
-                        id=row[0],
-                        name=row[1],
-                        email=row[2],
-                        password=row[3],
-                        phone=row[4],
-                        address=row[5],
-                        role=Role(row[6])
-                    )
-            print("Hibás email vagy jelszó")
-            return None
-        finally:
-            cursor.close()
-            conn.close()
-
-#Viszzaadja egy felhasználó összes adatát
-#Bemenetkénk megkapja:
 #a felhasználó email címét
 #Ha az adatbázisban nem szerepel az adott email cím akkor None ad vissza
     def get_user_by_email(self, email: str) -> Optional[User]:
