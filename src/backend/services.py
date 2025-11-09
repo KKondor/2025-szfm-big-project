@@ -1,6 +1,8 @@
 import bcrypt
 import re
 from users import UserManager, User
+from typing import Union
+
 
 user_manager = UserManager()
 
@@ -35,7 +37,7 @@ def hash_password(password: str) -> str:
 #Bejelentkezés email cím és jelszó kapott adatokkal.
 #Ha a bejelentkezés sikeres akkor visszaadja a felhasználó adatait users.py User class alapján.
 #Ha a bejelentkezés sikertelen akkor egy szöveget ad vissza.
-def login(email: str, password: str) -> str:
+def login(email: str, password: str) -> Union[User, str]:
     try:
         user = user_manager.get_user_by_email(email)
         if user and bcrypt.checkpw(password.encode(), user.password.encode()):
