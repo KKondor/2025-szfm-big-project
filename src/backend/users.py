@@ -65,8 +65,10 @@ class UserManager:
                         id=row[0],
                         name=row[1],
                         email=row[2],
-                        password=password,
-                        role=Role(row[3])
+                        password=row[3],
+                        phone=row[4],
+                        address=row[5],
+                        role=Role(row[6])
                     )
             print("Hibás email vagy jelszó")
             return None
