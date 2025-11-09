@@ -17,7 +17,8 @@ CREATE TABLE foods (
   name VARCHAR(50) NOT NULL,
   description TEXT,
   image TEXT,
-  price INT NOT NULL
+  price INT NOT NULL,
+  category VARCHAR(50)
 );
 
 -- orders tábla létrehozása
