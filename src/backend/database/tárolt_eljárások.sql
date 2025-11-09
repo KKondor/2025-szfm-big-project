@@ -50,11 +50,12 @@ CREATE PROCEDURE create_food(
     IN p_name VARCHAR(50),
     IN p_description TEXT,
     IN p_image TEXT,
-    IN p_price INT
+    IN p_price INT,
+    IN p_category VARCHAR(50)
 )
 BEGIN
-    INSERT INTO FOODS (name, description, image, price)
-    VALUES (p_name, p_description, p_image, p_price);
+    INSERT INTO FOODS (name, description, image, price, category)
+    VALUES (p_name, p_description, p_image, p_price, p_category);
 END;
 //
 DELIMITER ;
