@@ -111,10 +111,12 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE get_all_food()
 BEGIN
-    SELECT id, name, description, image, price FROM FOODS;
+    SELECT id, name, description, image, price, category
+    FROM FOODS;
 END;
 //
 DELIMITER ;
+
 
 -- Rögzíti a rendelést az orders és order_items táblákba
 -- Megkapja bemenetbe a felhasználó id, az ételek id és a megjegyzést
