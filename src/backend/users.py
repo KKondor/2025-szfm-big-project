@@ -93,7 +93,9 @@ class UserManager:
                         name=row[1],
                         email=row[2],
                         password=row[3],
-                        role=Role(row[4])
+                        phone=row[4],
+                        address=row[5],
+                        role=Role(row[6])
                     )
             print("Nincs ilyen email című felhasználó")
             return None
