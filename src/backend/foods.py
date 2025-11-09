@@ -24,3 +24,15 @@ class FoodManager:
         finally:
             cursor.close()
             conn.close()
+
+#Kitörli az adott ételt az adatbázisból
+#Meg kell adani neki bemenetbe: id
+    def delete_food(self, food_id: int):
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.callproc("delete_food", [food_id])
+            conn.commit()
+        finally:
+            cursor.close()
+            conn.close()
