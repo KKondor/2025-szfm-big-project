@@ -72,3 +72,28 @@ class FoodManager:
         finally:
             cursor.close()
             conn.close()
+
+#Visszaadja az összes étel minden adatát az adatbázisból
+#A visszatérési érték egy lista, melynek minden eleme egy Food
+    def get_all_food(self) -> List[Food]:
+        conn = get_connection()
+        cursor = conn.cursor()
+        foods = []
+        try:
+            cursor.callproc("get_all_food")
+            for result in cursor.stored_results():
+                rows = result.fetchall()
+                for row in rows:
+                    food = Food(
+                        id=row[0],
+                        name=row[1],
+                        description=row[2],
+                        image=row[3],
+                        price=row[4],
+                        category=row[5]
+                    )
+                    foods.append(food)
+            return foods
+        finally:
+            cursor.close()
+            conn.close()
