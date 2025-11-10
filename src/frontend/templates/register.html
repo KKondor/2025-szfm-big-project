@@ -27,6 +27,18 @@
         <input type="password" id="password" name="password" required />
       </div>
 
+      <div class="input-group">
+        <label for="phone">Phone number (optional)</label>
+        <input type="tel" id="phone" name="phone"
+          pattern="^\+?[0-9\s\-]{7,15}$"
+          placeholder="e.g. +1 555-123-4567">
+      </div>
+
+      <div class="input-group">
+        <label for="adress">Adress</label>
+        <input type="text" id="adress" name="adress" required />
+      </div>
+
       <div class ="error-message" id="error-message">
         <p>Example error</p>
       </div>
