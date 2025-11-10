@@ -44,6 +44,26 @@ END;
 //
 DELIMITER ;
 
+-- Visszaadja a felhasználók adatait rendezve: admin, user, majd abc
+DELIMITER //
+CREATE PROCEDURE get_all_user()
+BEGIN
+    SELECT 
+        id,
+        name,
+        email,
+        password,
+        phone,
+        address,
+        role
+    FROM users
+    ORDER BY 
+        FIELD(role, 'admin', 'user'),
+        name ASC;
+END;
+//
+DELIMITER ;
+
 -- Új étel létrehozása 
 DELIMITER //
 CREATE PROCEDURE create_food(
