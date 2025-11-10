@@ -420,6 +420,31 @@ END;
 //
 DELIMITER ;
 
+-- Visszaadja egy felhasználóhoz tartozó összes rendelést felhasználó id alapján
+DELIMITER //
+CREATE PROCEDURE get_order_by_user_id(
+    IN p_user_id INT
+)
+BEGIN
+    SELECT  
+        o.id AS order_id,
+        o.user_id,
+        o.order_date,
+        o.status,
+        o.note,
+        o.price AS total_price,
+        oi.id AS item_id,
+        oi.food_id,
+        oi.quantity,
+        oi.price AS item_price
+    FROM orders o
+    LEFT JOIN order_items oi ON o.id = oi.order_id
+    WHERE o.user_id = p_user_id
+    ORDER BY o.order_date DESC;
+END;
+//
+DELIMITER ;
+
 -- Megváltoztatja a rendelés státuszát id alapján
 DELIMITER //
 CREATE PROCEDURE update_order_status(
