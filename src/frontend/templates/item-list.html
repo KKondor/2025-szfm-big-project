@@ -31,6 +31,17 @@
 {% endblock %}
 
 {% block content %}
+<div class="filter-bar">
+    <label for="food-type">Filter by type:</label>
+    <select id="food-type" name="food-type">
+      <option value="all">All</option>
+      <option value="pizza">Pizza</option>
+      <option value="pasta">Pasta</option>
+      <option value="burger">Burger</option>
+      <option value="salad">Salad</option>
+    </select>
+  </div>
+  
 <div class="item-list">
 
   <div class="item-card">

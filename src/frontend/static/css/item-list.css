@@ -1,8 +1,39 @@
 .item-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(16rem, 40%, 22rem), 1fr));  
+  grid-template-columns: repeat(auto-fit, minmax(clamp(16rem, 40%, 22rem), 1fr));
   gap: 1.5rem;
   margin-left: calc(min(80vw, 240px) + 1rem);
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: calc(min(80vw, 240px) + 1rem);
+  margin-bottom: 1rem;
+}
+
+#food-type {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border 0.2s ease, background 0.2s ease;
+}
+
+#food-type:hover,
+#food-type:focus {
+    border-color: var(--brand);
+    background: rgba(255, 255, 255, 0.08);
+    outline: none;
+}
+
+#food-type option {
+    background-color: var(--bg_from);
+    color: var(--text);
 }
 
 .item-card {
