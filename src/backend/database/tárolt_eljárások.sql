@@ -64,6 +64,20 @@ END;
 //
 DELIMITER ;
 
+-- Módosítja a felhasználó jogosultságát id alapján
+DELIMITER //
+CREATE PROCEDURE update_user_role(
+    IN p_user_id INT,
+    IN p_new_role ENUM('admin', 'user')
+)
+BEGIN
+    UPDATE users
+    SET role = p_new_role
+    WHERE id = p_user_id;
+END;
+//
+DELIMITER ;
+
 -- Új étel létrehozása 
 DELIMITER //
 CREATE PROCEDURE create_food(
