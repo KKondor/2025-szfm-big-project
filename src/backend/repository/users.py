@@ -1,6 +1,6 @@
 from enum import Enum
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 from db_connect import get_connection
 
 
