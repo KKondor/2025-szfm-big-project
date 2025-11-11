@@ -100,3 +100,27 @@ class UserManager:
         finally:
             cursor.close()
             conn.close()
+
+#Visszaadja egy listában az összes felhasználót és azok összes adatát
+    def get_all_user(self) -> List[User]:
+        conn = get_connection()
+        cursor = conn.cursor()
+        users = []
+        try:
+            cursor.callproc("get_all_user")
+            for result in cursor.stored_results():
+                for row in result.fetchall():
+                    user = User(
+                        id=row[0],
+                        name=row[1],
+                        email=row[2],
+                        password=row[3],
+                        phone=row[4] if row[4] is not None else None,
+                        address=row[5],
+                        role=Role(row[6])
+                    )
+                    users.append(user)
+            return users
+        finally:
+            cursor.close()
+            conn.close()
