@@ -23,6 +23,7 @@ class UserManager:
 #Új felhasználót hoz létre az adatbázisba
 #Meg kell adani neki bemenetbe:
 #a nevet, az email címet, és a jelszót már titkosított formában
+#a telefont, a címet
 #Alap értelmezetten user jogot ad a felhasználónak
     def create_user(self, name: str, email: str, password: str, phone: str, address: str):
         conn = get_connection()
