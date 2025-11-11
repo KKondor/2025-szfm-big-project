@@ -125,3 +125,16 @@ class UserManager:
         finally:
             cursor.close()
             conn.close()
+
+# Módosítja egy felhasználó jogosultságát
+#Bemenetkénk megkapja:
+#A felhasználó id, az új jogosultság: USER/ADMIN
+    def update_user_role(self, user_id: int, new_role: Role):
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.callproc("update_user_role", [user_id, new_role.value])
+            conn.commit()
+        finally:
+            cursor.close()
+            conn.close()
