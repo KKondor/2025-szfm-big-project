@@ -1,6 +1,6 @@
 import bcrypt
 import re
-from users import UserManager, User
+from backend.repository.users import UserManager, User
 from typing import Union
 
 
