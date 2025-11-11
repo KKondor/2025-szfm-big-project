@@ -44,6 +44,16 @@ END;
 //
 DELIMITER ;
 
+-- A felhasználó adatainak visszaadása email cím vagy felhasználónév alapján
+DELIMITER //
+CREATE PROCEDURE get_user_by_identifier(IN p_identifier VARCHAR(100))
+BEGIN
+    SELECT id, name, email, password, address, role, phone
+    FROM users
+    WHERE email = p_identifier OR name = p_identifier;
+END
+DELIMITER ;
+
 -- Visszaadja a felhasználók adatait rendezve: admin, user, majd abc
 DELIMITER //
 CREATE PROCEDURE get_all_user()
