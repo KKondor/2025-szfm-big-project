@@ -66,7 +66,7 @@ class UserManager:
                         name=row[1],
                         email=row[2],
                         password=row[3],
-                        phone=row[4],
+                        phone=row[4] if row[4] is not None else None,
                         address=row[5],
                         role=Role(row[6])
                     )
