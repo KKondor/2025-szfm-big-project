@@ -389,6 +389,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
   -`update_user_password`: Jelszó felülírása email cím alapján.<br>
   -`get_user_by_email`: Email cím alapján visszaadja az adott felhasználó adatait.<br>
   -`get_user_by_identifier`: Email cím vagy felhasználónév alapján visszaadja az adott felhasználó adatait.<br>
+  -`get_all_user`: Visszaadja az összes felhasználó összes adatát.<br>
 
 - **Az ételek kezeléséhez szükséges eljárások:**<br>
   -`create_food`: Új étel létrehozása.<br>
