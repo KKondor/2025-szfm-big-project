@@ -36,20 +36,20 @@ def hash_password(password: str) -> str:
         return "Hiba a jelszó titkosításakor"
 
 
-#Bejelentkezés email cím és jelszó kapott adatokkal.
+#Bejelentkezés email cím vagy felhasználónév és jelszó kapott adatokkal.
 #Ha a bejelentkezés sikeres akkor visszaadja a felhasználó adatait users.py User class alapján.
 #Ha a bejelentkezés sikertelen akkor egy szöveget ad vissza.
-def login(email: str, password: str) -> Union[User, str]:
+def login(identifier: str, password: str) -> Union[User, str]:
     try:
-        user = user_manager.get_user_by_email(email)
+        user = user_manager.get_user_by_identifier(identifier)
         if user and bcrypt.checkpw(password.encode(), user.password.encode()):
             print("Bejelentkezés sikeres.")
             return user
-        print("Bejelentkezés sikertelen: téves email vagy jelszó.")
-        return "Bejelentkezés sikertelen: téves email vagy jelszó."
+        print("Bejelentkezés sikertelen: téves email/felhasználónév vagy jelszó.")
+        return "Bejelentkezés sikertelen: téves email/felhasználónév vagy jelszó."
     except Exception as e:
         print(f"Hiba történt a bejelentkezés során: {e}")
-        return "Hiba a bejelentkezés során"
+        return "Hiba a bejelentkezés során" + str(e)
 
 
 #A regisztráció kapott adatai: név, email, jelszó, telefon, cím
