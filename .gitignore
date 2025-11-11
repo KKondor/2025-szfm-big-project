@@ -1,7 +1,7 @@
 src/backend/venv/
 src/backend/.venv/
 
-src/backend/routes/__pycache__/
+*__pycache__/
 
 *.pyc
 
