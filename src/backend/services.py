@@ -112,3 +112,15 @@ def change_password(email: str, new_password: str) -> str:
     except Exception as e:
         print(f"Hiba történt a jelszó módosítása során: {e}")
         return "Hiba a jelszó módosítása során"
+
+# Visszaadja az összes felhasználó adatait
+# Siker esetén egy listát ad vissza User objektumokkal
+# Hiba esetén egy hibaüzenetet tartalmazó szöveget
+def get_all_users() -> Union[list[User], str]:
+    try:
+        users = user_manager.get_all_user()
+        print(f"{len(users)} felhasználó betöltve.")
+        return users
+    except Exception as e:
+        print(f"Hiba történt a felhasználók lekérdezése során: {e}")
+        return "Hiba a felhasználók lekérdezése során"
