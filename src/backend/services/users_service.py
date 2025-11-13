@@ -1,37 +1,62 @@
 from typing import Union
 from repository.users import UserManager, User, Role
 
-user_manager = UserManager()
-
-# Wraps user operations
 class UserService:
+
+    """
+    Service layer for managing user-related operations, including retrieval and role updates.
+    Performs input validation and error handling.
+    """
+
     def __init__(self):
         self._user_manager = UserManager()
 
-    def get_all_users(self) -> Union[list[User], str]:
+    def get_all_users(self) -> list[User]:
+
+        """
+        Retrieves all users from the database.
+
+        Returns:
+            List[User]: A list of all users.
+
+        Raises:
+            RuntimeError: If the database operation fails.
+        """
+
         try:
-            users = self._user_manager.get_all_user()
-            print(f"{len(users)} felhasználó betöltve.")
-            return users
+            return self._user_manager.get_all_user()
         except Exception as e:
-            print(f"Hiba történt a felhasználók lekérdezése során: {e}")
-            return "Hiba a felhasználók lekérdezése során"
+            raise RuntimeError(f"Failed to retrieve users: {e}")
 
+#------------------------------
     def change_user_role(self, user_id: int, new_role: Role) -> str:
-        try:
-            all_users = self._user_manager.get_all_user()
-            user = next((u for u in all_users if u.id == user_id), None)
+        
+        """
+        Updates the role of a specific user.
 
-            if not user:
-                print("A megadott felhasználó nem létezik.")
-                return "A megadott felhasználó nem létezik."
+        Parameters:
+            user_id (int): ID of the user whose role is to be updated.
+            new_role (Role): New role to assign (Role.USER or Role.ADMIN).
+
+        Raises:
+            ValueError: If inputs are invalid or user does not exist.
+            RuntimeError: If the database operation fails.
+        """
+
+        if not isinstance(user_id, int) or user_id <= 0:
+            raise ValueError("user_id must be a positive integer")
+        if not isinstance(new_role, Role):
+            raise ValueError("new_role must be a valid Role enum value")
+
+        try:
+            user = self._user_manager.get_user_by_id(user_id)
+            if user is None:
+                raise ValueError(f"User with ID {user_id} does not exist")
 
             self._user_manager.update_user_role(user_id, new_role)
-            print(f"A felhasználó (ID: {user_id}) jogosultsága sikeresen módosítva: {new_role.value}")
-            return "A jogosultság sikeresen módosítva."
         except Exception as e:
-            print(f"Hiba történt a jogosultság módosítása során: {e}")
-            return "Hiba a jogosultság módosítása során"
+            raise RuntimeError(f"Failed to update role for user {user_id}: {e}")
+
 
 # Shared instance
 user_service = UserService()
