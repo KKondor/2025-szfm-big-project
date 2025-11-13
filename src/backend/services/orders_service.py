@@ -1,5 +1,5 @@
 from typing import List
-from repository.orders import OrderManager, Order
+from repository.orders import OrderManager, Order, OrderStatus
 from repository.foods import FoodManager
 from repository.users import UserManager
 
@@ -8,6 +8,7 @@ class OrderService:
     def __init__(self):
         self._order_manager = OrderManager()
         self._food_manager = FoodManager()
+        self._user_manager = UserManager()
 
 #Létrehoz egy rendelést az adatbázisban az orders és order_items táblákban
 #Bemenetben megkapja:
@@ -30,10 +31,23 @@ class OrderService:
 #Visszaadja az összes rendelés összes adatát listában Order
     def get_all_orders(self) -> List[Order]:
         """Retrieve all orders from the database."""
+        
         try:
             return self._order_manager.get_all_orders()
         except Exception as e:
             raise RuntimeError(f"Failed to retrieve orders: {e}")
+
+#Visszaadja egy felhasználóhoz tartozó rendelések összes adatát listában Order
+#Bemenetben megkapja: felhasználó id
+    def get_order_by_user_id(self, user_id: int) -> List[Order]:
+        """Retrieve all orders for a specific user."""
+        if not isinstance(user_id, int) or user_id <= 0:
+            raise ValueError("user_id must be a positive integer")
+
+        try:
+            return self._order_manager.get_order_by_user_id(user_id)
+        except Exception as e:
+            raise RuntimeError(f"Failed to retrieve orders for user {user_id}: {e}")
 
 
 # Shared instance
