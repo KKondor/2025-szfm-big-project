@@ -127,6 +127,30 @@ class UserManager:
             cursor.close()
             conn.close()
 
+#Visszadaja egy felhasználó összes adatát
+#Bemenetben megkapja: user_id
+    def get_user_by_id(self, user_id: int) -> Optional[User]:
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.callproc("get_user_by_id", [user_id])
+            for result in cursor.stored_results():
+                row = result.fetchone()
+                if row:
+                    return User(
+                        id=row[0],
+                        name=row[1],
+                        email=row[2],
+                        password=row[3],
+                        phone=row[4] if row[4] is not None else None,
+                        address=row[5],
+                        role=Role(row[6])
+                    )
+            return None
+        finally:
+            cursor.close()
+            conn.close()
+    
 # Módosítja egy felhasználó jogosultságát
 #Bemenetkénk megkapja:
 #A felhasználó id, az új jogosultság: USER/ADMIN
