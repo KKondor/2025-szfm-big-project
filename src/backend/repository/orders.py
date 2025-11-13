@@ -136,3 +136,15 @@ class OrderManager:
        finally:
            cursor.close()
            conn.close()
+
+#Módosítja egy rendelés státuszát azonosító alapján
+#Bemenet: rendelés ID és új státusz ('pending', 'completed', 'cancelled')
+    def update_order_status(self, order_id: int, new_status: str):
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.callproc("update_order_status", [order_id, new_status])
+            conn.commit()
+        finally:
+            cursor.close()
+            conn.close()
