@@ -91,3 +91,26 @@ def api_change_password():
             return jsonify({'success': False, 'message': result}), 400
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+    
+@api_bp.route('/auth/get-user/<email>', methods=['GET'])
+def api_get_user(email):
+    """Get user by email."""
+    try:
+        user = users_service.get_user_by_email(email)
+        
+        if user:
+            return jsonify({
+                'success': True,
+                'user': {
+                    'id': user.id,
+                    'name': user.name,
+                    'email': user.email,
+                    'phone': user.phone,
+                    'address': user.address,
+                    'role': user.role.value
+                }
+            }), 200
+        else:
+            return jsonify({'success': False, 'message': 'User not found'}), 404
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
