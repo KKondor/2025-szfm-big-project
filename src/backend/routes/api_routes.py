@@ -222,3 +222,86 @@ def api_delete_food(food_id):
         return jsonify({'success': True, 'message': 'Food deleted successfully'}), 200
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+
+# ==================== ORDER ENDPOINTS ====================
+
+@api_bp.route('/orders', methods=['POST'])
+def api_create_order():
+    """Create a new order."""
+    try:
+        user_id = session.get('user_id')
+        if not user_id:
+            return jsonify({'success': False, 'message': 'User must be logged in'}), 401
+
+        data = request.get_json()
+        food_ids = data.get('food_ids', [])
+        note = data.get('note', '')
+
+        if not isinstance(food_ids, list) or len(food_ids) == 0:
+            return jsonify({'success': False, 'message': 'food_ids must be a non-empty list'}), 400
+
+        orders_service.create_order(user_id, food_ids, note)
+        return jsonify({'success': True, 'message': 'Order created successfully'}), 201
+    except ValueError as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+
+# ==================== USER MANAGEMENT ENDPOINTS ====================
+
+@api_bp.route('/users', methods=['GET'])
+def api_get_all_users():
+    """Get all users. (Admin only)"""
+    try:
+        if session.get('user_role') != 'admin':
+            return jsonify({'success': False, 'message': 'Admin access required'}), 403
+
+        result = users_service.get_all_users()
+        
+        if isinstance(result, list):
+            return jsonify({
+                'success': True,
+                'users': [
+                    {
+                        'id': user.id,
+                        'name': user.name,
+                        'email': user.email,
+                        'phone': user.phone,
+                        'address': user.address,
+                        'role': user.role.value
+                    }
+                    for user in result
+                ]
+            }), 200
+        else:
+            return jsonify({'success': False, 'message': result}), 500
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+
+@api_bp.route('/users/<int:user_id>/role', methods=['PUT'])
+def api_change_user_role(user_id):
+    """Change a user's role. (Admin only)"""
+    try:
+        if session.get('user_role') != 'admin':
+            return jsonify({'success': False, 'message': 'Admin access required'}), 403
+
+        data = request.get_json()
+        new_role_value = data.get('role')
+
+        if new_role_value not in ['user', 'admin']:
+            return jsonify({'success': False, 'message': 'Role must be "user" or "admin"'}), 400
+
+        from backend.repository.users import Role
+        new_role = Role(new_role_value)
+        result = users_service.change_user_role(user_id, new_role)
+
+        if result == "A jogosultság sikeresen módosítva.":
+            return jsonify({'success': True, 'message': result}), 200
+        else:
+            return jsonify({'success': False, 'message': result}), 400
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
