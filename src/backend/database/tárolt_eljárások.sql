@@ -74,6 +74,19 @@ END;
 //
 DELIMITER ;
 
+-- Visszaadja egy felhazsnáló összes adatát id alapján
+DELIMITER //
+CREATE PROCEDURE get_user_by_id(
+    IN p_user_id INT
+)
+BEGIN
+    SELECT id, name, email, password, phone, address, role
+    FROM users
+    WHERE id = p_user_id;
+END;
+//
+DELIMITER ;
+
 -- Módosítja a felhasználó jogosultságát id alapján
 DELIMITER //
 CREATE PROCEDURE update_user_role(
