@@ -31,3 +31,34 @@ def api_register():
             return jsonify({'success': False, 'message': result}), 400
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+    
+@api_bp.route('/auth/login', methods=['POST'])
+def api_login():
+    """User login endpoint."""
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
+
+        if not email or not password:
+            return jsonify({'success': False, 'message': 'Email and password required'}), 400
+
+        result = users_service.login(email, password)
+        
+        if isinstance(result, User):
+            session['user_id'] = result.id
+            session['user_role'] = result.role.value
+            return jsonify({
+                'success': True, 
+                'message': 'Bejelentkezés sikeres.',
+                'user': {
+                    'id': result.id,
+                    'name': result.name,
+                    'email': result.email,
+                    'role': result.role.value
+                }
+            }), 200
+        else:
+            return jsonify({'success': False, 'message': result}), 401
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
