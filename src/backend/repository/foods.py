@@ -1,4 +1,4 @@
-from db_connect import get_connection
+from repository.db_connect import get_connection
 from dataclasses import dataclass
 from typing import Optional, List
 

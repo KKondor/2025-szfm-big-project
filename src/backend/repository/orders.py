@@ -1,9 +1,9 @@
-from db_connect import get_connection
+from repository.db_connect import get_connection
 from dataclasses import dataclass
 from typing import List, Optional
 from datetime import datetime
-from foods import Food
-from users import User
+from repository.foods import Food
+from repository.users import User
 import json
 
 @dataclass

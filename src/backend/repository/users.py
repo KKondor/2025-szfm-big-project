@@ -1,7 +1,7 @@
 from enum import Enum
 from dataclasses import dataclass
 from typing import Optional, List
-from db_connect import get_connection
+from repository.db_connect import get_connection
 
 
 class Role(Enum):
@@ -14,9 +14,10 @@ class User:
     name: str
     email: str
     password: str
-    phone: Optional[str] = None
     address: str
     role: Role
+    phone: Optional[str] = None
+    
 
 class UserManager:
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, session
-from backend.services.auth_service import login as backend_login
-from backend.repository.users import User
+from services.auth_service import login as backend_login
+from repository.users import User
 
 auth_bp = Blueprint("auth_bp", __name__)
 
@@ -14,7 +14,7 @@ def login_route():
 
         if isinstance(user, User):
             session["user_id"] = user.id
-            session["user_role"] = user.role.value  # vagy user.role, ha nem Enum
+            session["user_role"] = user.role.value  #
             print(f"Bejelentkezett felhasználó: {user.name} (ID: {user.id}, Role: {user.role})")
             return redirect("/dashboard")
 

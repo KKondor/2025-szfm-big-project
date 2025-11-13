@@ -2,8 +2,8 @@
 API routes for user authentication, food management, and orders.
 """
 from flask import Blueprint, request, jsonify, session
-from backend.services import users_service, foods_service, orders_service
-from backend.repository.users import User
+from services import users_service, foods_service, orders_service, auth_service
+from repository.users import User
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -23,7 +23,7 @@ def api_register():
         if not all([name, email, password]):
             return jsonify({'success': False, 'message': 'Missing required fields'}), 400
 
-        result = users_service.register(name, email, password, phone, address)
+        result = auth_service.register(name, email, password, phone, address)
         
         if result == "Regisztráció sikeres.":
             return jsonify({'success': True, 'message': result}), 201
@@ -43,7 +43,7 @@ def api_login():
         if not email or not password:
             return jsonify({'success': False, 'message': 'Email and password required'}), 400
 
-        result = users_service.login(email, password)
+        result = auth_service.login(email, password)
         
         if isinstance(result, User):
             session['user_id'] = result.id
@@ -83,7 +83,7 @@ def api_change_password():
         if not email or not new_password:
             return jsonify({'success': False, 'message': 'Email and new password required'}), 400
 
-        result = users_service.change_password(email, new_password)
+        result = auth_service.change_password(email, new_password)
         
         if result == "A jelszó sikeresen megváltozott.":
             return jsonify({'success': True, 'message': result}), 200
@@ -96,7 +96,7 @@ def api_change_password():
 def api_get_user(email):
     """Get user by email."""
     try:
-        user = users_service.get_user_by_email(email)
+        user = auth_service.get_user_by_email(email)
         
         if user:
             return jsonify({

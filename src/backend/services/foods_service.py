@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from backend.repository.foods import FoodManager, Food
+from repository.foods import FoodManager, Food
 
 class FoodService:
     def __init__(self):

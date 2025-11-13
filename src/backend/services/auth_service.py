@@ -1,6 +1,6 @@
 import bcrypt
 import re
-from backend.repository.users import UserManager, User
+from repository.users import UserManager, User
 from typing import Union
 
 
@@ -112,3 +112,8 @@ def change_password(email: str, new_password: str) -> str:
     except Exception as e:
         print(f"Hiba történt a jelszó módosítása során: {e}")
         return "Hiba a jelszó módosítása során"
+
+
+def get_user_by_email(email: str):
+    """Convenience wrapper to fetch a user by email."""
+    return user_manager.get_user_by_email(email)
