@@ -6,114 +6,190 @@ from typing import Union
 
 user_manager = UserManager()
 
-#Ellenörni, hogy a megadott email címnek helyes e a formátuma.
 def is_valid_email(email: str) -> bool:
+
+    """
+    Checks whether the given email has a valid format.
+
+    Parameters:
+        email (str): The email address to validate.
+
+    Returns:
+        bool: True if valid, False otherwise.
+    """
+
     if email == "admin":
         return True
     pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
     return re.match(pattern, email) is not None
 
-
-#Ellenőrzi, hogy a megadott jelszó elég erős-e.
-#Megnézi, hogy szerepel e benne: kis betű, nagy betű, szám
-#És megnézi, hogy minimum tartalmaz-e 12 karaktert.
+#------------------------------
 def is_strong_password(password: str) -> bool:
+
+    """
+    Checks whether the given password meets strength requirements.
+
+    Requirements:
+        - At least one lowercase letter
+        - At least one uppercase letter
+        - At least one digit
+        - Minimum length of 12 characters
+
+    Parameters:
+        password (str): The password to validate.
+
+    Returns:
+        bool: True if strong, False otherwise.
+    """
+
     has_lower = any(c.islower() for c in password)
     has_upper = any(c.isupper() for c in password)
     has_digit = any(c.isdigit() for c in password)
     long_enough = len(password) >= 12
     return has_lower and has_upper and has_digit and long_enough
 
-
-#Titkosítja a megadott jelszót bcrypt hash algoritmussal.
+#------------------------------
 def hash_password(password: str) -> str:
+
+    """
+    Hashes the given password using bcrypt.
+
+    Parameters:
+        password (str): The plain text password.
+
+    Returns:
+        str: The hashed password.
+
+    Raises:
+        RuntimeError: If hashing fails.
+    """
+
     try:
-        hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-        print("A jelszó titkosítása elkészült.")
-        return hashed
+        return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
     except Exception as e:
-        print(f"Hiba történt a jelszó titkosítása során: {e}")
-        return "Hiba a jelszó titkosításakor"
+        raise RuntimeError(f"Password hashing failed: {e}")
 
-
-#Bejelentkezés email cím vagy felhasználónév és jelszó kapott adatokkal.
-#Ha a bejelentkezés sikeres akkor visszaadja a felhasználó adatait users.py User class alapján.
-#Ha a bejelentkezés sikertelen akkor egy szöveget ad vissza.
+#------------------------------
 def login(identifier: str, password: str) -> Union[User, str]:
+    
+    """
+    Authenticates a user by email or username and password.
+
+    Parameters:
+        identifier (str): Email or username.
+        password (str): Plain text password.
+
+    Returns:
+        User: The authenticated user.
+
+    Raises:
+        ValueError: If credentials are invalid.
+        RuntimeError: If authentication fails due to system error.
+    """
+    
     try:
         user = user_manager.get_user_by_identifier(identifier)
-        if user and bcrypt.checkpw(password.encode(), user.password.encode()):
-            print("Bejelentkezés sikeres.")
-            return user
-        print("Bejelentkezés sikertelen: téves email/felhasználónév vagy jelszó.")
-        return "Bejelentkezés sikertelen: téves email/felhasználónév vagy jelszó."
+        if user is None or not bcrypt.checkpw(password.encode(), user.password.encode()):
+            raise ValueError("Invalid email/username or password")
+        return user
+    except ValueError:
+        raise
     except Exception as e:
-        print(f"Hiba történt a bejelentkezés során: {e}")
-        return "Hiba a bejelentkezés során" + str(e)
+        raise RuntimeError(f"Login failed: {e}")
 
-
-#A regisztráció kapott adatai: név, email, jelszó, telefon, cím
-#Ellenörzi az email formátumát, a jelszó erősségét.
-#Titkosítja a jelszót.
-#Hozzáadja a felhasználót az adatbázishoz.
-#Visszatérési érték pedig egy szöveg:
-#a sikeres regisztrációról vagy esetleges hibákról
+#------------------------------
 def register(name: str, email: str, password: str, phone: str = "", address: str = "") -> str:
+    
+    """
+    Registers a new user with the given credentials and contact information.
+
+    Parameters:
+        name (str): Full name of the user.
+        email (str): Email address.
+        password (str): Plain text password.
+        phone (str): Optional phone number.
+        address (str): Optional address.
+
+    Raises:
+        ValueError: If input is invalid or user already exists.
+        RuntimeError: If registration fails due to system error.
+    """
+    
+    if not name or len(name) > 100:
+        raise ValueError("Name is required and must be 100 characters or fewer")
+    if not is_valid_email(email):
+        raise ValueError("Invalid email format")
+    if not is_strong_password(password):
+        raise ValueError("Password is not strong enough")
+    if phone and len(phone) > 50:
+        raise ValueError("Phone number must be 50 characters or fewer")
+    if address and len(address) > 255:
+        raise ValueError("Address must be 255 characters or fewer")
+    if user_manager.get_user_by_email(email):
+        raise ValueError("Email already exists")
+
     try:
-        if not is_valid_email(email):
-            print("Hibás email formátum.")
-            return "Hibás email formátum."
-
-        if not is_strong_password(password):
-            print("A jelszó nem elég erős.")
-            return "A jelszó nem elég erős."
-
-        if user_manager.get_user_by_email(email):
-            print("Ilyen email már létezik.")
-            return "Ilyen email már létezik."
-
         hashed_password = hash_password(password)
-        if "Hiba" in hashed_password:
-            return hashed_password
-
         user_manager.create_user(name, email, hashed_password, phone, address)
-        print("Regisztráció sikeres.")
-        return "Regisztráció sikeres."
     except Exception as e:
-        print(f"Hiba történt a regisztráció során: {e}")
-        return "Hiba a regisztráció során"
+        raise RuntimeError(f"Registration failed: {e}")
 
-
-#A jelszó megváltoztatásához szükséges adatok:
-#az email cím, az új jelszó
-#Ellenörni, hogy az új jelszó elég erős e.
-#Ellenörni, hogy a megadott email cím létezik e.
-#Titkosítja az új jelszót és kicseréli az adatbázisban.
-#Visszatérési érték pedig egy szöveg:
-#a sikeres jelszó módosításról vagy esetleges hibákról
+#------------------------------
 def change_password(email: str, new_password: str) -> str:
+    
+    """
+    Changes the password for a user identified by email.
+
+    Parameters:
+        email (str): Email address of the user.
+        new_password (str): New plain text password.
+
+    Raises:
+        ValueError: If input is invalid or user does not exist.
+        RuntimeError: If password update fails.
+    """
+    
+    if not is_valid_email(email):
+        raise ValueError("Invalid email format")
+    if not is_strong_password(new_password):
+        raise ValueError("New password is not strong enough")
+
+    user = user_manager.get_user_by_email(email)
+    if user is None:
+        raise ValueError("Email does not exist")
+
     try:
-        if not is_strong_password(new_password):
-            print("A jelszó nem elég erős.")
-            return "A jelszó nem elég erős."
-
-        user = user_manager.get_user_by_email(email)
-        if not user:
-            print("Az email nem létezik.")
-            return "Az email nem létezik."
-
         hashed_password = hash_password(new_password)
-        if "Hiba" in hashed_password:
-            return hashed_password
-
         user_manager.update_user_password(email, hashed_password)
-        print("A jelszó sikeresen megváltozott.")
-        return "A jelszó sikeresen megváltozott."
     except Exception as e:
-        print(f"Hiba történt a jelszó módosítása során: {e}")
-        return "Hiba a jelszó módosítása során"
+        raise RuntimeError(f"Password update failed: {e}")
 
-
+#------------------------------
 def get_user_by_email(email: str):
-    """Convenience wrapper to fetch a user by email."""
-    return user_manager.get_user_by_email(email)
+
+    """
+    Retrieves a user by their email address.
+
+    Parameters:
+        email (str): Email address of the user.
+
+    Returns:
+        User: The user object.
+
+    Raises:
+        ValueError: If email is invalid or user not found.
+        RuntimeError: If retrieval fails.
+    """
+
+    if not is_valid_email(email):
+        raise ValueError("Invalid email format")
+
+    try:
+        user = user_manager.get_user_by_email(email)
+        if user is None:
+            raise ValueError("User with this email does not exist")
+        return user
+    except ValueError:
+        raise
+    except Exception as e:
+        raise RuntimeError(f"Failed to retrieve user by email: {e}")
