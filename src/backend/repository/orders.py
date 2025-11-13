@@ -40,3 +40,50 @@ class OrderManager:
             cursor.close()
             conn.close()
 
+#Visszaadja az összes rendelést az adatbázisból
+#A kimenet egy kista ami Order tartalmaz
+    def get_all_orders(self) -> List[Order]:
+        conn = get_connection()
+        cursor = conn.cursor()
+        orders_dict = {}
+        try:
+            cursor.callproc("get_all_orders")
+            for result in cursor.stored_results():
+                for row in result.fetchall():
+                    order_id = row[0]
+                    user_id = row[1]
+                    order_date = row[2]
+                    status = row[3]
+                    note = row[4]
+                    total_price = row[5]
+                    item_id = row[6]
+                    food_id = row[7]
+                    quantity = row[8]
+                    item_price = row[9]
+                    user = UserManager().get_user_by_id("id:" + str(user_id))
+                    food = next((f for f in Food.get_all_foods() if f.id == food_id), None)
+
+                    if order_id not in orders_dict:
+                        orders_dict[order_id] = Order(
+                            order_id=order_id,
+                            user=user,
+                            order_date=order_date,
+                            status=status,
+                            note=note,
+                            total_price=total_price,
+                            items=[]
+                        )
+
+                    if food:
+                        item = OrderItem(
+                            item_id=item_id,
+                            food=food,
+                            quantity=quantity,
+                            item_price=item_price
+                        )
+                        orders_dict[order_id].items.append(item)
+
+            return list(orders_dict.values())
+        finally:
+            cursor.close()
+            conn.close()
