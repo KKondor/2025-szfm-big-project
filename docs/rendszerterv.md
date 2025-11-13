@@ -390,6 +390,7 @@ Ezek a megoldások kielégítik az N2 (**Megbízhatóság**) és N4 (**Biztonsá
   -`get_user_by_email`: Email cím alapján visszaadja az adott felhasználó adatait.<br>
   -`get_user_by_identifier`: Email cím vagy felhasználónév alapján visszaadja az adott felhasználó adatait.<br>
   -`get_all_user`: Visszaadja az összes felhasználó összes adatát.<br>
+  -`get_user_by_id`: Visszaadja egy felhasználó összes adatát id alapján.<br>
   -`update_user_role`: Módosítja a felhasználó jogosultságát id alapján.<br>
 
 - **Az ételek kezeléséhez szükséges eljárások:**<br>
