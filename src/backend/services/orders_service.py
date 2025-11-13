@@ -49,6 +49,19 @@ class OrderService:
         except Exception as e:
             raise RuntimeError(f"Failed to retrieve orders for user {user_id}: {e}")
 
+#Módosítja egy rendeléshez tartozó állapotot
+#Bemenetben megkapja:
+#a rendelés id, az új stazuszt OrderStatus ENUM formában
+    def update_order_status(self, order_id: int, new_status: OrderStatus) -> None:
+        """Update the status of an existing order."""
+        if not isinstance(order_id, int) or order_id <= 0:
+            raise ValueError("order_id must be a positive integer")
+
+        try:
+            self._order_manager.update_order_status(order_id, new_status.value)
+        except Exception as e:
+            raise RuntimeError(f"Failed to update order status for order {order_id}: {e}")
+
 
 # Shared instance
 order_service = OrderService()
