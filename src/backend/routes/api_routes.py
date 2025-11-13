@@ -186,3 +186,27 @@ def api_create_food():
         return jsonify({'success': False, 'message': str(e)}), 400
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+    
+@api_bp.route('/foods/<int:food_id>', methods=['PUT'])
+def api_update_food(food_id):
+    """Update a food item. (Admin only)"""
+    try:
+        if session.get('user_role') != 'admin':
+            return jsonify({'success': False, 'message': 'Admin access required'}), 403
+
+        data = request.get_json()
+        name = data.get('name')
+        description = data.get('description')
+        image = data.get('image')
+        price = data.get('price')
+        category = data.get('category')
+
+        if not all([name, price]):
+            return jsonify({'success': False, 'message': 'Name and price are required'}), 400
+
+        foods_service.update_food(food_id, name, description, image, price, category)
+        return jsonify({'success': True, 'message': 'Food updated successfully'}), 200
+    except ValueError as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
