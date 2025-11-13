@@ -71,3 +71,23 @@ def api_logout():
         return jsonify({'success': True, 'message': 'Kijelentkezés sikeres.'}), 200
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+    
+@api_bp.route('/auth/change-password', methods=['POST'])
+def api_change_password():
+    """Change user password."""
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        new_password = data.get('new_password')
+
+        if not email or not new_password:
+            return jsonify({'success': False, 'message': 'Email and new password required'}), 400
+
+        result = users_service.change_password(email, new_password)
+        
+        if result == "A jelszó sikeresen megváltozott.":
+            return jsonify({'success': True, 'message': result}), 200
+        else:
+            return jsonify({'success': False, 'message': result}), 400
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
