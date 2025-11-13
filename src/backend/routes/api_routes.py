@@ -114,3 +114,27 @@ def api_get_user(email):
             return jsonify({'success': False, 'message': 'User not found'}), 404
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+# ==================== FOOD MANAGEMENT ENDPOINTS ====================
+
+@api_bp.route('/foods', methods=['GET'])
+def api_get_all_foods():
+    """Get all foods."""
+    try:
+        foods = foods_service.get_all_food()
+        return jsonify({
+            'success': True,
+            'foods': [
+                {
+                    'id': food.id,
+                    'name': food.name,
+                    'description': food.description,
+                    'image': food.image,
+                    'price': food.price,
+                    'category': food.category
+                }
+                for food in foods
+            ]
+        }), 200
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
