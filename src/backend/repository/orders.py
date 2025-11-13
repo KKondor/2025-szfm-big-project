@@ -41,7 +41,7 @@ class OrderManager:
             conn.close()
 
 #Visszaadja az összes rendelést az adatbázisból
-#A kimenet egy kista ami Order tartalmaz
+#A kimenet egy lista ami Order tartalmaz
     def get_all_orders(self) -> List[Order]:
         conn = get_connection()
         cursor = conn.cursor()
@@ -60,8 +60,8 @@ class OrderManager:
                     food_id = row[7]
                     quantity = row[8]
                     item_price = row[9]
-                    user = UserManager().get_user_by_id("id:" + str(user_id))
-                    food = next((f for f in Food.get_all_foods() if f.id == food_id), None)
+                    user = UserManager().get_user_by_id(user_id)
+                    food = FoodManager().get_food(food_id)
 
                     if order_id not in orders_dict:
                         orders_dict[order_id] = Order(
