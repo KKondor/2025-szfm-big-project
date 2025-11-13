@@ -18,16 +18,35 @@
 
     <div class="admin-sections">
         <!-- Add Item -->
-         <!--Az új ételt feltölteni a backendre. Tip Az image itt úgy lesz hogy lementi a static imagesbe és az adatbázisra csak a nevét menti le (food.jpg)-->
+        <!--Az új ételt feltölteni a backendre. Tip Az image itt úgy lesz hogy lementi a static imagesbe és az adatbázisra csak a nevét menti le (food.jpg)-->
         <div class="admin-section active" id="add-item">
             <h3>Add New Menu Item</h3>
-            <form class="admin-form">
-                <label>Name</label>
-                <input type="text" placeholder="Item name">
-                <label>Price</label>
-                <input type="number" step="5" placeholder="Item price">
-                <label>Image</label>
-                <input type="file" accept="image/*" required>
+
+            <form class="admin-form" method="POST" action="/admin/add-item" enctype="multipart/form-data">
+
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Item name" required>
+
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" step="0.01" placeholder="Item price" required>
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Short description" rows="3"
+                    required></textarea>
+
+                <label for="type">Type</label>
+                <select id="type" name="type" required>
+                    <option value="" disabled selected>Select type</option>
+                    <option value="burger">Burger</option>
+                    <option value="pizza">Pizza</option>
+                    <option value="drink">Drink</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="side">Side</option>
+                </select>
+
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+
                 <button class="btn">Add Item</button>
             </form>
         </div>
@@ -71,7 +90,7 @@
 
 
         <!-- View Orders -->
-         <!--Hasonlóan csak megjeleníted az ordereket és updateled ha változtat az admin.-->
+        <!--Hasonlóan csak megjeleníted az ordereket és updateled ha változtat az admin.-->
         <div class="admin-section" id="view-orders">
             <h3>View Orders</h3>
 
@@ -85,9 +104,9 @@
                     <div class="order-progress">
                         <label>Progress</label>
                         <select class="progress-select">
-                                <option>Pending</option>
-                                <option selected>Completed</option>
-                                <option>Cancelled</option>
+                            <option>Pending</option>
+                            <option selected>Completed</option>
+                            <option>Cancelled</option>
                         </select>
                     </div>
                 </div>
@@ -101,9 +120,9 @@
                     <div class="order-progress">
                         <label>Progress</label>
                         <select class="progress-select">
-                                <option>Pending</option>
-                                <option selected>Completed</option>
-                                <option>Cancelled</option>
+                            <option>Pending</option>
+                            <option selected>Completed</option>
+                            <option>Cancelled</option>
                         </select>
                     </div>
                 </div>
@@ -117,9 +136,9 @@
                     <div class="order-progress">
                         <label>Progress</label>
                         <select class="progress-select">
-                                <option>Pending</option>
-                                <option selected>Completed</option>
-                                <option>Cancelled</option>
+                            <option>Pending</option>
+                            <option selected>Completed</option>
+                            <option>Cancelled</option>
                         </select>
                     </div>
                 </div>

@@ -81,7 +81,16 @@
     border-radius: 0.5rem;
     padding: 0.6rem;
     color: var(--text);
+}
+
+.admin-form textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.6rem;
+    color: var(--text);
     width: 100%;
+    resize: vertical;
 }
 
 .admin-form input[type="file"] {
@@ -127,7 +136,7 @@
     color: var(--brand);
 }
 
-.role-select {
+select {
     background: rgba(255, 255, 255, 0.05);
     color: var(--text);
     border: 1px solid var(--border);
@@ -138,14 +147,14 @@
     transition: border 0.2s ease, background 0.2s ease;
 }
 
-.role-select:hover,
-.role-select:focus {
+select:hover,
+select:focus {
     border-color: var(--brand);
     background: rgba(255, 255, 255, 0.08);
     outline: none;
 }
 
-.role-select option {
+select option {
     background-color: var(--bg_from);
     color: var(--text);
 }
