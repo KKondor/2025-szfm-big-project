@@ -210,3 +210,15 @@ def api_update_food(food_id):
         return jsonify({'success': False, 'message': str(e)}), 400
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+    
+@api_bp.route('/foods/<int:food_id>', methods=['DELETE'])
+def api_delete_food(food_id):
+    """Delete a food item. (Admin only)"""
+    try:
+        if session.get('user_role') != 'admin':
+            return jsonify({'success': False, 'message': 'Admin access required'}), 403
+
+        foods_service.delete_food(food_id)
+        return jsonify({'success': True, 'message': 'Food deleted successfully'}), 200
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
