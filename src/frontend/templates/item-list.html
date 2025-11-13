@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block body %}
+<!--Itt a userhez tartozó foodokat jeleníti meg-->
 <aside id="basket-sidebar" class="basket-sidebar active">
   <h2>Your Basket</h2>
   <div class="basket-items">
@@ -31,6 +32,7 @@
 {% endblock %}
 
 {% block content %}
+<!--Leolvassa az összes féle typeot a backendről és azok lesznek az optionok. Le filtereli az item listát csak a typeba eső foodokkal-->
 <div class="filter-bar">
     <label for="food-type">Filter by type:</label>
     <select id="food-type" name="food-type">
@@ -41,7 +43,7 @@
       <option value="salad">Salad</option>
     </select>
   </div>
-  
+<!--Felsorolja (lazyloadinggal) a foodokat. Az első példa az amit használni kéne templatenek-->
 <div class="item-list">
 
   <div class="item-card">

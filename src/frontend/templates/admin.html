@@ -18,6 +18,7 @@
 
     <div class="admin-sections">
         <!-- Add Item -->
+         <!--Az új ételt feltölteni a backendre. Tip Az image itt úgy lesz hogy lementi a static imagesbe és az adatbázisra csak a nevét menti le (food.jpg)-->
         <div class="admin-section active" id="add-item">
             <h3>Add New Menu Item</h3>
             <form class="admin-form">
@@ -32,6 +33,7 @@
         </div>
 
         <!-- Manage Users -->
+        <!--Meg kell jeleníteni a felhasználók listáját (maybe lazyloadingal), frissíteni a role-t-->
         <div class="admin-section" id="manage-users">
             <h3>Manage Users</h3>
             <table class="admin-table">
@@ -69,6 +71,7 @@
 
 
         <!-- View Orders -->
+         <!--Hasonlóan csak megjeleníted az ordereket és updateled ha változtat az admin.-->
         <div class="admin-section" id="view-orders">
             <h3>View Orders</h3>
 
@@ -126,6 +129,7 @@
     </div>
 </section>
 
+<!--Ez mehet át külső scriptbe-->
 <script>
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {

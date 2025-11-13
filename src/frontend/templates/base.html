@@ -15,6 +15,15 @@
     <nav>
       <a href="{{ url_for('main.item_list', filename='item-list.html') }}">Home</a>
       <a href="{{ url_for('main.basket', filename='basket.html') }}">Basket</a>
+      {% if is_admin() %}
+        <a href="{{ url_for('main.admin') }}">Admin</a>
+      {% elif is_user() %}
+        <a href="{{ url_for('main.user_profile') }}">Profile</a>
+      {% endif %}
+
+      {% if session.get('user_id') %}
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+      {% endif %}
     </nav>
   </header>
   {% block body %} {% endblock %}
