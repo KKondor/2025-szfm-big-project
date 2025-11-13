@@ -2,9 +2,15 @@ from repository.db_connect import get_connection
 from dataclasses import dataclass
 from typing import List, Optional
 from datetime import datetime
-from repository.foods import Food
-from repository.users import User
+from repository.foods import Food, FoodManager
+from repository.users import User, UserManager
 import json
+from enum import Enum
+
+class OrderStatus(str, Enum):
+    PENDING = "pending"
+    COMPLETED = "completed"
+    CANCELLED = "cancelled"
 
 @dataclass
 class OrderItem:
@@ -19,7 +25,7 @@ class Order:
     order_id: int
     user: User
     order_date: datetime
-    status: str
+    status: OrderStatus
     note: Optional[str]
     total_price: int
     items: List[OrderItem]
@@ -53,7 +59,7 @@ class OrderManager:
                     order_id = row[0]
                     user_id = row[1]
                     order_date = row[2]
-                    status = row[3]
+                    status = OrderStatus(row[3])
                     note = row[4]
                     total_price = row[5]
                     item_id = row[6]
@@ -101,7 +107,7 @@ class OrderManager:
                for row in result.fetchall():
                    order_id = row[0]
                    order_date = row[2]
-                   status = row[3]
+                   status = OrderStatus(row[3])
                    note = row[4]
                    total_price = row[5]
                    item_id = row[6]
@@ -138,12 +144,12 @@ class OrderManager:
            conn.close()
 
 #Módosítja egy rendelés státuszát azonosító alapján
-#Bemenet: rendelés ID és új státusz ('pending', 'completed', 'cancelled')
-    def update_order_status(self, order_id: int, new_status: str):
+#Bemenet: rendelés ID és új státusz OrderStatus ENUM formában
+    def update_order_status(self, order_id: int, new_status: OrderStatus):
         conn = get_connection()
         cursor = conn.cursor()
         try:
-            cursor.callproc("update_order_status", [order_id, new_status])
+            cursor.callproc("update_order_status", [order_id, new_status.value])
             conn.commit()
         finally:
             cursor.close()
