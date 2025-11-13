@@ -62,3 +62,12 @@ def api_login():
             return jsonify({'success': False, 'message': result}), 401
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+    
+@api_bp.route('/auth/logout', methods=['POST'])
+def api_logout():
+    """User logout endpoint."""
+    try:
+        session.clear()
+        return jsonify({'success': True, 'message': 'Kijelentkezés sikeres.'}), 200
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
