@@ -138,3 +138,26 @@ def api_get_all_foods():
         }), 200
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+    
+@api_bp.route('/foods/<int:food_id>', methods=['GET'])
+def api_get_food(food_id):
+    """Get food by ID."""
+    try:
+        food = foods_service.get_food(food_id)
+        
+        if food:
+            return jsonify({
+                'success': True,
+                'food': {
+                    'id': food.id,
+                    'name': food.name,
+                    'description': food.description,
+                    'image': food.image,
+                    'price': food.price,
+                    'category': food.category
+                }
+            }), 200
+        else:
+            return jsonify({'success': False, 'message': 'Food not found'}), 404
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
