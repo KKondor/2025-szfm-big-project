@@ -18,6 +18,7 @@ class FoodManager:
     Handles direct database operations related to food items.
     """
 
+#------------------------------
     def create_food(self, name: str, description: str, image: str, price: int, category: str):
         
         """
