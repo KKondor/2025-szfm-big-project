@@ -14,19 +14,31 @@ class User:
     name: str
     email: str
     password: str
+    phone: Optional[str] = None
     address: str
     role: Role
-    phone: Optional[str] = None
-    
 
+#------------------------------
 class UserManager:
 
-#Új felhasználót hoz létre az adatbázisba
-#Meg kell adani neki bemenetbe:
-#a nevet, az email címet, és a jelszót már titkosított formában
-#a telefont, a címet
-#Alap értelmezetten user jogot ad a felhasználónak
+    """
+    Handles direct database operations related to users.
+    """
+
+#------------------------------
     def create_user(self, name: str, email: str, password: str, phone: str, address: str):
+        
+        """
+        Inserts a new user into the database.
+
+        Parameters:
+            name (str): Full name of the user.
+            email (str): Email address.
+            password (str): Hashed password.
+            phone (str): Phone number.
+            address (str): Address.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -36,11 +48,17 @@ class UserManager:
             cursor.close()
             conn.close()
 
-#Lecseréli egy adott felhasználó jelszavát
-#Megkapja bemenetbe:
-#az email címet, hogy melyík felhasználót kell módosítania
-#és megkapja az új jelszót már titkosított formában
+#------------------------------
     def update_user_password(self, email: str, new_password: str):
+
+        """
+        Updates the password of a user identified by email.
+
+        Parameters:
+            email (str): Email address of the user.
+            new_password (str): New hashed password.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -50,11 +68,19 @@ class UserManager:
             cursor.close()
             conn.close()
 
-#Viszzaadja egy felhasználó összes adatát
-#Bemenetkénk megkapja:
-#a felhasználó email címét
-#Ha az adatbázisban nem szerepel az adott email cím akkor None ad vissza
+#------------------------------
     def get_user_by_email(self, email: str) -> Optional[User]:
+
+        """
+        Retrieves a user by their email address.
+
+        Parameters:
+            email (str): Email address to search.
+
+        Returns:
+            Optional[User]: The user if found, otherwise None.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -77,11 +103,19 @@ class UserManager:
             cursor.close()
             conn.close()
 
-#Viszzaadja egy felhasználó összes adatát
-#Bemenetkénk megkapja:
-#a felhasználó email címét vagy felhasználónevét
-#Ha az adatbázisban nem szerepel az adott email cím és vagy felhasználónév akkor None ad vissza
+#------------------------------
     def get_user_by_identifier(self, identifier: str) -> Optional[User]:
+
+        """
+        Retrieves a user by either email or username.
+
+        Parameters:
+            identifier (str): Email or username.
+
+        Returns:
+            Optional[User]: The user if found, otherwise None.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -103,8 +137,17 @@ class UserManager:
             cursor.close()
             conn.close()
 
-#Visszaadja egy listában az összes felhasználót és azok összes adatát
+
+#------------------------------
     def get_all_user(self) -> List[User]:
+
+        """
+        Retrieves all users from the database.
+
+        Returns:
+            list[User]: A list of all users.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         users = []
@@ -127,9 +170,20 @@ class UserManager:
             cursor.close()
             conn.close()
 
-#Visszadaja egy felhasználó összes adatát
-#Bemenetben megkapja: user_id
+
+#------------------------------
     def get_user_by_id(self, user_id: int) -> Optional[User]:
+
+        """
+        Retrieves a user by their ID.
+
+        Parameters:
+            user_id (int): ID of the user.
+
+        Returns:
+            Optional[User]: The user if found, otherwise None.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -150,11 +204,18 @@ class UserManager:
         finally:
             cursor.close()
             conn.close()
-    
-# Módosítja egy felhasználó jogosultságát
-#Bemenetkénk megkapja:
-#A felhasználó id, az új jogosultság: USER/ADMIN
+
+#------------------------------
     def update_user_role(self, user_id: int, new_role: Role):
+
+        """
+        Updates the role of a user.
+
+        Parameters:
+            user_id (int): ID of the user.
+            new_role (Role): New role to assign.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -163,3 +224,5 @@ class UserManager:
         finally:
             cursor.close()
             conn.close()
+
+
