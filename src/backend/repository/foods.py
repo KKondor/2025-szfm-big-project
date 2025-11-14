@@ -11,12 +11,26 @@ class Food:
     price: int
     category: Optional[str]
 
+#------------------------------
 class FoodManager:
-    
-#Új ételt hoz létre az adatbázisba
-#Meg kell adani neki bemenetbe:
-#a nevet, a leírást, a kép liknjét, az ár, a típus
+
+    """
+    Handles direct database operations related to food items.
+    """
+
     def create_food(self, name: str, description: str, image: str, price: int, category: str):
+        
+        """
+        Inserts a new food item into the database.
+
+        Parameters:
+            name (str): Name of the food.
+            description (str): Description of the food.
+            image (str): Image URL or path.
+            price (int): Price of the food.
+            category (str): Category of the food.
+        """
+        
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -26,9 +40,16 @@ class FoodManager:
             cursor.close()
             conn.close()
 
-#Kitörli az adott ételt az adatbázisból
-#Meg kell adani neki bemenetbe: id
+#------------------------------
     def delete_food(self, food_id: int):
+
+        """
+        Deletes a food item from the database by its ID.
+
+        Parameters:
+            food_id (int): ID of the food to delete.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -38,10 +59,21 @@ class FoodManager:
             cursor.close()
             conn.close()
 
-#Frissíti egy adott étel adatait az adatbázisban id alapján
-#Bemenetként minden adatot meg kell neki adni azt is amit nem akarunk módosítani:
-#az id, a nevet, a leírást, a kép liknjét, az ár, a típus
+#------------------------------
     def update_food(self, food_id: int, name: str, description: str, image: str, price: int, category: str):
+        
+        """
+        Updates an existing food item in the database.
+
+        Parameters:
+            food_id (int): ID of the food to update.
+            name (str): New name.
+            description (str): New description.
+            image (str): New image URL or path.
+            price (int): New price.
+            category (str): New category.
+        """
+        
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -51,9 +83,19 @@ class FoodManager:
             cursor.close()
             conn.close()
 
-#Visszaadja egy étel minden adatát az adatbázisból
-#Bemenetkénk megkapja: id
+#------------------------------
     def get_food(self, food_id: int) -> Optional[Food]:
+
+        """
+        Retrieves a single food item by its ID.
+
+        Parameters:
+            food_id (int): ID of the food to retrieve.
+
+        Returns:
+            Optional[Food]: The food item if found, otherwise None.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -74,9 +116,16 @@ class FoodManager:
             cursor.close()
             conn.close()
 
-#Visszaadja az összes étel minden adatát az adatbázisból
-#A visszatérési érték egy lista, melynek minden eleme egy Food
+#------------------------------
     def get_all_food(self) -> List[Food]:
+
+        """
+        Retrieves all food items from the database.
+
+        Returns:
+            List[Food]: A list of all food items.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         foods = []
@@ -98,3 +147,4 @@ class FoodManager:
         finally:
             cursor.close()
             conn.close()
+
