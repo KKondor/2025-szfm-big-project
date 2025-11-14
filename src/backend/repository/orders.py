@@ -7,10 +7,12 @@ from repository.users import User, UserManager
 import json
 from enum import Enum
 
+
 class OrderStatus(str, Enum):
     PENDING = "pending"
     COMPLETED = "completed"
     CANCELLED = "cancelled"
+
 
 @dataclass
 class OrderItem:
@@ -30,12 +32,25 @@ class Order:
     total_price: int
     items: List[OrderItem]
 
+#------------------------------
 class OrderManager:
 
-#Új rendelést hoz létre az adatbázisba
-#Meg kell adani neki bemenetbe:
-#a felhasználó id, a megrendelt ételek id listában(egy étel többször is szerepelhet), a megjegyzést
+    """
+    Handles direct database operations related to orders and order items.
+    """
+
+#------------------------------
     def create_order(self, user_id: int, food_ids: list, note: str):
+        
+        """
+        Creates a new order and inserts it into the orders and order_items tables.
+
+        Parameters:
+            user_id (int): ID of the user placing the order.
+            food_ids (list): List of food item IDs (can contain duplicates).
+            note (str): Optional note attached to the order.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -46,9 +61,16 @@ class OrderManager:
             cursor.close()
             conn.close()
 
-#Visszaadja az összes rendelést az adatbázisból
-#A kimenet egy lista ami Order tartalmaz
+#------------------------------
     def get_all_orders(self) -> List[Order]:
+
+        """
+        Retrieves all orders from the database, including their items and associated user and food data.
+
+        Returns:
+            List[Order]: A list of all orders.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         orders_dict = {}
@@ -66,6 +88,66 @@ class OrderManager:
                     food_id = row[7]
                     quantity = row[8]
                     item_price = row[9]
+
+                    user = UserManager().get_user_by_id(user_id)
+                    food = FoodManager().get_food(food_id)
+
+
+                    if order_id not in orders_dict:
+                        orders_dict[order_id] = Order(
+                            order_id=order_id,
+                            user=user,
+                            order_date=order_date,
+                            status=status,
+                            note=note,
+                            total_price=total_price,
+                            items=[]
+                        )
+
+                    if food:
+                        item = OrderItem(
+                            item_id=item_id,
+                            food=food,
+                            quantity=quantity,
+                            item_price=item_price
+                        )
+                        orders_dict[order_id].items.append(item)
+
+            return list(orders_dict.values())
+        finally:
+            cursor.close()
+            conn.close()
+
+#------------------------------
+    def get_order_by_user_id(self, user_id: int) -> List[Order]:
+
+        """
+        Retrieves all orders for a specific user.
+
+        Parameters:
+            user_id (int): ID of the user.
+
+        Returns:
+            List[Order]: A list of orders associated with the user.
+        """
+
+        conn = get_connection()
+        cursor = conn.cursor()
+        orders_dict = {}
+        try:
+            cursor.callproc("get_order_by_user_id", [user_id])
+            for result in cursor.stored_results():
+                for row in result.fetchall():
+                    order_id = row[0]
+                    order_date = row[2]
+                    status = OrderStatus(row[3])
+                    note = row[4]
+                    total_price = row[5]
+                    item_id = row[6]
+                    food_id = row[7]
+                    quantity = row[8]
+                    item_price = row[9]
+
                     user = UserManager().get_user_by_id(user_id)
                     food = FoodManager().get_food(food_id)
 
@@ -94,58 +176,17 @@ class OrderManager:
             cursor.close()
             conn.close()
 
-#Visszaadja egy felhasználóhoz tartozó összes rendelést
-#Bemenetként megkapja: a felhasználó id
-#A kimenet egy lista ami Order tartalmaz
-   def get_order_by_user_id(self, user_id: int) -> List[Order]:
-       conn = get_connection()
-       cursor = conn.cursor()
-       orders_dict = {}
-       try:
-           cursor.callproc("get_order_by_user_id", [user_id])
-           for result in cursor.stored_results():
-               for row in result.fetchall():
-                   order_id = row[0]
-                   order_date = row[2]
-                   status = OrderStatus(row[3])
-                   note = row[4]
-                   total_price = row[5]
-                   item_id = row[6]
-                   food_id = row[7]
-                   quantity = row[8]
-                   item_price = row[9]
-
-                   user = UserManager().get_user_by_id(user_id)
-                   food = FoodManager().get_food(food_id)
-
-                   if order_id not in orders_dict:
-                       orders_dict[order_id] = Order(
-                           order_id=order_id,
-                           user=user,
-                           order_date=order_date,
-                           status=status,
-                           note=note,
-                           total_price=total_price,
-                           items=[]
-                       )
-
-                   if food:
-                       item = OrderItem(
-                           item_id=item_id,
-                           food=food,
-                           quantity=quantity,
-                           item_price=item_price
-                       )
-                       orders_dict[order_id].items.append(item)
-
-           return list(orders_dict.values())
-       finally:
-           cursor.close()
-           conn.close()
-
-#Módosítja egy rendelés státuszát azonosító alapján
-#Bemenet: rendelés ID és új státusz OrderStatus ENUM formában
+#------------------------------
     def update_order_status(self, order_id: int, new_status: OrderStatus):
+        
+        """
+        Updates the status of an existing order.
+
+        Parameters:
+            order_id (int): ID of the order to update.
+            new_status (OrderStatus): New status to assign.
+        """
+
         conn = get_connection()
         cursor = conn.cursor()
         try:
