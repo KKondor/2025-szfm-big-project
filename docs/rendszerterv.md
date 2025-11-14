@@ -483,6 +483,447 @@ Az üzleti logika (Service réteg) az alkalmazás működésének fő szabályai
 
 A Service osztályokat a **Controller** hívja meg, azok pedig a **Model** rétegen keresztül érik el az adatbázist.
 
+### API Dokumentáció
+
+**Alap URL:** `/api`
+
+---
+
+#### 👤 Felhasználói Hitelesítés
+
+A felhasználói fiókok kezelésével kapcsolatos végpontok.
+
+##### `POST /auth/register`
+
+Új felhasználó regisztrálása.
+
+* **Request Body (JSON):**
+    ```json
+    {
+      "name": "string (kötelező)",
+      "email": "string (kötelező)",
+      "password": "string (kötelező)",
+      "phone": "string (opcionális)",
+      "address": "string (opcionális)"
+    }
+    ```
+* **Sikeres válasz (201):**
+    ```json
+    {
+      "success": true,
+      "message": "Regisztráció sikeres."
+    }
+    ```
+* **Hiba válaszok:**
+    * `400 Bad Request`: Hiányzó kötelező mezők (`Missing required fields`).
+    * `400 Bad Request`: Hibaüzenet a `auth_service.register`-től (pl. email már létezik).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `POST /auth/login`
+
+Felhasználó bejelentkeztetése és session indítása.
+
+* **Request Body (JSON):**
+    ```json
+    {
+      "email": "string (kötelező)",
+      "password": "string (kötelező)"
+    }
+    ```
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "message": "Bejelentkezés sikeres.",
+      "user": {
+        "id": "integer",
+        "name": "string",
+        "email": "string",
+        "role": "string (pl. 'user' vagy 'admin')"
+      }
+    }
+    ```
+* **Hiba válaszok:**
+    * `400 Bad Request`: Hiányzó email vagy jelszó.
+    * `401 Unauthorized`: Hibaüzenet a `auth_service.login`-tól (pl. hibás adatok).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `POST /auth/logout`
+
+Felhasználó kijelentkeztetése (session törlése).
+
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "message": "Kijelentkezés sikeres."
+    }
+    ```
+* **Hiba válasz (500):** Szerverhiba.
+
+---
+
+##### `POST /auth/change-password`
+
+Felhasználó jelszavának megváltoztatása.
+
+* **Request Body (JSON):**
+    ```json
+    {
+      "email": "string (kötelező)",
+      "new_password": "string (kötelező)"
+    }
+    ```
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "message": "A jelszó sikeresen megváltozott."
+    }
+    ```
+* **Hiba válaszok:**
+    * `400 Bad Request`: Hiányzó email vagy új jelszó.
+    * `400 Bad Request`: Hibaüzenet a `auth_service.change_password`-től (pl. felhasználó nem található).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+#### 🍔 Étel Kezelés
+
+Ételek listázásával és módosításával kapcsolatos végpontok.
+
+##### `GET /foods`
+
+Az összes elérhető étel lekérdezése.
+
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "foods": [
+        {
+          "id": "integer",
+          "name": "string",
+          "description": "string",
+          "image": "string",
+          "price": "float",
+          "category": "string"
+        }
+      ]
+    }
+    ```
+* **Hiba válasz (500):** Szerverhiba.
+
+---
+
+##### `GET /foods/<int:food_id>`
+
+Egy specifikus étel lekérdezése ID alapján.
+
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "food": {
+        "id": "integer",
+        "name": "string",
+        "description": "string",
+        "image": "string",
+        "price": "float",
+        "category": "string"
+      }
+    }
+    ```
+* **Hiba válaszok:**
+    * `404 Not Found`: Az étel nem található (`Food not found`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `POST /foods`
+
+Új étel létrehozása. **(Admin jogosultság szükséges)**
+
+* **Request Body (JSON):**
+    ```json
+    {
+      "name": "string (kötelező)",
+      "description": "string (opcionális)",
+      "image": "string (opcionális)",
+      "price": "float (kötelező)",
+      "category": "string (opcionális)"
+    }
+    ```
+* **Sikeres válasz (201):**
+    ```json
+    {
+      "success": true,
+      "message": "Food created successfully"
+    }
+    ```
+* **Hiba válaszok:**
+    * `403 Forbidden`: Nincs admin jogosultság (`Admin access required`).
+    * `400 Bad Request`: Hiányzó kötelező mezők (`Name and price are required`).
+    * `400 Bad Request`: Érvénytelen adat (pl. `ValueError`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `PUT /foods/<int:food_id>`
+
+Meglévő étel módosítása. **(Admin jogosultság szükséges)**
+
+* **Request Body (JSON):**
+    ```json
+    {
+      "name": "string (kötelező)",
+      "description": "string (opcionális)",
+      "image": "string (opcionális)",
+      "price": "float (kötelező)",
+      "category": "string (opcionális)"
+    }
+    ```
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "message": "Food updated successfully"
+    }
+    ```
+* **Hiba válaszok:**
+    * `403 Forbidden`: Nincs admin jogosultság (`Admin access required`).
+    * `400 Bad Request`: Hiányzó kötelező mezők (`Name and price are required`).
+    * `400 Bad Request`: Érvénytelen adat (pl. `ValueError`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `DELETE /foods/<int:food_id>`
+
+Étel törlése. **(Admin jogosultság szükséges)**
+
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "message": "Food deleted successfully"
+    }
+    ```
+* **Hiba válaszok:**
+    * `403 Forbidden`: Nincs admin jogosultság (`Admin access required`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+#### 🛒 Rendelés Kezelés
+
+Rendelések létrehozásával és listázásával kapcsolatos végpontok.
+
+##### `POST /orders`
+
+Új rendelés létrehozása. **(Bejelentkezés szükséges)**
+
+* **Request Body (JSON):**
+    ```json
+    {
+      "food_ids": ["list[integer] (kötelező, nem üres)"],
+      "note": "string (opcionális)"
+    }
+    ```
+* **Sikeres válasz (201):**
+    ```json
+    {
+      "success": true,
+      "message": "Order created successfully"
+    }
+    ```
+* **Hiba válaszok:**
+    * `401 Unauthorized`: Nincs bejelentkezve (`User must be logged in`).
+    * `400 Bad Request`: Érvénytelen `food_ids` (`food_ids must be a non-empty list`).
+    * `400 Bad Request`: Érvénytelen adat (pl. `ValueError`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `GET /orders`
+
+Az összes rendelés lekérdezése. **(Admin jogosultság szükséges)**
+
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "orders": [
+        {
+          "order_id": "integer",
+          "user_id": "integer",
+          "user_name": "string",
+          "order_date": "string (ISO format)",
+          "status": "string (pl. 'pending')",
+          "note": "string",
+          "total_price": "float",
+          "items": [
+            {
+              "item_id": "integer",
+              "food_id": "integer",
+              "food_name": "string",
+              "quantity": "integer",
+              "item_price": "float"
+            }
+          ]
+        }
+      ]
+    }
+    ```
+* **Hiba válaszok:**
+    * `403 Forbidden`: Nincs admin jogosultság (`Admin access required`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `GET /orders/user/<int:user_id>`
+
+Egy adott felhasználó összes rendelésének lekérdezése.
+(Felhasználó csak a sajátját láthatja, admin bárkiét).
+
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "orders": [
+        {
+          "order_id": "integer",
+          "user_id": "integer",
+          "order_date": "string (ISO format)",
+          "status": "string",
+          "note": "string",
+          "total_price": "float",
+          "items": [
+            {
+              "item_id": "integer",
+              "food_id": "integer",
+              "food_name": "string",
+              "quantity": "integer",
+              "item_price": "float"
+            }
+          ]
+        }
+      ]
+    }
+    ```
+* **Hiba válaszok:**
+    * `403 Forbidden`: Hozzáférés megtagadva (`Access denied`).
+    * `400 Bad Request`: Érvénytelen adat (pl. `ValueError`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `PUT /orders/<int:order_id>/status`
+
+Rendelés státuszának módosítása. **(Admin jogosultság szükséges)**
+
+* **Request Body (JSON):**
+    ```json
+    {
+      "status": "string (kötelező, 'pending', 'completed' vagy 'cancelled')"
+    }
+    ```
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "message": "Order status updated successfully"
+    }
+    ```
+* **Hiba válaszok:**
+    * `403 Forbidden`: Nincs admin jogosultság (`Admin access required`).
+    * `400 Bad Request`: Érvénytelen státusz.
+    * `400 Bad Request`: Érvénytelen adat (pl. `ValueError`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+### 🛠️ Felhasználó Kezelés (Admin)
+
+Felhasználók adminisztrációjával kapcsolatos végpontok.
+
+##### `GET /users`
+
+Az összes felhasználó lekérdezése. **(Admin jogosultság szükséges)**
+
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "users": [
+        {
+          "id": "integer",
+          "name": "string",
+          "email": "string",
+          "phone": "string",
+          "address": "string",
+          "role": "string (pl. 'user' vagy 'admin')"
+        }
+      ]
+    }
+    ```
+* **Hiba válaszok:**
+    * `403 Forbidden`: Nincs admin jogosultság (`Admin access required`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `GET /users/<email>`
+
+Felhasználó lekérdezése email cím alapján.
+
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "user": {
+        "id": "integer",
+        "name": "string",
+        "email": "string",
+        "phone": "string",
+        "address": "string",
+        "role": "string"
+      }
+    }
+    ```
+* **Hiba válaszok:**
+    * `404 Not Found`: A felhasználó nem található (`User not found`).
+    * `500 Internal Server Error`: Szerverhiba.
+
+---
+
+##### `PUT /users/<int:user_id>/role`
+
+Felhasználó jogosultságának (szerepkörének) módosítása. **(Admin jogosultság szükséges)**
+
+* **Request Body (JSON):**
+    ```json
+    {
+      "role": "string (kötelező, 'user' vagy 'admin')"
+    }
+    ```
+* **Sikeres válasz (200):**
+    ```json
+    {
+      "success": true,
+      "message": "A jogosultság sikeresen módosítva."
+    }
+    ```
+* **Hiba válaszok:**
+    * `403 Forbidden`: Nincs admin jogosultság (`Admin access required`).
+    * `400 Bad Request`: Érvénytelen szerepkör.
+    * `400 Bad Request`: Hibaüzenet a `users_service.change_user_role`-tól.
+    * `500 Internal Server Error`: Szerverhiba.
+
 ### 10.3. Kliensoldal osztályai
 
 | Osztály / Modul | Leírás | Fő funkciók |
