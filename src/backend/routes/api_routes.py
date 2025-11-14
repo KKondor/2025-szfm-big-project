@@ -249,6 +249,107 @@ def api_create_order():
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
 
 
+@api_bp.route('/orders', methods=['GET'])
+def api_get_all_orders():
+    """Get all orders. (Admin only)"""
+    try:
+        if session.get('user_role') != 'admin':
+            return jsonify({'success': False, 'message': 'Admin access required'}), 403
+
+        orders = orders_service.get_all_orders()
+        return jsonify({
+            'success': True,
+            'orders': [
+                {
+                    'order_id': order.order_id,
+                    'user_id': order.user.id,
+                    'user_name': order.user.name,
+                    'order_date': order.order_date.isoformat() if order.order_date else None,
+                    'status': order.status.value,
+                    'note': order.note,
+                    'total_price': order.total_price,
+                    'items': [
+                        {
+                            'item_id': item.item_id,
+                            'food_id': item.food.id,
+                            'food_name': item.food.name,
+                            'quantity': item.quantity,
+                            'item_price': item.item_price
+                        }
+                        for item in order.items
+                    ]
+                }
+                for order in orders
+            ]
+        }), 200
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+
+@api_bp.route('/orders/user/<int:user_id>', methods=['GET'])
+def api_get_user_orders(user_id):
+    """Get all orders for a specific user. User can only see their own orders unless admin."""
+    try:
+        current_user_id = session.get('user_id')
+        is_admin = session.get('user_role') == 'admin'
+
+        if not is_admin and current_user_id != user_id:
+            return jsonify({'success': False, 'message': 'Access denied'}), 403
+
+        orders = orders_service.get_order_by_user_id(user_id)
+        return jsonify({
+            'success': True,
+            'orders': [
+                {
+                    'order_id': order.order_id,
+                    'user_id': order.user.id,
+                    'order_date': order.order_date.isoformat() if order.order_date else None,
+                    'status': order.status.value,
+                    'note': order.note,
+                    'total_price': order.total_price,
+                    'items': [
+                        {
+                            'item_id': item.item_id,
+                            'food_id': item.food.id,
+                            'food_name': item.food.name,
+                            'quantity': item.quantity,
+                            'item_price': item.item_price
+                        }
+                        for item in order.items
+                    ]
+                }
+                for order in orders
+            ]
+        }), 200
+    except ValueError as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+
+@api_bp.route('/orders/<int:order_id>/status', methods=['PUT'])
+def api_update_order_status(order_id):
+    """Update order status. (Admin only)"""
+    try:
+        if session.get('user_role') != 'admin':
+            return jsonify({'success': False, 'message': 'Admin access required'}), 403
+
+        data = request.get_json()
+        new_status = data.get('status')
+
+        if new_status not in ['pending', 'completed', 'cancelled']:
+            return jsonify({'success': False, 'message': 'Status must be "pending", "completed", or "cancelled"'}), 400
+
+        from repository.orders import OrderStatus
+        orders_service.update_order_status(order_id, OrderStatus(new_status))
+        return jsonify({'success': True, 'message': 'Order status updated successfully'}), 200
+    except ValueError as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+
+
 # ==================== USER MANAGEMENT ENDPOINTS ====================
 
 @api_bp.route('/users', methods=['GET'])
