@@ -14,9 +14,9 @@ class User:
     name: str
     email: str
     password: str
-    phone: Optional[str] = None
     address: str
     role: Role
+    phone: Optional[str] = None
 
 #------------------------------
 class UserManager:
