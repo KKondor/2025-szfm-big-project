@@ -10,7 +10,7 @@
 <!--Ezt is meg kéne oldania a html-nek-->
 <body>
   <div class="register-container">
-    <form class="register-form" id="registerForm">
+    <form class="register-form" id="registerForm" method="POST" action="{{ url_for('auth_bp.register_route') }}">
       <h2>Create an account</h2>
       <div class="input-group">
         <label for="email">Email</label>
@@ -19,7 +19,7 @@
 
       <div class="input-group">
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" required />
+        <input type="text" id="name" name="name" required />
       </div>
 
       <div class="input-group">
@@ -40,10 +40,12 @@
       </div>
 
       <div class ="error-message" id="error-message">
-        <p>Example error</p>
+        {% if error_message %}
+          <p>{{ error_message }}</p>
+        {% endif %} 
       </div>
 
-      <button type="submit">Log In</button>
+      <button type="submit">Sign up</button>
 
       <p class="signin-text">
         Already have an account?

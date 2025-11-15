@@ -33,7 +33,7 @@ def is_strong_password(password: str) -> bool:
         - At least one lowercase letter
         - At least one uppercase letter
         - At least one digit
-        - Minimum length of 12 characters
+        - Minimum length of 6 characters
 
     Parameters:
         password (str): The password to validate.
@@ -45,7 +45,7 @@ def is_strong_password(password: str) -> bool:
     has_lower = any(c.islower() for c in password)
     has_upper = any(c.isupper() for c in password)
     has_digit = any(c.isdigit() for c in password)
-    long_enough = len(password) >= 12
+    long_enough = len(password) >= 6
     return has_lower and has_upper and has_digit and long_enough
 
 #------------------------------

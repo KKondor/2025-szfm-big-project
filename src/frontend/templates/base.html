@@ -18,7 +18,7 @@
       {% if is_admin() %}
         <a href="{{ url_for('main.admin') }}">Admin</a>
       {% elif is_user() %}
-        <a href="{{ url_for('main.user_profile') }}">Profile</a>
+        <a href="{{ url_for('main.profile') }}">Profile</a>
       {% endif %}
 
       {% if session.get('user_id') %}
