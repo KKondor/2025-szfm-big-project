@@ -2,12 +2,14 @@ import os
 from flask import Flask, render_template, session
 from routes.main_routes import main_bp
 from routes.api_routes import api_bp
+from auth.auth import auth_bp
 
 app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
 app.secret_key = os.getenv("SECRET_KEY")
 
 app.register_blueprint(main_bp)
 app.register_blueprint(api_bp)
+app.register_blueprint(auth_bp)
 
 # Context processors to make functions available in templates
 @app.context_processor

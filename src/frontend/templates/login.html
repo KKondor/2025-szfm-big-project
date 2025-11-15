@@ -10,7 +10,7 @@
 <!--Ezt (ha jól csinálják) megoldja a html-->
 <body>
   <div class="login-container">
-    <form class="login-form" id="loginForm">  
+    <form class="login-form" id="loginForm" method="POST" action="{{ url_for('auth_bp.login_route') }}">  
       <h2>Welcome</h2>
       <div class="input-group">
         <label for="identifier">Email or Username</label>
