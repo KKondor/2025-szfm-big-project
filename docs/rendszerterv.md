@@ -976,6 +976,18 @@ A kosár tartalma a böngésző `localStorage` területén kerül tárolásra, �
 - A kosár tartalma külön oldalon (**basket nézet**) is megjelenik, ahol a felhasználó részletesen ellenőrizheti a rendelést.
 - A kosár aktuális állapotát a rendszer JSON formátumban menti és tölti vissza a `localStorage` segítségével.
 
+#### 10.4.4. Rendelés leadása a backend felé (BASKET.JS)
+
+A kosár tartalmának véglegesítésekor a rendszer rendelést hoz létre és elküldi azt a backendnek.
+
+**Fő funkciók:**
+
+- A kosárban szereplő tételek alapján a kliens összeállítja a rendelés adatait.
+- A rendelésben az ételek azonosítói (ID-k) kerülnek továbbításra a backend API felé.
+- A rendszer a rendeléshez opcionális megjegyzést is továbbíthat.
+- Sikeres rendeléslétrehozás esetén a kosár ürül, a felület frissül, és a felhasználó visszajelzést kap (pl. felugró üzenet).
+- Hibás válasz vagy szerverhiba esetén a felhasználó tájékoztatást kap a sikertelen rendelésről.
+
 
 ## 11. Tesztterv
 
