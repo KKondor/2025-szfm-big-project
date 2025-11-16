@@ -284,3 +284,21 @@ async function updateOrderStatus(orderId, status) {
   const data = await res.json();
   if (!data.success) throw new Error("Order status error: " + (data.message || ""));
 }
+
+function showStatus(container, msg, isError) {
+  let el = container.querySelector(".js-inline-status");
+  if (!el) {
+    el = document.createElement("div");
+    el.classList.add("js-inline-status");
+    el.style.fontSize = "0.8rem";
+    el.style.marginTop = "0.25rem";
+    container.appendChild(el);
+  }
+  el.textContent = msg;
+  el.style.color = isError ? "red" : "green";
+  setTimeout(() => { el.textContent = ""; }, 2000);
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
