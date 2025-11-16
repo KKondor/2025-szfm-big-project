@@ -98,7 +98,6 @@ class UserManager:
                         address=row[5],
                         role=Role(row[6])
                     )
-            print("Nincs ilyen email című felhasználó")
             return None
         finally:
             cursor.close()
