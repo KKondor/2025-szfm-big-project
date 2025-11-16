@@ -108,3 +108,50 @@ function renderFoods(reset = false) {
     loadMoreBtn.remove();
   }
 }
+
+function createFoodCard(food) {
+  const card = document.createElement("div");
+  card.classList.add("item-card");
+
+  const img = document.createElement("img");
+  img.src = `/static/images/${food.image || "food.jpg"}`;
+  img.alt = food.name;
+
+  const info = document.createElement("div");
+  info.classList.add("info");
+
+  const title = document.createElement("h2");
+  title.textContent = food.name;
+
+  info.appendChild(title);
+
+  if (food.description) {
+    const desc = document.createElement("p");
+    desc.textContent = food.description;
+    info.appendChild(desc);
+  }
+
+  const price = document.createElement("p");
+  price.classList.add("price");
+  price.textContent = `${Number(food.price).toFixed(2)} Ft`;
+
+  info.appendChild(price);
+
+  const btn = document.createElement("button");
+  btn.classList.add("add-btn");
+  btn.textContent = "🧺";
+  btn.title = "Add to basket";
+  btn.addEventListener("click", () => {
+    addToBasket({
+      id: food.id,
+      name: food.name,
+      price: Number(food.price)
+    });
+  });
+
+  card.appendChild(img);
+  card.appendChild(info);
+  card.appendChild(btn);
+
+  return card;
+}
