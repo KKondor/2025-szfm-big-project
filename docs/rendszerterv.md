@@ -1052,6 +1052,18 @@ A rendszer több nézeten is tab-alapú navigációt használ (például az admi
 - Az aktív tab vizuálisan kiemelve jelenik meg (pl. külön CSS osztály segítségével).
 - A váltás kizárólag DOM elemek állapotának módosításával történik, oldal újratöltése nélkül.
 
+#### 10.4.8. Felhasználói élmény javítása javascript segítségével
+
+A frontend JavaScript modulok célja, hogy a rendszer használata gyors és kényelmes legyen a felhasználók számára.
+
+**Megvalósuló előnyök:**
+
+- Azonnali vizuális frissítések a DOM manipulációval (pl. kosár, rendelések, státuszok).
+- Oldalak közötti újratöltés minimalizálása, ahol lehetséges, csak komponensek cserélődnek.
+- Valós idejű adatlekérés a backend API-k segítségével.
+- Interaktív elemek (gombok, tabok, kosár, admin műveletek) azonnali visszajelzést adnak.
+- A felhasználói élmény összhangban áll a nem-funkcionális követelményekkel (használhatóság, teljesítmény).
+
 
 ## 11. Tesztterv
 
