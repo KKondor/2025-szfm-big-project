@@ -39,7 +39,7 @@ function renderBasketPage() {
     row.classList.add("basket-item");
 
     const img = document.createElement("img");
-    img.src = `/static/images/food.jpg`;
+    img.src = `/static/images/${item.image || "food.jpg"}`;
     img.alt = item.name;
 
     const info = document.createElement("div");
@@ -57,7 +57,7 @@ function renderBasketPage() {
 
     const price = document.createElement("span");
     price.classList.add("basket-price");
-    price.textContent = `$${(item.price * item.qty).toFixed(2)}`;
+    price.textContent = `${(item.price * item.qty).toFixed(2)}Ft`;
 
     details.appendChild(amount);
     details.appendChild(price);
