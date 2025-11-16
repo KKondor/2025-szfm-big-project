@@ -145,7 +145,8 @@ function createFoodCard(food) {
     addToBasket({
       id: food.id,
       name: food.name,
-      price: Number(food.price)
+      price: Number(food.price),
+      image: food.image
     });
   });
 
@@ -175,7 +176,7 @@ function addToBasket(food) {
   if (existing) {
     existing.qty += 1;
   } else {
-    items.push({ id: food.id, name: food.name, price: food.price, qty: 1 });
+    items.push({ id: food.id, name: food.name, price: food.price, image: food.image, qty: 1 });
   }
   saveBasket(items);
   renderBasketSidebar();
@@ -217,7 +218,7 @@ function renderBasketSidebar() {
     row.classList.add("basket-item");
 
     const img = document.createElement("img");
-    img.src = `/static/images/food.jpg`;
+    img.src = `/static/images/${item.image || "food.jpg"}`;
     img.alt = item.name;
 
     const info = document.createElement("div");
