@@ -39,7 +39,7 @@ function renderBasketPage() {
     row.classList.add("basket-item");
 
     const img = document.createElement("img");
-    img.src = `/static/images/food.jpg`; // vagy saját image mező, ha elmented
+    img.src = `/static/images/food.jpg`;
     img.alt = item.name;
 
     const info = document.createElement("div");
@@ -83,4 +83,18 @@ function renderBasketPage() {
   totalSpan.textContent = `$${total.toFixed(2)}`;
 
   checkoutBtn.onclick = () => checkout(items);
+}
+
+function removeItem(foodId) {
+  let items = getBasket();
+  const idx = items.findIndex((i) => i.id === foodId);
+  if (idx !== -1) {
+    if (items[idx].qty > 1) {
+      items[idx].qty -= 1;
+    } else {
+      items.splice(idx, 1);
+    }
+    saveBasket(items);
+    renderBasketPage();
+  }
 }
