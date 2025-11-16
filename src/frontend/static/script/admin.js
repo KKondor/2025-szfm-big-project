@@ -286,7 +286,7 @@ async function updateOrderStatus(orderId, status) {
 }
 
 function showStatus(container, msg, isError) {
-  let el = container.querySelector(".js-inline-status");
+  /*let el = container.querySelector(".response");
   if (!el) {
     el = document.createElement("div");
     el.classList.add("js-inline-status");
@@ -296,7 +296,8 @@ function showStatus(container, msg, isError) {
   }
   el.textContent = msg;
   el.style.color = isError ? "red" : "green";
-  setTimeout(() => { el.textContent = ""; }, 2000);
+  setTimeout(() => { el.textContent = ""; }, 2000);*/
+  alert((isError ? "Error: " : "Success: ") + msg);
 }
 
 function capitalize(str) {

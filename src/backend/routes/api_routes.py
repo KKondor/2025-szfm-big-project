@@ -3,7 +3,8 @@ API routes for user authentication, food management, and orders.
 """
 from flask import Blueprint, request, jsonify, session
 from services import users_service, foods_service, orders_service, auth_service
-from repository.users import User
+from repository.users import User, Role
+from repository.orders import OrderStatus
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -318,7 +319,6 @@ def api_update_order_status(order_id):
         if new_status not in ['pending', 'completed', 'cancelled']:
             return jsonify({'success': False, 'message': 'Status must be "pending", "completed", or "cancelled"'}), 400
 
-        from repository.orders import OrderStatus
         orders_service.update_order_status(order_id, OrderStatus(new_status))
         return jsonify({'success': True, 'message': 'Order status updated successfully'}), 200
     except ValueError as e:
@@ -397,14 +397,13 @@ def api_change_user_role(user_id):
         if new_role_value not in ['user', 'admin']:
             return jsonify({'success': False, 'message': 'Role must be "user" or "admin"'}), 400
 
-        from backend.repository.users import Role
+        
         new_role = Role(new_role_value)
-        result = users_service.change_user_role(user_id, new_role)
-
-        if result == "A jogosultság sikeresen módosítva.":
-            return jsonify({'success': True, 'message': result}), 200
-        else:
-            return jsonify({'success': False, 'message': result}), 400
-    except Exception as e:
-        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+        users_service.change_user_role(user_id, new_role)
+        return jsonify({'success': True, 'message': 'Password change successful'}), 200
+            
+    except ValueError as ve:
+            return jsonify({'success': False, 'message': ve}), 400
+    except RuntimeError as re:
+            return jsonify({'success': False, 'message': re}), 500
 

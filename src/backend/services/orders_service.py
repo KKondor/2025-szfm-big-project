@@ -126,7 +126,7 @@ class OrderService:
             raise ValueError("new_status must be a valid OrderStatus enum value")
 
         try:
-            self._order_manager.update_order_status(order_id, new_status.value)
+            self._order_manager.update_order_status(order_id, new_status)
         except Exception as e:
             raise RuntimeError(f"Failed to update order status for order {order_id}: {e}")
 
