@@ -963,6 +963,19 @@ A nagyobb étellisták hatékony kezelése érdekében a rendszer lazy loading m
 - Amennyiben nincs több megjeleníthető étel, a „Load more” gomb automatikusan eltűnik.
 - A lazy loading együtt működik a kategóriaszűréssel, így szűrt listák esetén is csak fokozatosan jelennek meg az elemek.
 
+#### 10.4.3. Kosár működése localstorage alapján (ITEM-LIST.JS, BASKET.JS)
+
+A kosár tartalma a böngésző `localStorage` területén kerül tárolásra, így oldalfrissítés vagy újranyitás esetén is megmarad.
+
+**Fő funkciók:**
+
+- A felhasználó az étellistáról egy gomb segítségével kosárhoz adhatja a kiválasztott ételt.
+- Ha egy étel már szerepel a kosárban, a rendszer növeli annak mennyiségét, nem hoz létre külön új sort.
+- A kosár oldalsávban (item-list oldalon) jelenik meg, és tartalmazza az étel nevét, mennyiségét és összárát.
+- A felhasználó csökkentheti a mennyiséget vagy teljesen eltávolíthat egy tételt a kosárból.
+- A kosár tartalma külön oldalon (**basket nézet**) is megjelenik, ahol a felhasználó részletesen ellenőrizheti a rendelést.
+- A kosár aktuális állapotát a rendszer JSON formátumban menti és tölti vissza a `localStorage` segítségével.
+
 
 ## 11. Tesztterv
 
