@@ -107,3 +107,132 @@ function renderUserInfo(user) {
   infoDiv.appendChild(addressP);
   infoDiv.appendChild(roleP);
 }
+
+async function loadUserOrders(userId) {
+  const ordersList = document.querySelector(
+    '.profile-section#view-orders .orders-list'
+  );
+  if (!ordersList) {
+    console.warn("Nem találom a .orders-list elemet a view-orders szekcióban.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/orders/user/${userId}`);
+    if (!res.ok) {
+      console.warn("GET /api/orders/user/<user_id> hiba:", res.status);
+      return;
+    }
+
+    const data = await res.json();
+    if (!data.success || !Array.isArray(data.orders)) {
+      console.warn("Orders válasz hibás:", data);
+      return;
+    }
+
+    ordersList.innerHTML = "";
+
+    if (!data.orders.length) {
+      const emptyMsg = document.createElement("p");
+      emptyMsg.textContent = "You have no orders yet.";
+      ordersList.appendChild(emptyMsg);
+      return;
+    }
+
+    data.orders.forEach((order) => {
+      const card = createOrderCard(order);
+      ordersList.appendChild(card);
+    });
+  } catch (err) {
+    console.error("Hiba az orders betöltésekor:", err);
+  }
+}
+
+function createOrderCard(order) {
+  const card = document.createElement("div");
+  card.classList.add("order-card");
+
+  const info = document.createElement("div");
+  info.classList.add("order-info");
+
+  const idSpan = document.createElement("span");
+  idSpan.classList.add("order-id");
+  idSpan.textContent = `#${order.order_id}`;
+
+  const dateSpan = document.createElement("span");
+  dateSpan.classList.add("order-date");
+  const dateStr = order.order_date
+    ? order.order_date.split("T")[0]
+    : "";
+  dateSpan.textContent = dateStr;
+
+  info.appendChild(idSpan);
+  info.appendChild(dateSpan);
+
+  const progress = document.createElement("div");
+  progress.classList.add("order-progress");
+
+  const label = document.createElement("label");
+  label.textContent = "Status";
+
+  const bar = document.createElement("div");
+  bar.classList.add("progress-bar");
+
+  const fill = document.createElement("div");
+  fill.classList.add("progress-fill");
+
+  const status = (order.status || "").toLowerCase();
+  fill.dataset.status = status;
+  fill.textContent = capitalize(status);
+
+  let width = "30%";
+  if (status === "completed") width = "100%";
+  if (status === "cancelled") width = "100%";
+  fill.style.width = width;
+
+  bar.appendChild(fill);
+  progress.appendChild(label);
+  progress.appendChild(bar);
+
+  const summary = document.createElement("div");
+  summary.classList.add("order-summary");
+
+  if (Array.isArray(order.items) && order.items.length) {
+    const ul = document.createElement("ul");
+    ul.classList.add("order-items");
+
+    order.items.forEach((item) => {
+      const li = document.createElement("li");
+
+      const nameSpan = document.createElement("span");
+      nameSpan.classList.add("item-name");
+      nameSpan.textContent = item.food_name;
+
+      const qtySpan = document.createElement("span");
+      qtySpan.classList.add("item-qty");
+      qtySpan.textContent = `x${item.quantity}`;
+
+      const priceSpan = document.createElement("span");
+      priceSpan.classList.add("item-price");
+      priceSpan.textContent = `${item.item_price} Ft`;
+
+      li.appendChild(nameSpan);
+      li.appendChild(qtySpan);
+      li.appendChild(priceSpan);
+      ul.appendChild(li);
+    });
+
+    summary.appendChild(ul);
+  }
+
+  const totalSpan = document.createElement("span");
+  totalSpan.classList.add("order-total");
+  totalSpan.innerHTML = `<strong>Total:</strong> ${order.total_price} Ft`;
+  summary.appendChild(totalSpan);
+
+  card.appendChild(info);
+  card.appendChild(progress);
+  card.appendChild(summary);
+
+  return card;
+}
