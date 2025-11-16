@@ -38,20 +38,10 @@ function initProfile() {
 }
 
 function getEmailFromProfileInfo() {
-  const infoDiv = document.querySelector(".profile-info");
-  if (!infoDiv) return null;
+  const container = document.querySelector(".profile-container");
+  if (!container) return null;
 
-  const paragraphs = infoDiv.querySelectorAll("p");
-  for (const p of paragraphs) {
-    const text = p.textContent.toLowerCase();
-    if (text.includes("email")) {
-      const parts = p.textContent.split(":");
-      if (parts.length >= 2) {
-        return parts[1].trim();
-      }
-    }
-  }
-  return null;
+  return container.dataset.userEmail || null;
 }
 
 async function loadUserDataAndOrders(email) {

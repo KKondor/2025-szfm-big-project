@@ -17,6 +17,7 @@ def login_route():
             if isinstance(user, User):
                 session["user_id"] = user.id
                 session["user_role"] = user.role.value
+                session["user_email"] = user.email
                 print(f"Bejelentkezett felhasználó: {user.name} (ID: {user.id}, Role: {user.role})")
                 return redirect("/")
             else:

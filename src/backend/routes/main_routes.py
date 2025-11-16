@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 from auth.auth_utils import login_required, admin_required
+from repository.users import UserManager
 
 main_bp = Blueprint('main', __name__)
 
@@ -34,7 +35,10 @@ def item_list():
 @main_bp.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
+    user_manager = UserManager()
+    email = session.get("user_email")
+    user = user_manager.get_user_by_email(email) if email else None
+    return render_template('profile.html', user=user)
 
 @main_bp.route('/chatbot')
 @login_required

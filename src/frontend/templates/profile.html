@@ -8,16 +8,11 @@
 
 <!--Jelenítsd meg a felhasználó adatait-->
 {% block content %}
-<section class="profile-container" data-user-id="{{ session.get('user_id') }}"></section>
+<section class="profile-container" data-user-email="{{ session.get('user_email') }}"></section>
   <h2>Your Profile</h2>
 
   <div class="profile-card">
     <div class="profile-info">
-      <p><strong>Name: </strong>Example Name</p>
-      <p><strong>Email: </strong>example@email.com</p>
-      <p><strong>Phone: </strong> 11111111111111</p>
-      <p><strong>Adress: </strong> Example adress 123</p>
-      <p><strong>Role: </strong> Customer</p>
     </div>
   </div>
 
@@ -30,34 +25,7 @@
     <div class="profile-section active" id="view-orders">
       <h3>Your Orders</h3>
       <div class="orders-list">
-        <div class="order-card">
-          <div class="order-info">
-            <span class="order-id">#2042</span>
-            <span class="order-date">2025-11-01</span>
-          </div>
-          <div class="order-progress">
-            <label>Status</label>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 80%;" data-status="preparing">Preparing</div>
-            </div>
-          </div>
-          <div class="order-items">
-          <h4>Ordered Foods</h4>
-          <ul>
-            <li>
-              <span class="item-name">Classic Burger</span>
-              <span class="item-qty">x2</span>
-              <span class="item-price">2400 Ft</span>
-            </li>
-            <li>
-              <span class="item-name">French Fries</span>
-              <span class="item-qty">x1</span>
-              <span class="item-price">900 Ft</span>
-            </li>
-          </ul>
-          <span class="order-total"><strong>Total:</strong> 3300 Ft</span>
-        </div>
-        </div>
+        
       </div>
     </div>
     <!--Jelezd a backendnek hogy a current user jelszava megváltozik-->
@@ -76,15 +44,5 @@
   </div>
 </section>
 <!--Ez is mehet js-be-->
-<script>
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    document.querySelectorAll('.profile-section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(btn.dataset.target).classList.add('active');
-  });
-});
-</script>
+<script src="{{ url_for('static', filename='script/profile.js') }}" defer></script>
 {% endblock %}
