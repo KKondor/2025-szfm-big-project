@@ -147,19 +147,5 @@
 
     </div>
 </section>
-
-<!--Ez mehet át külső scriptbe-->
-<script>
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Tab button states
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // Section visibility
-            document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(btn.dataset.target).classList.add('active');
-        });
-    });
-</script>
+<script src="{{ url_for('static', filename='script/admin.js') }}"></script>
 {% endblock %}
