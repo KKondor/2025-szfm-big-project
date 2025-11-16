@@ -98,3 +98,39 @@ function removeItem(foodId) {
     renderBasketPage();
   }
 }
+
+async function checkout(items) {
+  if (!items.length) {
+    alert("Your basket is empty.");
+    return;
+  }
+
+  const foodIds = [];
+  items.forEach((item) => {
+    for (let i = 0; i < item.qty; i++) {
+      foodIds.push(item.id);
+    }
+  });
+
+  try {
+    const res = await fetch(`${API_BASE}/orders`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ food_ids: foodIds, note: "" })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Order creation failed");
+    }
+
+    saveBasket([]);
+    renderBasketPage();
+    alert("Order created successfully!");
+    window.location.href = "/profile";
+  } catch (err) {
+    console.error(err);
+    alert("Error creating order: " + err.message);
+  }
+}
