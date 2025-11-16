@@ -14,9 +14,9 @@ class User:
     name: str
     email: str
     password: str
-    phone: Optional[str] = None
     address: str
     role: Role
+    phone: Optional[str] = None
     
 
 #------------------------------
@@ -129,9 +129,9 @@ class UserManager:
                         name=row[1],
                         email=row[2],
                         password=row[3],
-                        phone=row[6] if row[6] is not None else None,
-                        address=row[4],
-                        role=Role(row[5]),
+                        phone=row[4] if row[4] is not None else None,
+                        address=row[5],
+                        role=Role(row[6]),
                     )
             return None
         finally:
