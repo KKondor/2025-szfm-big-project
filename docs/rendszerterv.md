@@ -988,6 +988,31 @@ A kosár tartalmának véglegesítésekor a rendszer rendelést hoz létre és e
 - Sikeres rendeléslétrehozás esetén a kosár ürül, a felület frissül, és a felhasználó visszajelzést kap (pl. felugró üzenet).
 - Hibás válasz vagy szerverhiba esetén a felhasználó tájékoztatást kap a sikertelen rendelésről.
 
+#### 10.4.5. Admin funkciók javascript logikája (ADMIN.JS)
+
+Az `admin.js` modul az admin felület kliensoldali működését valósítja meg, három fő funkciócsoporttal.
+
+**Étel feltöltése:**
+
+- Az admin új ételt vihet fel a rendszerbe, megadva a név, ár, leírás és kategória mezőket.
+- A kép fájljából csak a fájlnév kerül elküldésre a backendnek, a tényleges fájlfeltöltés prototípus szinten opcionális.
+- Az adatok JSON formátumban, POST kérés formájában jutnak el a backend API megfelelő végpontjára.
+- A rendszer visszajelzést ad a sikeres vagy sikertelen mentésről.
+
+**Felhasználók kezelése:**
+
+- Az admin lekérheti és megjelenítheti az összes regisztrált felhasználót.
+- A felhasználók szerepköre (user / admin) legördülő listából módosítható.
+- A szerepkörmódosítás PUT kérés formájában kerül elküldésre a backend felé.
+- A módosítás eredményéről a felület rövid visszajelzést jelenít meg (siker / hiba).
+
+**Rendelések kezelése:**
+
+- Az admin felületen megjelennek az összes beérkezett rendelések.
+- A rendeléskártyák tartalmazzák az azonosítót, felhasználói adatokat, dátumot, státuszt és a hozzá tartozó tételeket.
+- A rendelés státusza (Pending, Completed, Cancelled) legördülő listából módosítható.
+- A státuszmódosítás PUT kérésként kerül elküldésre a backendnek, és a felhasználó (admin) azonnali vizuális visszajelzést kap.
+
 
 ## 11. Tesztterv
 
