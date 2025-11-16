@@ -83,12 +83,13 @@ def api_change_password():
         if not email or not new_password:
             return jsonify({'success': False, 'message': 'Email and new password required'}), 400
 
-        result = auth_service.change_password(email, new_password)
-        
-        if result == "A jelszó sikeresen megváltozott.":
-            return jsonify({'success': True, 'message': result}), 200
-        else:
-            return jsonify({'success': False, 'message': result}), 400
+        auth_service.change_password(email, new_password)
+        return jsonify({'success': True, 'message': 'Password changed successfully.'}), 200
+
+    except ValueError as ve:
+        return jsonify({'success': False, 'message': str(ve)}), 400
+    except RuntimeError as re:
+        return jsonify({'success': False, 'message': str(re)}), 500
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
 
