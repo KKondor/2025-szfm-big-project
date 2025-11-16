@@ -1041,6 +1041,17 @@ A `profile.js` modul a bejelentkezett felhasználó profiloldalának működés�
 - Sikeres validáció után a rendszer POST kérést küld a backend jelszóváltoztató végpontjára.
 - A felhasználó visszajelzést kap a jelszóváltoztatás sikeréről vagy hibájáról.
 
+#### 10.4.7. Tab-alapú nézetváltás kezelése
+
+A rendszer több nézeten is tab-alapú navigációt használ (például az admin felületen és a profiloldalon).
+
+**Fő funkciók:**
+
+- A JavaScript eseménykezelők figyelik a tab gombokra érkező kattintásokat.
+- Az aktív tabhoz tartozó szekció láthatóvá válik, míg a többi elrejtésre kerül.
+- Az aktív tab vizuálisan kiemelve jelenik meg (pl. külön CSS osztály segítségével).
+- A váltás kizárólag DOM elemek állapotának módosításával történik, oldal újratöltése nélkül.
+
 
 ## 11. Tesztterv
 
