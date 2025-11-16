@@ -70,3 +70,41 @@ function buildTypeOptionsFromFoods(foods) {
 
   currentFilter = "all";
 }
+
+function renderFoods(reset = false) {
+  const container = document.querySelector(".item-list");
+  if (!container) return;
+
+  if (reset) {
+    container.innerHTML = "";
+    renderedCount = 0;
+  }
+
+  const filtered = allFoods.filter(food => {
+    if (currentFilter === "all") return true;
+    return (food.category || "").toLowerCase() === currentFilter.toLowerCase();
+  });
+
+  const toRender = filtered.slice(renderedCount, renderedCount + PAGE_SIZE);
+
+  toRender.forEach(food => {
+    const card = createFoodCard(food);
+    container.appendChild(card);
+  });
+
+  renderedCount += toRender.length;
+
+  let loadMoreBtn = document.getElementById("load-more-foods");
+  if (filtered.length > renderedCount) {
+    if (!loadMoreBtn) {
+      loadMoreBtn = document.createElement("button");
+      loadMoreBtn.id = "load-more-foods";
+      loadMoreBtn.textContent = "Load more";
+      loadMoreBtn.classList.add("load-more-btn");
+      loadMoreBtn.addEventListener("click", () => renderFoods(false));
+      container.parentElement.appendChild(loadMoreBtn);
+    }
+  } else if (loadMoreBtn) {
+    loadMoreBtn.remove();
+  }
+}
