@@ -952,6 +952,18 @@ Az `item-list.js` modul felelős az ételek megjelenítéséért és a kategóri
 - Az ételek kártyák formájában jelennek meg (kép, név, ár, opcionális leírás).
 - A felület dinamikusan frissül DOM manipulációval (HTML elemek létrehozása JavaScripttel).
 
+#### 10.4.2. Lazy loading a lista fokozatos betöltéséhez (ITEM-LIST.JS)
+
+A nagyobb étellisták hatékony kezelése érdekében a rendszer lazy loading megoldást alkalmaz.
+
+**Fő funkciók:**
+
+- Kezdetben csak egy előre meghatározott elemszám (oldalméret) kerül megjelenítésre.
+- A „Load more” gomb újabb elemeket tölt be a már megjelenített lista végére.
+- Amennyiben nincs több megjeleníthető étel, a „Load more” gomb automatikusan eltűnik.
+- A lazy loading együtt működik a kategóriaszűréssel, így szűrt listák esetén is csak fokozatosan jelennek meg az elemek.
+
+
 ## 11. Tesztterv
 
 A tesztelés célja a rendszer funkcionalitásának, megbízhatóságának és biztonságának ellenőrzése.  
