@@ -109,10 +109,10 @@ function setupUsers() {
     const idCell = row?.querySelector("td:first-child");
     if (!idCell) return;
 
-    const idText = idCell.textContent.trim(); // pl. "#001"
+    const idText = idCell.textContent.trim(); 
     const userId = parseInt(idText.replace("#", ""), 10);
-    const uiRole = select.value;            // "Admin" vagy "User"
-    const apiRole = uiRole.toLowerCase();   // "admin" / "user"
+    const uiRole = select.value;            
+    const apiRole = uiRole.toLowerCase();   
 
     try {
       await updateUserRole(userId, apiRole);
@@ -177,4 +177,110 @@ async function updateUserRole(userId, role) {
   if (!data.success) {
     throw new Error("Role update error: " + (data.message || ""));
   }
+}
+
+function setupOrders() {
+  const section = document.getElementById("view-orders");
+  if (!section) return;
+
+  const list = section.querySelector(".orders-list");
+  if (!list) return;
+
+  loadOrders(list).catch((err) => {
+    console.warn("Nem sikerült betölteni az ordereket, marad a statikus minta:", err);
+  });
+
+  list.addEventListener("change", async (e) => {
+    const select = e.target;
+    if (!select.classList.contains("progress-select")) return;
+
+    const card = select.closest(".order-card");
+    const idSpan = card?.querySelector(".order-id");
+    if (!idSpan) return;
+
+    const orderId = parseInt(idSpan.textContent.replace("#", ""), 10);
+    const uiStatus = select.value;  
+    const apiStatus = uiStatus.toLowerCase(); 
+
+    try {
+      await updateOrderStatus(orderId, apiStatus);
+      showStatus(card, "Status updated ✓", false);
+    } catch (err) {
+      console.error(err);
+      showStatus(card, "Error updating status", true);
+    }
+  });
+}
+
+async function loadOrders(list) {
+  const res = await fetch(`${API_BASE}/orders`);
+  if (!res.ok) throw new Error("GET /api/orders failed " + res.status);
+
+  const data = await res.json();
+  if (!data.success || !Array.isArray(data.orders) || !data.orders.length) return;
+
+  list.innerHTML = "";
+
+  data.orders.forEach((order) => {
+    const card = document.createElement("div");
+    card.classList.add("order-card");
+
+    const info = document.createElement("div");
+    info.classList.add("order-info");
+
+    const idSpan = document.createElement("span");
+    idSpan.classList.add("order-id");
+    idSpan.textContent = `#${order.order_id}`;
+
+    const userSpan = document.createElement("span");
+    userSpan.classList.add("user-id");
+    userSpan.textContent = `User #${order.user_id} (${order.user_name || ""})`;
+
+    const dateSpan = document.createElement("span");
+    dateSpan.classList.add("order-date");
+    dateSpan.textContent = order.order_date || "";
+
+    info.appendChild(idSpan);
+    info.appendChild(userSpan);
+    info.appendChild(dateSpan);
+
+    const progress = document.createElement("div");
+    progress.classList.add("order-progress");
+
+    const label = document.createElement("label");
+    label.textContent = "Progress";
+
+    const select = document.createElement("select");
+    select.classList.add("progress-select");
+
+    ["pending", "completed", "cancelled"].forEach((st) => {
+      const opt = document.createElement("option");
+      opt.value = capitalize(st);
+      opt.textContent = capitalize(st);
+      if (order.status && order.status.toLowerCase() === st) {
+        opt.selected = true;
+      }
+      select.appendChild(opt);
+    });
+
+    progress.appendChild(label);
+    progress.appendChild(select);
+
+    card.appendChild(info);
+    card.appendChild(progress);
+    list.appendChild(card);
+  });
+}
+
+async function updateOrderStatus(orderId, status) {
+  const res = await fetch(`${API_BASE}/orders/${orderId}/status`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status })
+  });
+
+  if (!res.ok) throw new Error("PUT /api/orders/id/status failed " + res.status);
+
+  const data = await res.json();
+  if (!data.success) throw new Error("Order status error: " + (data.message || ""));
 }
