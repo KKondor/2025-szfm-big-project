@@ -236,3 +236,58 @@ function createOrderCard(order) {
 
   return card;
 }
+
+function setupPasswordChange(initialEmail) {
+  const form = document.querySelector("#change-password .profile-form");
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const inputs = form.querySelectorAll("input[type='password']");
+    if (inputs.length < 3) return;
+
+    const currentPassword = inputs[0].value.trim();
+    const newPassword = inputs[1].value.trim();
+    const confirmPassword = inputs[2].value.trim();
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      alert("Please fill in all password fields.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      alert("New password and confirmation do not match.");
+      return;
+    }
+
+    const email = initialEmail || getEmailFromProfileInfo();
+    if (!email) {
+      alert("Cannot determine user email, password change failed.");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/change-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          new_password: newPassword
+        })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Password change failed");
+      }
+
+      alert("Password changed successfully.");
+      form.reset();
+    } catch (err) {
+      console.error("Password change error:", err);
+      alert("Error changing password: " + err.message);
+    }
+  });
+}
