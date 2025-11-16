@@ -935,6 +935,23 @@ Felhasználó jogosultságának (szerepkörének) módosítása. **(Admin jogosu
 | `AdminPage` | Az adminisztrátori felület logikáját valósítja meg. | Rendelések megjelenítése, státusz módosítása, új ételek felvitele, törlés és szerkesztés. |
 | `ProfilePage` | A felhasználói profil megtekintését és módosítását kezeli. | Felhasználói adatok megjelenítése, módosítás, jelszóváltás, kijelentkezés. |
 
+### 10.4. Frontend javascript funkciók
+
+A rendszer frontendje különálló JavaScript modulokra épül, amelyek a kliensoldali logikát valósítják meg.  
+Ezek a modulok felelősek az ételek megjelenítéséért, a kosár kezeléséért, a rendelések továbbításáért, valamint az adminisztrációs és profil funkciók működtetéséért.
+
+#### 10.4.1. Étel listázás és kategória szerinti szűrés (ITEM-LIST.JS)
+
+Az `item-list.js` modul felelős az ételek megjelenítéséért és a kategória alapú szűrésért.
+
+**Fő funkciók:**
+
+- Az ételek betöltése a backend API-ból (`/api/foods` végpont).
+- A backendről érkező adatok alapján a kategórialista automatikus felépítése.
+- A felhasználó kategória szerinti szűrést végezhet a legördülő listával.
+- Az ételek kártyák formájában jelennek meg (kép, név, ár, opcionális leírás).
+- A felület dinamikusan frissül DOM manipulációval (HTML elemek létrehozása JavaScripttel).
+
 ## 11. Tesztterv
 
 A tesztelés célja a rendszer funkcionalitásának, megbízhatóságának és biztonságának ellenőrzése.  
