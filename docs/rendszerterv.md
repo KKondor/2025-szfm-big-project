@@ -1013,6 +1013,34 @@ Az `admin.js` modul az admin felület kliensoldali működését valósítja meg
 - A rendelés státusza (Pending, Completed, Cancelled) legördülő listából módosítható.
 - A státuszmódosítás PUT kérésként kerül elküldésre a backendnek, és a felhasználó (admin) azonnali vizuális visszajelzést kap.
 
+#### 10.4.6. Profiloldal funkciói javascript-tel (PROFILE.JS)
+
+A `profile.js` modul a bejelentkezett felhasználó profiloldalának működéséért felel.
+
+**Felhasználói adatok megjelenítése:**
+
+- A rendszer a bejelentkezett felhasználó email címe alapján kérdezi le a részletes profiladatokat a backendtől.
+- A felületen a név, email, telefonszám, cím és szerepkör jelenik meg.
+- A JavaScript a backendtől kapott adatokat dinamikusan illeszti be a HTML struktúrába.
+
+**Felhasználóhoz kapcsolódó rendelések listázása:**
+
+- A profiloldal külön szekcióban jeleníti meg az adott felhasználó korábbi rendeléseit.
+- Minden rendelés kártyán jelenik meg, amely tartalmazza:
+  - a rendelés azonosítóját,
+  - a rendelés dátumát,
+  - az egyes tételeket (étel neve, mennyisége, tételára),
+  - a rendelés végösszegét,
+  - a rendelés státuszát vizuális progress bar formájában.
+- A progress bar a rendelés állapotát (pl. pending, completed) vizuálisan is jelzi.
+
+**Jelszóváltoztatás:**
+
+- A felhasználó külön űrlapon keresztül adhatja meg új jelszavát.
+- A JavaScript validálja a mezőket (nem üres, egyező új jelszó és megerősítés).
+- Sikeres validáció után a rendszer POST kérést küld a backend jelszóváltoztató végpontjára.
+- A felhasználó visszajelzést kap a jelszóváltoztatás sikeréről vagy hibájáról.
+
 
 ## 11. Tesztterv
 
