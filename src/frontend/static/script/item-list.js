@@ -155,3 +155,109 @@ function createFoodCard(food) {
 
   return card;
 }
+
+function getBasket() {
+  try {
+    const raw = localStorage.getItem(BASKET_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveBasket(items) {
+  localStorage.setItem(BASKET_KEY, JSON.stringify(items));
+}
+
+function addToBasket(food) {
+  const items = getBasket();
+  const existing = items.find(i => i.id === food.id);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    items.push({ id: food.id, name: food.name, price: food.price, qty: 1 });
+  }
+  saveBasket(items);
+  renderBasketSidebar();
+}
+
+function removeFromBasket(foodId) {
+  let items = getBasket();
+  const idx = items.findIndex(i => i.id === foodId);
+  if (idx !== -1) {
+    if (items[idx].qty > 1) {
+      items[idx].qty -= 1;
+    } else {
+      items.splice(idx, 1);
+    }
+    saveBasket(items);
+    renderBasketSidebar();
+  }
+}
+
+function renderBasketSidebar() {
+  const sidebar = document.getElementById("basket-sidebar");
+  if (!sidebar) return;
+
+  const itemsContainer = sidebar.querySelector(".basket-items");
+  const totalSpan = sidebar.querySelector(".basket-total span:last-child");
+  const checkoutBtn = sidebar.querySelector(".checkout-btn");
+
+  if (!itemsContainer || !totalSpan || !checkoutBtn) return;
+
+  const items = getBasket();
+  itemsContainer.innerHTML = "";
+
+  let total = 0;
+
+  items.forEach(item => {
+    total += item.price * item.qty;
+
+    const row = document.createElement("div");
+    row.classList.add("basket-item");
+
+    const img = document.createElement("img");
+    img.src = `/static/images/food.jpg`;
+    img.alt = item.name;
+
+    const info = document.createElement("div");
+    info.classList.add("basket-info");
+
+    const title = document.createElement("h3");
+    title.textContent = item.name;
+
+    const details = document.createElement("div");
+    details.classList.add("basket-details");
+
+    const amount = document.createElement("span");
+    amount.classList.add("basket-amount");
+    amount.textContent = `x${item.qty}`;
+
+    const price = document.createElement("span");
+    price.classList.add("basket-price");
+    price.textContent = `${(item.price * item.qty).toFixed(2)} Ft`;
+
+    details.appendChild(amount);
+    details.appendChild(price);
+    info.appendChild(title);
+    info.appendChild(details);
+
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("remove-btn");
+    removeBtn.innerHTML = "&times;";
+    removeBtn.setAttribute("aria-label", "Remove item");
+    removeBtn.addEventListener("click", () => removeFromBasket(item.id));
+
+    row.appendChild(img);
+    row.appendChild(info);
+    row.appendChild(removeBtn);
+
+    itemsContainer.appendChild(row);
+  });
+
+  totalSpan.textContent = `${total.toFixed(2)} Ft`;
+
+  checkoutBtn.onclick = () => {
+    window.location.href = "/basket";
+  };
+}
