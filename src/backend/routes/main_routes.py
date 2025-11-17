@@ -22,6 +22,10 @@ def login():
 def register():
     return render_template('register.html')
 
+@main_bp.route('/forgot')
+def forgot():
+    return render_template('forgot.html')
+
 @main_bp.route('/admin')
 @admin_required
 def admin():
