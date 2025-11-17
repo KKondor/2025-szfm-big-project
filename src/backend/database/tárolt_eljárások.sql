@@ -50,7 +50,7 @@ CREATE PROCEDURE get_user_by_identifier(IN p_identifier VARCHAR(100))
 BEGIN
     SELECT id, name, email, password, address, role, phone
     FROM users
-    WHERE email = p_identifier OR name = p_identifier;
+    WHERE BINARY name = p_identifier OR BINARY email = p_identifier;
 END
 DELIMITER ;
 
