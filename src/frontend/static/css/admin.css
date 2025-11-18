@@ -89,7 +89,6 @@
     border-radius: 0.5rem;
     padding: 0.6rem;
     color: var(--text);
-    width: 100%;
     resize: vertical;
 }
 

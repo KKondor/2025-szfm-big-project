@@ -94,7 +94,6 @@
     border-radius: 0.5rem;
     padding: 0.6rem;
     color: var(--text);
-    width: 100%;
 }
 
 .orders-list .order-card {
@@ -171,6 +170,7 @@
     border: none;
     cursor: pointer;
     transition: background 0.2s;
+    margin-top: 1rem;
 }
 
 .btn:hover {
