@@ -7,10 +7,15 @@
 
 .filter-bar {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
   margin-left: calc(min(80vw, 240px) + 1rem);
   margin-bottom: 1rem;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 #food-type {
@@ -34,6 +39,28 @@
 #food-type option {
     background-color: var(--bg_from);
     color: var(--text);
+}
+
+#food-search {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.95rem;
+  width: 180px;
+  transition: border 0.2s ease, background 0.2s ease;
+}
+
+#food-search::placeholder {
+  color: var(--text_faded);
+}
+
+#food-search:hover,
+#food-search:focus {
+  border-color: var(--brand);
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
 }
 
 .item-card {
@@ -104,11 +131,11 @@
 
 .basket-sidebar {
   position: fixed;
-  margin-top: 5.5rem;
+  margin-top: 7.5rem;
   top: 0;
   left: 0;
   width: min(80vw, 320px);
-  height: calc(97vh - 5.5rem);
+  height: calc(97vh - 7.5rem);
   background: var(--bg_from);
   backdrop-filter: blur(8px);
   border-right: 1px solid var(--border);

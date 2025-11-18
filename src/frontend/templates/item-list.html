@@ -34,6 +34,7 @@
 {% block content %}
 <!--Leolvassa az összes féle typeot a backendről és azok lesznek az optionok. Le filtereli az item listát csak a typeba eső foodokkal-->
 <div class="filter-bar">
+  <div class="filter-group">
     <label for="food-type">Filter by type:</label>
     <select id="food-type" name="food-type">
       <option value="all">All</option>
@@ -42,6 +43,13 @@
       <option value="burger">Burger</option>
       <option value="salad">Salad</option>
     </select>
+    </div>
+    <input
+      type="text"
+      id="food-search"
+      placeholder="Search items..."
+      autocomplete="off"
+    >
   </div>
 <!--Felsorolja (lazyloadinggal) a foodokat. Az első példa az amit használni kéne templatenek-->
 <div class="item-list">
