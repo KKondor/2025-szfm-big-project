@@ -17,6 +17,7 @@
 
 body {
   margin: 0;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,4 +106,15 @@ button:hover {
 .signin-text a {
   color: #9d8fff;
   text-decoration: none;
+}
+
+@media (max-height: 500px) {
+
+
+  .register-container {
+    max-width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
 }
