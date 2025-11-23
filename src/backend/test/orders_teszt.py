@@ -2,16 +2,19 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import pytest
-from services.foods_service import food_service
-from repository.foods import Food, FoodManager
-
+from services.orders_service import order_service
+from repository.orders import OrderStatus
+from repository.orders import Order
+from repository.foods import Food
+from repository.users import User
+from repository.db_connect import get_connection
 
 # Tesztadatok
-VALID_NAME = "Teszt Étel"
-VALID_DESCRIPTION = "Finom és friss"
-VALID_IMAGE = "image.jpg"
-VALID_PRICE = 1200
-VALID_CATEGORY = "Főétel"
+VALID_USER_ID = 4
+VALID_FOOD_IDS = [1, 2]
+INVALID_USER_ID = 999
+INVALID_FOOD_IDS = [999]
+TOO_LONG_NOTE = "x" * 501
 
 # 🔧 Tesztlogika
 def report_result(description: str, expected: str, actual: str, match: bool):
@@ -22,249 +25,182 @@ def report_result(description: str, expected: str, actual: str, match: bool):
         f"   ✅ Egyezés: {match}\n"
     )
     print(output)
-    with open("foods_teszt_eredmenyek.log", "a", encoding="utf-8") as log_file:
+    with open("orders_teszt_eredmenyek.log", "a", encoding="utf-8") as log_file:
         log_file.write(output)
 
-
-@pytest.fixture
-def test_food():
-    food_service.create_food(VALID_NAME, VALID_DESCRIPTION, VALID_IMAGE, VALID_PRICE, VALID_CATEGORY)
-    all_foods = food_service.get_all_food()
-    food = [f for f in all_foods if f.name == VALID_NAME and f.price == VALID_PRICE][0]
-    yield food
-    food_service.delete_food(food.id)
-
-
 '''
 # -------------------------
-# INPUT VALIDÁCIÓS TESZTEK
+# SIKERES RENDELÉS LÉTREHOZÁSA
 # -------------------------
 '''
 
-def test_create_food_missing_name():
-    description = "Étel létrehozása név nélkül"
-    expected = "Hiba: name is required"
+def test_create_order_success_and_cleanup():
+    description = "Sikeres rendelés létrehozása és törlése"
+    expected = "Rendelés bekerült, majd törölve lett"
+
+    created_order_id = None
+    test_note = "Teszt rendelés törléshez"
+
     try:
-        food_service.create_food("", VALID_DESCRIPTION, VALID_IMAGE, VALID_PRICE, VALID_CATEGORY)
+        order_service.create_order(VALID_USER_ID, VALID_FOOD_IDS, test_note)
+
+        orders = order_service.get_order_by_user_id(VALID_USER_ID)
+        matching_orders = [o for o in orders if o.note == test_note]
+        match = len(matching_orders) > 0
+        actual = f"Talált rendelés: {matching_orders[0].order_id}" if match else "Nem található"
+
+        if match:
+            created_order_id = matching_orders[0].order_id
+
+    except Exception as e:
+        actual = str(e)
+        match = False
+
+    finally:
+        if created_order_id:
+            try:
+                from repository.db_connect import get_connection
+                conn = get_connection()
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM order_items WHERE order_id = %s", (created_order_id,))
+                cursor.execute("DELETE FROM orders WHERE id = %s", (created_order_id,))
+                conn.commit()
+                cursor.close()
+                conn.close()
+            except Exception as cleanup_error:
+                print(f"Hiba a törlés során: {cleanup_error}")
+
+    report_result(description, expected, actual, match)
+    assert match
+
+'''
+# -------------------------
+# HIBÁS RENDELÉS LÉTREHOZÁSA
+# -------------------------
+'''
+
+def test_create_order_invalid_user():
+    description = "Rendelés nem létező user ID-val"
+    expected = "Hiba: User with ID 999 does not exist"
+
+    try:
+        order_service.create_order(INVALID_USER_ID, VALID_FOOD_IDS, "Teszt")
         actual = "Sikerült létrehozni"
-        match = False
-    except ValueError as e:
-        actual = str(e)
-        match = "name is required" in actual
-    report_result(description, expected, actual, match)
-    assert match
-
-def test_create_food_long_name():
-    description = "Étel létrehozása túl hosszú névvel"
-    expected = "Hiba: Food name must be 50 characters or fewer"
-    long_name = "A" * 51
-    try:
-        food_service.create_food(long_name, VALID_DESCRIPTION, VALID_IMAGE, VALID_PRICE, VALID_CATEGORY)
-        actual = "Sikerült létrehozni"
-        match = False
-    except ValueError as e:
-        actual = str(e)
-        match = "50 characters or fewer" in actual
-    report_result(description, expected, actual, match)
-    assert match
-
-def test_create_food_negative_price():
-    description = "Étel létrehozása negatív árral"
-    expected = "Hiba: price must be a non-negative integer"
-    try:
-        food_service.create_food(VALID_NAME, VALID_DESCRIPTION, VALID_IMAGE, -100, VALID_CATEGORY)
-        actual = "Sikerült létrehozni"
-        match = False
-    except ValueError as e:
-        actual = str(e)
-        match = "non-negative integer" in actual
-    report_result(description, expected, actual, match)
-    assert match
-
-def test_create_food_long_category():
-    description = "Étel létrehozása túl hosszú kategóriával"
-    expected = "Hiba: Category must be 50 characters or fewer"
-    long_category = "B" * 51
-    try:
-        food_service.create_food(VALID_NAME, VALID_DESCRIPTION, VALID_IMAGE, VALID_PRICE, long_category)
-        actual = "Sikerült létrehozni"
-        match = False
-    except ValueError as e:
-        actual = str(e)
-        match = "50 characters or fewer" in actual
-    report_result(description, expected, actual, match)
-    assert match
-
-def test_get_food_invalid_id():
-    description = "Étel lekérdezése érvénytelen ID-val"
-    expected = "Hiba: food_id must be a positive integer"
-    try:
-        food_service.get_food(-1)
-        actual = "Sikerült lekérdezni"
-        match = False
-    except ValueError as e:
-        actual = str(e)
-        match = "positive integer" in actual
-    report_result(description, expected, actual, match)
-    assert match
-
-def test_delete_food_invalid_id():
-    description = "Étel törlése érvénytelen ID-val"
-    expected = "Hiba: food_id must be a positive integer"
-    try:
-        food_service.delete_food("abc")
-        actual = "Sikerült törölni"
-        match = False
-    except ValueError as e:
-        actual = str(e)
-        match = "positive integer" in actual
-    report_result(description, expected, actual, match)
-    assert match
-
-def test_update_food_nonexistent():
-    description = "Nem létező étel módosítása"
-    expected = "Hiba: Food with ID 99999 does not exist"
-
-    try:
-        food_service.update_food(
-            99999,
-            "Nem létező", "Leírás", "img.jpg", 1000, "Kategória"
-        )
-        actual = "Sikerült módosítani"
         match = False
     except ValueError as e:
         actual = str(e)
         match = "does not exist" in actual
+
     report_result(description, expected, actual, match)
     assert match
 
-
-'''
-# -------------------------
-# LÉTREHOZÁS, MÓDOSÍTÁS, TÖRLÉS TESZTEK
-# -------------------------
-'''
-
-def test_create_food_success():
-    description = "Sikeres étel létrehozás"
-    expected = "Étel létrejött és lekérdezhető"
-    found = []
+def test_create_order_invalid_food():
+    description = "Rendelés nem létező étel ID-val"
+    expected = "Hiba: Food with ID 999 does not exist"
 
     try:
-        food_service.create_food(VALID_NAME, VALID_DESCRIPTION, VALID_IMAGE, VALID_PRICE, VALID_CATEGORY)
-        all_foods = food_service.get_all_food()
-        found = [f for f in all_foods if f.name == VALID_NAME and f.price == VALID_PRICE]
-        actual = f"Talált: {found[0].name}, {found[0].price}" if found else "Nem található"
-        match = len(found) > 0
+        order_service.create_order(VALID_USER_ID, INVALID_FOOD_IDS, "Teszt")
+        actual = "Sikerült létrehozni"
+        match = False
+    except ValueError as e:
+        actual = str(e)
+        match = "does not exist" in actual
+
+    report_result(description, expected, actual, match)
+    assert match
+
+def test_create_order_empty_food_list():
+    description = "Rendelés üres étel listával"
+    expected = "Hiba: food_ids must be a non-empty list of food IDs"
+
+    try:
+        order_service.create_order(VALID_USER_ID, [], "Teszt")
+        actual = "Sikerült létrehozni"
+        match = False
+    except ValueError as e:
+        actual = str(e)
+        match = "non-empty list" in actual
+
+    report_result(description, expected, actual, match)
+    assert match
+
+def test_create_order_note_too_long():
+    description = "Rendelés túl hosszú megjegyzéssel"
+    expected = "Hiba: Note must be 500 characters or fewer"
+
+    try:
+        order_service.create_order(VALID_USER_ID, VALID_FOOD_IDS, TOO_LONG_NOTE)
+        actual = "Sikerült létrehozni"
+        match = False
+    except ValueError as e:
+        actual = str(e)
+        match = "500 characters or fewer" in actual
+
+    report_result(description, expected, actual, match)
+    assert match
+
+'''
+# -------------------------
+# STÁTUSZ MÓDOSÍTO TESZT
+# -------------------------
+'''
+
+def test_update_order_status_and_cleanup():
+    description = "Rendelés státusz módosítása és törlése"
+    expected = "Státusz módosítva COMPLETED-re, majd rendelés törölve"
+
+    created_order_id = None
+    test_note = "Teszt státusz módosítás"
+
+    try:
+        order_service.create_order(VALID_USER_ID, VALID_FOOD_IDS, test_note)
+
+        orders = order_service.get_order_by_user_id(VALID_USER_ID)
+        matching_orders = [o for o in orders if o.note == test_note]
+        match = len(matching_orders) > 0
+        actual = f"Talált rendelés: {matching_orders[0].order_id}" if match else "Nem található"
+
+        if match:
+            created_order_id = matching_orders[0].order_id
+
+            order_service.update_order_status(created_order_id, OrderStatus.COMPLETED)
+
+            updated_order = [o for o in order_service.get_order_by_user_id(VALID_USER_ID) if o.order_id == created_order_id][0]
+            match = updated_order.status == OrderStatus.COMPLETED
+            actual = f"Új státusz: {updated_order.status}"
+
     except Exception as e:
         actual = str(e)
         match = False
+
     finally:
-        if found:
-            food_service.delete_food(found[0].id)
+        if created_order_id:
+            try:
+                conn = get_connection()
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM order_items WHERE order_id = %s", (created_order_id,))
+                cursor.execute("DELETE FROM orders WHERE id = %s", (created_order_id,))
+                conn.commit()
+                cursor.close()
+                conn.close()
+            except Exception as cleanup_error:
+                print(f"Hiba a törlés során: {cleanup_error}")
+
     report_result(description, expected, actual, match)
     assert match
 
 
-def test_update_food_success():
-    description = "Sikeres étel módosítás"
-    expected = "Étel adatai frissültek"
+def test_update_order_status_invalid_id():
+    description = "Státusz módosítása érvénytelen order_id értékkel"
+    expected = "Hiba: order_id must be a positive integer"
 
     try:
-        food_service.create_food("Frissítendő", "Leírás", "img.jpg", 1000, "Kategória")
-        all_foods = food_service.get_all_food()
-        food = [f for f in all_foods if f.name == "Frissítendő"][0]
-        food_service.update_food(food.id, "Frissített név", "Új leírás", "img2.jpg", 1500, "Új kategória")
-        updated = food_service.get_food(food.id)
-        actual = f"{updated.name}, {updated.price}, {updated.category}"
-        match = updated.name == "Frissített név" and updated.price == 1500 and updated.category == "Új kategória"
-    except Exception as e:
-        actual = str(e)
+        order_service.update_order_status(-5, OrderStatus.CANCELLED)
+        actual = "Sikerült módosítani"
         match = False
-    finally:
-        if 'food' in locals():
-            food_service.delete_food(food.id)
-    report_result(description, expected, actual, match)
-    assert match
-
-
-
-def test_delete_food_success():
-    description = "Sikeres étel törlés"
-    expected = "Étel törölve, nem található többé"
-
-    try:
-        food_service.create_food("Törlendő", "Leírás", "img.jpg", 800, "Kategória")
-        all_foods = food_service.get_all_food()
-        food = [f for f in all_foods if f.name == "Törlendő"][0]
-        food_service.delete_food(food.id)
-        result = food_service.get_food(food.id)
-        actual = "None" if result is None else f"Még létezik: {result.name}"
-        match = result is None
-    except Exception as e:
+    except ValueError as e:
         actual = str(e)
-        match = False
-    report_result(description, expected, actual, match)
-    assert match
-
-'''
-# -------------------------
-# LISTA TESZT
-# -------------------------
-'''
-
-def test_get_all_food_returns_list():
-    description = "Összes étel lekérdezése"
-    expected = "Lista visszatér, minden elem Food típusú"
-    try:
-        foods = food_service.get_all_food()
-        actual = f"Talált {len(foods)} étel"
-        match = isinstance(foods, list) and all(isinstance(f, Food) for f in foods)
-    except Exception as e:
-        actual = str(e)
-        match = False
-    report_result(description, expected, actual, match)
-    assert match
-
-'''
-# -------------------------
-# FIXTURE TESZT
-# -------------------------
-'''
-
-def test_food_is_retrievable(test_food):
-    description = "Tesztétel lekérdezhető"
-    expected = "Lekérdezett étel megegyezik a létrehozottal"
-
-    try:
-        retrieved = food_service.get_food(test_food.id)
-        actual = f"{retrieved.name}, {retrieved.price}"
-        match = (
-            retrieved is not None and
-            retrieved.name == VALID_NAME and
-            retrieved.price == VALID_PRICE
-        )
-    except Exception as e:
-        actual = str(e)
-        match = False
+        match = "positive integer" in actual
 
     report_result(description, expected, actual, match)
     assert match
-
-
-def test_food_in_all_food_list(test_food):
-    description = "Tesztétel szerepel az összes étel listában"
-    expected = "get_all_food() tartalmazza a létrehozott ételt"
-
-    try:
-        all_foods = food_service.get_all_food()
-        found = any(f.id == test_food.id for f in all_foods)
-        actual = f"Szerepel: {test_food.name}" if found else "Nem szerepel"
-        match = found
-    except Exception as e:
-        actual = str(e)
-        match = False
-
-    report_result(description, expected, actual, match)
-    assert match
-
