@@ -1,0 +1,65 @@
+
+🔹 Étel létrehozása név nélkül
+   ➤ Elvárt eredmény: Hiba: name is required
+   📥 Kapott eredmény: name is required
+   ✅ Egyezés: True
+
+🔹 Étel létrehozása túl hosszú névvel
+   ➤ Elvárt eredmény: Hiba: Food name must be 50 characters or fewer
+   📥 Kapott eredmény: Food name must be 50 characters or fewer
+   ✅ Egyezés: True
+
+🔹 Étel létrehozása negatív árral
+   ➤ Elvárt eredmény: Hiba: price must be a non-negative integer
+   📥 Kapott eredmény: price must be a non-negative integer
+   ✅ Egyezés: True
+
+🔹 Étel létrehozása túl hosszú kategóriával
+   ➤ Elvárt eredmény: Hiba: Category must be 50 characters or fewer
+   📥 Kapott eredmény: Category must be 50 characters or fewer
+   ✅ Egyezés: True
+
+🔹 Étel lekérdezése érvénytelen ID-val
+   ➤ Elvárt eredmény: Hiba: food_id must be a positive integer
+   📥 Kapott eredmény: food_id must be a positive integer
+   ✅ Egyezés: True
+
+🔹 Étel törlése érvénytelen ID-val
+   ➤ Elvárt eredmény: Hiba: food_id must be a positive integer
+   📥 Kapott eredmény: food_id must be a positive integer
+   ✅ Egyezés: True
+
+🔹 Nem létező étel módosítása
+   ➤ Elvárt eredmény: Hiba: Food with ID 99999 does not exist
+   📥 Kapott eredmény: Food with ID 99999 does not exist
+   ✅ Egyezés: True
+
+🔹 Sikeres étel létrehozás
+   ➤ Elvárt eredmény: Étel létrejött és lekérdezhető
+   📥 Kapott eredmény: Talált: Teszt Étel, 1200
+   ✅ Egyezés: True
+
+🔹 Sikeres étel módosítás
+   ➤ Elvárt eredmény: Étel adatai frissültek
+   📥 Kapott eredmény: Frissített név, 1500, Új kategória
+   ✅ Egyezés: True
+
+🔹 Sikeres étel törlés
+   ➤ Elvárt eredmény: Étel törölve, nem található többé
+   📥 Kapott eredmény: None
+   ✅ Egyezés: True
+
+🔹 Összes étel lekérdezése
+   ➤ Elvárt eredmény: Lista visszatér, minden elem Food típusú
+   📥 Kapott eredmény: Talált 2 étel
+   ✅ Egyezés: True
+
+🔹 Tesztétel lekérdezhető
+   ➤ Elvárt eredmény: Lekérdezett étel megegyezik a létrehozottal
+   📥 Kapott eredmény: Teszt Étel, 1200
+   ✅ Egyezés: True
+
+🔹 Tesztétel szerepel az összes étel listában
+   ➤ Elvárt eredmény: get_all_food() tartalmazza a létrehozott ételt
+   📥 Kapott eredmény: Szerepel: Teszt Étel
+   ✅ Egyezés: True
