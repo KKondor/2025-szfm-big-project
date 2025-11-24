@@ -51,6 +51,45 @@ python src/backend/app.py
 ```
 The url will be displayed in the console. Open it in the browser.
 
+## 3. Import the Database Schema and Procedures
+
+Before running the application, you must set up the database.
+
+You will find two SQL files inside the project:
+
+- `src/backend/database/táblákat_létrehozó_kódok.sql` — Schema file: creates all tables (users, foods, orders, order_items)
+- `src/backend/database/tárolt_eljárások.sql` — Procedure file: contains stored procedures used by the backend
+
+### Steps to import:
+
+1. Make sure the database defined in your `.env` file exists.
+
+```sql
+CREATE DATABASE fast-food_database;
+```
+
+2. Import the schema file:
+
+```bash
+mysql -u <DB_USER> -p fast-food_database < src/backend/database/táblákat_létrehozó_kódok.sql
+```
+
+3. Import the procedure file:
+
+```bash
+mysql -u <DB_USER> -p fast-food_database < src/backend/database/tárolt_eljárások.sql
+```
+
+If your MySQL user requires a host paramater:
+```bash
+mysql -h <DB_HOST> -u <DB_USER> -p fast-food_database < src/backend/database/táblákat_létrehozó_kódok.sql
+```
+
+After importing both files, your database will contain:
+
+- All required tables
+- All stored procedures used by the backend API
+
 ---
 
 # Features / Quick Runthrough
