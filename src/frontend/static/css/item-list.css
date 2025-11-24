@@ -331,3 +331,14 @@
     margin-top: 0.5rem;
   }
 }
+
+@media (max-height: 450px) {
+  .basket-total {
+    display: none;
+  }
+
+  .basket-item img{
+    width: clamp(2.5rem, 2vw, 3.5rem);
+    height: clamp(2.5rem, 2vw, 3.5rem);
+  }
+}
