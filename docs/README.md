@@ -50,3 +50,24 @@ pip install -r src/backend/requirements.txt
 python src/backend/app.py
 ```
 The url will be displayed in the console. Open it in the browser.
+
+---
+
+# Features / Quick Runthrough
+
+This section gives an overview of the main functionalities available in the Restaurant Webshop.
+
+## Customer Features
+
+- **Browse Foods**: View all available meals with details such as name, description, price, and category.  
+- **Add to Basket**: Select meals and add them to your basket for checkout.  
+- **Place Orders**: Complete the order workflow and confirm purchases.  
+- **User Authentication**: Sign up and log in to access personalized features.  
+
+## Admin Features
+
+- **Manage Users**: View, edit, or remove registered users.  
+- **Manage Orders**: Monitor all orders, update their status, and manage order history.  
+- **Manage Foods**: Add, update, or remove menu items available in the webshop.  
+
+---
