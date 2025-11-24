@@ -285,12 +285,12 @@
     top: auto;
     bottom: 0;
     left: 0;
-    width: 97vw;
+    width: 100vw;
     height: 30vh; 
     margin: 0;
     border-right: none;
     border-top: 2px solid var(--border);
-    padding: 0.5rem;
+    padding: 0;
     transform: translateY(100%); 
   }
 
