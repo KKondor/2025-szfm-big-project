@@ -2,13 +2,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(clamp(16rem, 40%, 22rem), 1fr));
   gap: 1.5rem;
-  margin-left: calc(min(80vw, 240px) + 1rem);
+  margin-left: calc(min(80vw, 320px) + 1rem);
 }
 
 .filter-bar {
   display: flex;
   justify-content: space-between;
-  margin-left: calc(min(80vw, 240px) + 1rem);
+  margin-left: calc(min(80vw, 320px) + 1rem);
   margin-bottom: 1rem;
 }
 
