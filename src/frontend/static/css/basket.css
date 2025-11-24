@@ -130,17 +130,3 @@
   }
 }
 
-@media (max-width: 480px) {
-  .basket-item {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .basket-item img {
-    align-self: center;
-  }
-
-  .basket-details {
-    justify-content: center;
-  }
-}
