@@ -3,7 +3,7 @@
 {% block title %}Edit {{ food.name }}{% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/edit-food.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
 <section class="edit-food-container">
   <h2>Edit Food: {{ food.name }}</h2>
 
-  <form method="POST" action="{{ url_for('update_food', food_id=food.id) }}" class="edit-food-form" enctype="multipart/form-data">
+  <form class="edit-food-form" id="edit-food-form" enctype="multipart/form-data">
     <div class="form-group">
       <label for="food-name">Name</label>
       <input id="food-name" name="name" type="text" value="{{ food.name }}" required>
@@ -24,13 +24,14 @@
 
     <div class="form-group">
       <label for="food-image">Image</label>
-      <input id="food-image" name="image" type="text" value="{{ food.image }}">
+      <input type="file" id="food-image" name="food-image" accept="image/*" value="{{ food.image }}">
+      <input type="hidden" id="old-image" value="{{ food.image }}">
       <img src="{{ url_for('static', filename='images/' ~ food.image) }}" alt="{{ food.name }}" class="preview-image">
     </div>
 
     <div class="form-group">
-      <label for="food-price">Price ($)</label>
-      <input id="food-price" name="price" type="number" step="0.01" value="{{ food.price }}" required>
+      <label for="food-price">Price (Ft)</label>
+      <input id="food-price" name="price" type="number" step="1" value="{{ food.price }}" required>
     </div>
 
     <div class="form-group">
@@ -40,10 +41,40 @@
 
     <div class="form-buttons">
       <button type="submit" class="save-btn">Save Changes</button>
-      <a href="{{ url_for('delete_food', food_id=food.id) }}" class="delete-btn">Delete Food</a>
+      <a href="{{ url_for('api.api_delete_food', food_id=food.id) }}" class="delete-btn">Delete Food</a>
     </div>
   </form>
 
-  <a href="{{ url_for('item_list') }}" class="back-link">← Back to list</a>
+  <a href="{{ url_for('main.item_list', filename = 'item-list.html') }}" class="back-link">← Back to list</a>
 </section>
+<script>
+  //Ezt ki lehet tolni egy külső js-re
+const form = document.querySelector("#edit-food-form");
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form); // automatically includes files
+    //ENNEK VISZONT A HTML-BEN KELL LENNIE
+    const foodId = "{{ food.id }}";
+
+    try {
+        const res = await fetch(`/api/foods/files/${foodId}`, {
+            method: "PUT",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+            throw new Error(data.message || "Failed to update food");
+        }
+
+        alert("Food updated successfully.");
+        window.location.href = "{{ url_for('main.item_list') }}";
+    } catch (err) {
+        console.error("Error updating food:", err);
+        alert("Error updating food: " + err.message);
+    }
+});
+</script>
 {% endblock %}

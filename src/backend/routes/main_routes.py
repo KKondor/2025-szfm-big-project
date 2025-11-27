@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, session
 from auth.auth_utils import login_required, admin_required
 from repository.users import UserManager
+from repository.foods import FoodManager
 
 main_bp = Blueprint('main', __name__)
 
@@ -48,3 +49,9 @@ def profile():
 @login_required
 def chatbot():
     return render_template('chatbot.html')
+
+@main_bp.route('/foods/<int:food_id>')
+def edit_food(food_id):
+    food_manager = FoodManager()
+    food = food_manager.get_food(food_id)
+    return render_template("edit.html", food=food)

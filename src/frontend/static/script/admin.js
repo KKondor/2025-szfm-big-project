@@ -55,23 +55,20 @@ function setupAddItemForm() {
       return;
     }
 
-    const imageName = file ? file.name : null;
-
-    const payload = {
-      name: name,
-      description: description || null,
-      image: imageName,
-      price: price,
-      category: category || null,
-    };
+    // Build FormData instead of JSON
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("category", category);
+    if (file) {
+      formData.append("image", file); // actual file object
+    }
 
     try {
-      const res = await fetch(`${API_BASE}/foods`, {
+      const res = await fetch(`${API_BASE}/foods/files`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        body: formData, // no headers, browser sets multipart/form-data automatically
       });
 
       const data = await res.json().catch(() => ({}));
@@ -87,41 +84,7 @@ function setupAddItemForm() {
       alert("Error creating food: " + err.message);
     }
   });
-}
 
-function setupUsers() {
-  const section = document.getElementById("manage-users");
-  if (!section) return;
-
-  const table = section.querySelector("table.admin-table");
-  const tbody = section.querySelector("tbody");
-  if (!table || !tbody) return;
-
-  loadUsers(tbody).catch((err) => {
-    console.warn("Nem sikerült betölteni a usereket, marad a statikus minta:", err);
-  });
-
-  table.addEventListener("change", async (e) => {
-    const select = e.target;
-    if (!select.classList.contains("role-select")) return;
-
-    const row = select.closest("tr");
-    const idCell = row?.querySelector("td:first-child");
-    if (!idCell) return;
-
-    const idText = idCell.textContent.trim(); 
-    const userId = parseInt(idText.replace("#", ""), 10);
-    const uiRole = select.value;            
-    const apiRole = uiRole.toLowerCase();   
-
-    try {
-      await updateUserRole(userId, apiRole);
-      showStatus(row, "Role updated ✓", false);
-    } catch (err) {
-      console.error(err);
-      showStatus(row, "Error updating role", true);
-    }
-  });
 }
 
 async function loadUsers(tbody) {
