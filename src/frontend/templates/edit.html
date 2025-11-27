@@ -41,7 +41,7 @@
 
     <div class="form-buttons">
       <button type="submit" class="save-btn">Save Changes</button>
-      <a href="{{ url_for('api.api_delete_food', food_id=food.id) }}" class="delete-btn">Delete Food</a>
+      <button type="button" class="delete-btn" id="delete-food-btn">Delete Food</button>
     </div>
   </form>
 
@@ -49,6 +49,27 @@
 </section>
 <script>
   //Ezt ki lehet tolni egy külső js-re
+document.querySelector("#delete-food-btn").addEventListener("click", async () => {
+    const foodId = "{{ food.id }}";
+    if (!confirm("Are you sure you want to delete this food?")) return;
+
+    try {
+        const res = await fetch(`/api/foods/${foodId}`, {
+            method: "DELETE"
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+            throw new Error(data.message || "Failed to delete food");
+        }
+
+        alert("Food deleted successfully.");
+        window.location.href = "{{ url_for('main.item_list') }}";
+    } catch (err) {
+        console.error("Error deleting food:", err);
+        alert("Error deleting food: " + err.message);
+    }
+});
 const form = document.querySelector("#edit-food-form");
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
