@@ -1,12 +1,20 @@
 """
 API routes for user authentication, food management, and orders.
 """
-from flask import Blueprint, request, jsonify, session
+import os
+from flask import Blueprint, request, jsonify, session, current_app as app
+from werkzeug.utils import secure_filename
 from services import users_service, foods_service, orders_service, auth_service
 from repository.users import User, Role
 from repository.orders import OrderStatus
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
+
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # ==================== USER AUTHENTICATION ENDPOINTS ====================
 
@@ -165,6 +173,32 @@ def api_create_food():
         return jsonify({'success': False, 'message': str(e)}), 400
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+@api_bp.route('/foods/files', methods=['POST'])
+def api_create_food_files():
+    try:
+        if session.get('user_role') != 'admin':
+            return jsonify({'success': False, 'message': 'Admin access required'}), 403
+
+        name = request.form.get('name')
+        description = request.form.get('description')
+        price = request.form.get('price')
+        category = request.form.get('category')
+
+        price = float(price) if price else None
+
+        file = request.files.get('image')
+        image_filename = None
+        if file and allowed_file(file.filename):
+            image_filename = secure_filename(file.filename)
+            save_path = os.path.join(app.static_folder, 'images', image_filename)
+            file.save(save_path)
+
+        foods_service.create_food(name, description, image_filename, price, category)
+        return jsonify({'success': True, 'message': 'Food created successfully'}), 201
+
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
     
 @api_bp.route('/foods/<int:food_id>', methods=['PUT'])
 def api_update_food(food_id):
@@ -190,6 +224,31 @@ def api_update_food(food_id):
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
     
+@api_bp.route('/foods/files/<int:food_id>', methods=['PUT'])
+def api_update_food_files(food_id):
+    try:
+        if session.get('user_role') != 'admin':
+            return jsonify({'success': False, 'message': 'Admin access required'}), 403
+        # Get text fields
+        name = request.form.get('name')
+        description = request.form.get('description')
+        price = int(request.form.get('price'))
+        category = request.form.get('category')
+
+        # Get file
+        file = request.files.get('food-image') 
+        image_filename = request.form.get('old-image') 
+        if file and allowed_file(file.filename):
+            image_filename = secure_filename(file.filename)
+            save_path = os.path.join(app.static_folder, 'images', image_filename)
+            file.save(save_path)
+
+        foods_service.update_food(food_id, name, description, image_filename, price, category)
+        return jsonify({'success': True, 'message': 'Food updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
+
 @api_bp.route('/foods/<int:food_id>', methods=['DELETE'])
 def api_delete_food(food_id):
     """Delete a food item. (Admin only)"""
