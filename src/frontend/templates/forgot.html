@@ -7,10 +7,9 @@
   <title>Reset your password</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/forgot.css') }}" />
 </head>
-<!--Ezt (ha jól csinálják) megoldja a html-->
 <body>
   <div class="forgot-container">
-    <form class="forgot-form" id="forgotForm">  
+    <form class="forgot-form" id="forgotForm" method="post">  
       <h2>Reset your password</h2>
       <div class="input-group">
         <label for="email">Email</label>
@@ -20,6 +19,16 @@
       <div class="input-group">
         <label for="new-password">New Password</label>
         <input type="password" id="new-password" name="new-password" required />
+      </div>
+      
+      <div class="pass-rules">
+        <p>Password must contain:</p>
+        <ul>
+          <li>At least 6 characters</li>
+          <li>At least one uppercase letter</li>
+          <li>At least one lowercase letter</li>
+          <li>At least one number</li>
+        </ul>
       </div>
 
       <div class="input-group">
@@ -33,7 +42,7 @@
         {% endif %} 
       </div>
 
-      <button type="submit">Change password</button>
+      <button>Change password</button>
 
       <p class="signup-text">
         <a href="{{ url_for('main.login', filename='login.html') }}">Back to login</a>
@@ -41,5 +50,5 @@
     </form>
   </div>
 </body>
-
+<script src="{{ url_for('static', filename='script/forgot.js') }}"></script>
 </html>
