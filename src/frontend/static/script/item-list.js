@@ -105,7 +105,7 @@ function renderFoods(reset = false) {
     container.innerHTML = `<div class="empty">No items found</div>`;
     return;
   }
-  
+
   const toRender = filtered.slice(renderedCount, renderedCount + PAGE_SIZE);
 
   toRender.forEach(food => {
@@ -292,4 +292,9 @@ function renderBasketSidebar() {
   checkoutBtn.onclick = () => {
     window.location.href = "/basket";
   };
+  if (items.length === 0) {
+    sidebar.classList.remove("active");
+  } else {
+    sidebar.classList.add("active");
+  }
 }
