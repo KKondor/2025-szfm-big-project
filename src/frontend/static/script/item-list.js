@@ -26,6 +26,15 @@ function initItemListPage() {
 }
 
 async function loadFoods() {
+  const container = document.querySelector(".item-list");
+  if (container) {
+    container.innerHTML = `
+      <div class="loading">
+        <div class="spinner"></div>
+        Loading items...
+      </div>`;
+  }
+  try {
   const res = await fetch(`${API_BASE}/foods`);
   if (!res.ok) throw new Error("GET /api/foods failed " + res.status);
 
@@ -39,6 +48,13 @@ async function loadFoods() {
   buildTypeOptionsFromFoods(allFoods);
   renderedCount = 0;
   renderFoods(true);
+  }
+  catch (err) {
+    console.error("Food load error:", err);
+    if (container) {
+      container.innerHTML = `<div class="error">Error loading items</div>`;
+  }
+  }
 }
 
 function buildTypeOptionsFromFoods(foods) {
@@ -85,6 +101,11 @@ function renderFoods(reset = false) {
     return (food.category || "").toLowerCase() === currentFilter.toLowerCase();
   });
 
+  if (filtered.length === 0 && reset) {
+    container.innerHTML = `<div class="empty">No items found</div>`;
+    return;
+  }
+  
   const toRender = filtered.slice(renderedCount, renderedCount + PAGE_SIZE);
 
   toRender.forEach(food => {
@@ -93,7 +114,6 @@ function renderFoods(reset = false) {
   });
 
   renderedCount += toRender.length;
-
   let loadMoreBtn = document.getElementById("load-more-foods");
   if (filtered.length > renderedCount) {
     if (!loadMoreBtn) {
