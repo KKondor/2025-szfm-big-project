@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-{% if is_admin %}
+{% if is_admin() %}
 <input type="hidden" id="is-admin" value="true">
 {% endif %}
 <!--Itt a userhez tartozó foodokat jeleníti meg-->
