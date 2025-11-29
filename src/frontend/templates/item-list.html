@@ -7,6 +7,9 @@
 {% endblock %}
 
 {% block body %}
+{% if is_admin %}
+  <input type="hidden" id="is-admin" value="true">
+{% endif %}
 <!--Itt a userhez tartozó foodokat jeleníti meg-->
 <aside id="basket-sidebar" class="basket-sidebar active">
   <h2>Your Basket</h2>

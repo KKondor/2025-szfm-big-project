@@ -154,6 +154,17 @@ function createFoodCard(food) {
   card.appendChild(info);
   card.appendChild(btn);
 
+  if (document.getElementById("is-admin")) {
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("edit-btn");
+    editBtn.textContent = "✏️";
+    editBtn.title = "Edit item";
+    editBtn.addEventListener("click", () => {
+      window.location.href = `/foods/${food.id}`;
+    });
+    card.appendChild(editBtn);
+  }
+
   return card;
 }
 
