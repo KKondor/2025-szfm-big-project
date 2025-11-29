@@ -48,7 +48,7 @@ h2 {
   flex-direction: column;
 }
 
-.error-message  {
+.error-message {
   margin-bottom: 1rem;
   font-size: 0.9rem;
   color: var(--danger);
@@ -103,18 +103,19 @@ button:hover {
 }
 
 .forgot-link {
-justify-content: center;
+  justify-content: center;
   text-align: center;
   margin-top: 0.5rem;
 }
 
-.forgot-link a{
-    font-size: 0.9rem;
-    text-decoration: none;
-    color: #9d8fff;
+.forgot-link a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #9d8fff;
 }
+
 .forgot-link a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 @media (max-height: 500px) {

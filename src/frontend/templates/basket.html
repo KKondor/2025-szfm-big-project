@@ -8,25 +8,25 @@
 
 {% block content %}
 <!--Meg kell jeleníteni a jelenlegi userhez tartozó food itemeket (ezt pontosan nem tudom hogy kéne)-->
-  <div class="basket-items">
-    <div class="basket-item">
-      <img src="{{ url_for('static', filename='images/food.jpg') }}" alt="Dish">
-      <div class="basket-info">
-        <h3>Pizza Margherita</h3>
-        <div class="basket-details">
-          <span class="basket-amount">x1</span>
-          <span class="basket-price">$12.00</span>
-        </div>
+<div class="basket-items">
+  <div class="basket-item">
+    <img src="{{ url_for('static', filename='images/food.jpg') }}" alt="Dish">
+    <div class="basket-info">
+      <h3>Pizza Margherita</h3>
+      <div class="basket-details">
+        <span class="basket-amount">x1</span>
+        <span class="basket-price">$12.00</span>
       </div>
-      <button class="remove-btn" aria-label="Remove item">&times;</button>
     </div>
+    <button class="remove-btn" aria-label="Remove item">&times;</button>
   </div>
+</div>
 
-  <div class="basket-total">
-    <span>Total:</span>
-    <span>$24.00</span>
-  </div>
-  <!--Csináljon egy új ordert és ürítse a userhez tartozó foodokat-->
-  <button class="checkout-btn">Checkout</button>
+<div class="basket-total">
+  <span>Total:</span>
+  <span>$24.00</span>
+</div>
+<!--Csináljon egy új ordert és ürítse a userhez tartozó foodokat-->
+<button class="checkout-btn">Checkout</button>
 <script src="{{ url_for('static', filename='script/basket.js') }}"></script>
 {% endblock %}

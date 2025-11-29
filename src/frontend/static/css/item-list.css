@@ -35,7 +35,9 @@
 }
 
 @keyframes spin {
-  100% { transform: rotate(360deg); }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .filter-bar {
@@ -64,14 +66,14 @@
 
 #food-type:hover,
 #food-type:focus {
-    border-color: var(--brand);
-    background: rgba(255, 255, 255, 0.08);
-    outline: none;
+  border-color: var(--brand);
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
 }
 
 #food-type option {
-    background-color: var(--bg_from);
-    color: var(--text);
+  background-color: var(--bg_from);
+  color: var(--text);
 }
 
 #food-search {
@@ -161,7 +163,7 @@
 .edit-btn {
   position: absolute;
   bottom: 0.8rem;
-  left: 0.8rem; 
+  left: 0.8rem;
   background: #f0d84e;
   color: white;
   border: none;
@@ -305,7 +307,7 @@
     margin-left: 0;
     margin-bottom: 35vh;
   }
-  
+
   .item-card {
     flex-direction: column;
     text-align: center;
@@ -329,15 +331,15 @@
   }
 
   .edit-btn {
-  position: absolute;
-  bottom: 7.5%; 
-  left: 0;
-  right: 0;
-  height: 7.5%;
-  width: 100%;
-  padding: 0rem;
-  background-color: #f0d84e;
-  border-radius: 0;
+    position: absolute;
+    bottom: 7.5%;
+    left: 0;
+    right: 0;
+    height: 7.5%;
+    width: 100%;
+    padding: 0rem;
+    background-color: #f0d84e;
+    border-radius: 0;
   }
 
   .filter-bar {
@@ -351,12 +353,12 @@
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 30vh; 
+    height: 30vh;
     margin: 0;
     border-right: none;
     border-top: 2px solid var(--border);
     padding: 0;
-    transform: translateY(100%); 
+    transform: translateY(100%);
   }
 
   .basket-sidebar.active {
@@ -388,7 +390,7 @@
     order: -1;
     margin: 0;
     justify-content: space-evenly;
-    border-top: none ;
+    border-top: none;
   }
 
   .checkout-btn {
@@ -402,7 +404,7 @@
     display: none;
   }
 
-  .basket-item img{
+  .basket-item img {
     width: clamp(2.5rem, 2vw, 3.5rem);
     height: clamp(2.5rem, 2vw, 3.5rem);
   }

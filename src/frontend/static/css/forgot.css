@@ -48,7 +48,7 @@ h2 {
   flex-direction: column;
 }
 
-.error-message  {
+.error-message {
   margin-bottom: 1rem;
   font-size: 0.9rem;
   color: var(--danger);

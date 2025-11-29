@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
 </head>
 <!--Ezt (ha jól csinálják) megoldja a html-->
+
 <body>
   <div class="login-container">
-    <form class="login-form" id="loginForm" method="POST" action="{{ url_for('auth_bp.login_route') }}">  
+    <form class="login-form" id="loginForm" method="POST" action="{{ url_for('auth_bp.login_route') }}">
       <h2>Welcome</h2>
       <div class="input-group">
         <label for="identifier">Email or Username</label>
@@ -22,10 +23,10 @@
         <input type="password" id="password" name="password" required />
       </div>
 
-      <div class ="error-message" id="error-message">
+      <div class="error-message" id="error-message">
         {% if error_message %}
-          <p>{{ error_message }}</p>
-        {% endif %} 
+        <p>{{ error_message }}</p>
+        {% endif %}
       </div>
 
       <button type="submit">Log In</button>
@@ -35,9 +36,9 @@
         <a href="{{ url_for('main.register', filename='register.html') }}">Sign up</a>
       </p>
       <div class="forgot-link">
-      <a href="{{ url_for('main.forgot', filename='forgot.html') }}">
-      Forgot your password?
-      </a>
+        <a href="{{ url_for('main.forgot', filename='forgot.html') }}">
+          Forgot your password?
+        </a>
       </div>
     </form>
   </div>

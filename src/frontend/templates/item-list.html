@@ -8,7 +8,7 @@
 
 {% block body %}
 {% if is_admin %}
-  <input type="hidden" id="is-admin" value="true">
+<input type="hidden" id="is-admin" value="true">
 {% endif %}
 <!--Itt a userhez tartozó foodokat jeleníti meg-->
 <aside id="basket-sidebar" class="basket-sidebar active">
@@ -35,14 +35,9 @@
       <option value="burger">Burger</option>
       <option value="salad">Salad</option>
     </select>
-    </div>
-    <input
-      type="text"
-      id="food-search"
-      placeholder="Search items..."
-      autocomplete="off"
-    >
   </div>
+  <input type="text" id="food-search" placeholder="Search items..." autocomplete="off">
+</div>
 <!--Felsorolja (lazyloadinggal) a foodokat. Az első példa az amit használni kéne templatenek-->
 <div class="item-list">
 </div>
