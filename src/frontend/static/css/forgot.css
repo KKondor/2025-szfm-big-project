@@ -48,12 +48,16 @@ h2 {
   flex-direction: column;
 }
 
-.error-message  {
+.error-message {
   margin-bottom: 1rem;
   font-size: 0.9rem;
   color: var(--danger);
   font-weight: 600;
   font-style: italic;
+}
+
+.error-message.success {
+  color: var(--brand-2);
 }
 
 label {
@@ -74,6 +78,11 @@ input:focus {
   outline: 2px solid #6c63ff;
 }
 
+.pass-rules {
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  font-style: italic;
+}
 
 button {
   width: 100%;

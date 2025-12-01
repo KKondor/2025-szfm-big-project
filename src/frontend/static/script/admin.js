@@ -55,23 +55,20 @@ function setupAddItemForm() {
       return;
     }
 
-    const imageName = file ? file.name : null;
-
-    const payload = {
-      name: name,
-      description: description || null,
-      image: imageName,
-      price: price,
-      category: category || null,
-    };
+    // Build FormData instead of JSON
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("category", category);
+    if (file) {
+      formData.append("image", file); // actual file object
+    }
 
     try {
-      const res = await fetch(`${API_BASE}/foods`, {
+      const res = await fetch(`${API_BASE}/foods/files`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        body: formData, // no headers, browser sets multipart/form-data automatically
       });
 
       const data = await res.json().catch(() => ({}));
@@ -87,6 +84,7 @@ function setupAddItemForm() {
       alert("Error creating food: " + err.message);
     }
   });
+
 }
 
 function setupUsers() {
@@ -125,6 +123,9 @@ function setupUsers() {
 }
 
 async function loadUsers(tbody) {
+  tbody.innerHTML = `<tr><td colspan="3" class="loading">Loading users...</td></tr>`;
+
+  try {
   const res = await fetch(`${API_BASE}/users`);
   if (!res.ok) throw new Error("GET /api/users failed " + res.status);
 
@@ -162,6 +163,9 @@ async function loadUsers(tbody) {
     tr.appendChild(roleTd);
     tbody.appendChild(tr);
   });
+}catch(err){
+    tbody.innerHTML = `<tr><td colspan="3" class="error">Error loading users: ${err.message}</td></tr>`;
+}
 }
 
 async function updateUserRole(userId, role) {
@@ -213,6 +217,11 @@ function setupOrders() {
 }
 
 async function loadOrders(list) {
+
+  list.innerHTML = `<div class="loading">Loading orders...</div>`;
+
+  try{
+
   const res = await fetch(`${API_BASE}/orders`);
   if (!res.ok) throw new Error("GET /api/orders failed " + res.status);
 
@@ -270,6 +279,9 @@ async function loadOrders(list) {
     card.appendChild(progress);
     list.appendChild(card);
   });
+  }catch(err){
+    list.innerHTML = `<div class="error">Error loading orders: ${err.message}</div>`;
+  }
 }
 
 async function updateOrderStatus(orderId, status) {

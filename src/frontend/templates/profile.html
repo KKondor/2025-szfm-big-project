@@ -9,39 +9,39 @@
 <!--Jelenítsd meg a felhasználó adatait-->
 {% block content %}
 <section class="profile-container" data-user-email="{{ session.get('user_email') }}"></section>
-  <h2>Your Profile</h2>
+<h2>Your Profile</h2>
 
-  <div class="profile-card">
-    <div class="profile-info">
-    </div>
+<div class="profile-card">
+  <div class="profile-info">
   </div>
+</div>
 
-  <div class="profile-tabs">
-    <button class="tab-btn active" data-target="view-orders">View Orders</button>
-    <button class="tab-btn" data-target="change-password">Change Password</button>
-  </div>
+<div class="profile-tabs">
+  <button class="tab-btn active" data-target="view-orders">View Orders</button>
+  <button class="tab-btn" data-target="change-password">Change Password</button>
+</div>
 <!--Jelenítsd meg a azokat a ordereket amik a userhez vannak kötve-->
-  <div class="profile-sections">
-    <div class="profile-section active" id="view-orders">
-      <h3>Your Orders</h3>
-      <div class="orders-list">
-        
-      </div>
-    </div>
-    <!--Jelezd a backendnek hogy a current user jelszava megváltozik-->
-    <div class="profile-section" id="change-password">
-      <h3>Change Password</h3>
-      <form class="profile-form">
-        <label>Current Password</label>
-        <input type="password" placeholder="Enter current password" required>
-        <label>New Password</label>
-        <input type="password" placeholder="Enter new password" required>
-        <label>Confirm New Password</label>
-        <input type="password" placeholder="Confirm new password" required>
-        <button class="btn">Update Password</button>
-      </form>
+<div class="profile-sections">
+  <div class="profile-section active" id="view-orders">
+    <h3>Your Orders</h3>
+    <div class="orders-list">
+
     </div>
   </div>
+  <!--Jelezd a backendnek hogy a current user jelszava megváltozik-->
+  <div class="profile-section" id="change-password">
+    <h3>Change Password</h3>
+    <form class="profile-form">
+      <label>Current Password</label>
+      <input type="password" placeholder="Enter current password" required>
+      <label>New Password</label>
+      <input type="password" placeholder="Enter new password" required>
+      <label>Confirm New Password</label>
+      <input type="password" placeholder="Confirm new password" required>
+      <button class="btn">Update Password</button>
+    </form>
+  </div>
+</div>
 </section>
 <!--Ez is mehet js-be-->
 <script src="{{ url_for('static', filename='script/profile.js') }}" defer></script>

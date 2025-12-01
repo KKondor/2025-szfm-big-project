@@ -97,65 +97,65 @@
 }
 
 .orders-list .order-card {
-  display: flex;
-  flex-direction: column;     
-  align-items: stretch;        
-  gap: 1rem;                   
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
-  border-radius: 0.6rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 6px var(--box_shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 0.6rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px var(--box_shadow);
 }
 
 .orders-list .order-card .order-info {
-  display: flex;
-  justify-content: flex-start;
-  gap: 1.5rem;
-  width: 100%;
-  min-width: 0;  
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    width: 100%;
+    min-width: 0;
 }
 
 .orders-list .order-card .order-progress {
-  width: 100%;
-  margin-left: 0;
-  flex-grow: 0;   
+    width: 100%;
+    margin-left: 0;
+    flex-grow: 0;
 }
 
 .orders-list .order-card .progress {
-  width: 100%;
-  height: 0.9rem; 
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
-  overflow: hidden;
+    width: 100%;
+    height: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
 }
 
 .orders-list .order-card .progress-bar {
-  height: 100%;
-  border-radius: 0.5rem;
-  border: 0.1rem solid var(--border);
-  transition: width 0.3s ease;
+    height: 100%;
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--border);
+    transition: width 0.3s ease;
 }
 
 .orders-list .order-card .order-items {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: 0.8rem;
-  padding: 1rem;
-  box-shadow: 0 2px 6px var(--box_shadow);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 0.8rem;
+    padding: 1rem;
+    box-shadow: 0 2px 6px var(--box_shadow);
 }
 
 .orders-list .order-card .order-items li {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
 }
 
 .orders-list .order-card .order-items .item-name {
-  flex: 1 1 auto;
-  min-width: 0; 
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 

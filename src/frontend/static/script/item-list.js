@@ -7,6 +7,7 @@ const PAGE_SIZE = 6;
 let allFoods = [];
 let currentFilter = "all";
 let renderedCount = 0;
+let searchTerm = "";
 
 document.addEventListener("DOMContentLoaded", () => {
   initItemListPage();
@@ -20,25 +21,60 @@ function initItemListPage() {
       renderFoods(true);
     });
   }
+  const searchInput = document.getElementById("food-search");
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      searchTerm = searchInput.value.trim().toLowerCase();
+      renderFoods(true);
+    });
+  }
 
   loadFoods().catch(err => console.error("Food load error:", err));
   renderBasketSidebar();
+  const header = document.querySelector(".site-header");
+  if (header) {
+    function updateSidebarOffset() {
+      const rect = header.getBoundingClientRect();
+      const visibleHeight = Math.max(0, rect.bottom - Math.max(0, rect.top));
+      document.documentElement.style.setProperty("--sidebar-top", visibleHeight + "px");
+    }
+
+    window.addEventListener("scroll", updateSidebarOffset);
+    window.addEventListener("resize", updateSidebarOffset);
+    updateSidebarOffset(); // run once on load
+  }
 }
 
 async function loadFoods() {
-  const res = await fetch(`${API_BASE}/foods`);
-  if (!res.ok) throw new Error("GET /api/foods failed " + res.status);
-
-  const data = await res.json();
-  if (!data.success || !Array.isArray(data.foods)) {
-    throw new Error("Invalid foods response");
+  const container = document.querySelector(".item-list");
+  if (container) {
+    container.innerHTML = `
+      <div class="loading">
+        <div class="spinner"></div>
+        Loading items...
+      </div>`;
   }
+  try {
+    const res = await fetch(`${API_BASE}/foods`);
+    if (!res.ok) throw new Error("GET /api/foods failed " + res.status);
 
-  allFoods = data.foods;
+    const data = await res.json();
+    if (!data.success || !Array.isArray(data.foods)) {
+      throw new Error("Invalid foods response");
+    }
 
-  buildTypeOptionsFromFoods(allFoods);
-  renderedCount = 0;
-  renderFoods(true);
+    allFoods = data.foods;
+
+    buildTypeOptionsFromFoods(allFoods);
+    renderedCount = 0;
+    renderFoods(true);
+  }
+  catch (err) {
+    console.error("Food load error:", err);
+    if (container) {
+      container.innerHTML = `<div class="error">Error loading items</div>`;
+    }
+  }
 }
 
 function buildTypeOptionsFromFoods(foods) {
@@ -81,9 +117,24 @@ function renderFoods(reset = false) {
   }
 
   const filtered = allFoods.filter(food => {
-    if (currentFilter === "all") return true;
-    return (food.category || "").toLowerCase() === currentFilter.toLowerCase();
+    const matchesCategory =
+      currentFilter === "all" ||
+      (food.category || "").toLowerCase() === currentFilter.toLowerCase();
+
+    const matchesSearch =
+      !searchTerm ||
+      food.name.toLowerCase().includes(searchTerm) ||
+      (food.description && food.description.toLowerCase().includes(searchTerm));
+
+    return matchesCategory && matchesSearch;
   });
+
+
+
+  if (filtered.length === 0 && reset) {
+    container.innerHTML = `<div class="empty">No items found</div>`;
+    return;
+  }
 
   const toRender = filtered.slice(renderedCount, renderedCount + PAGE_SIZE);
 
@@ -93,7 +144,6 @@ function renderFoods(reset = false) {
   });
 
   renderedCount += toRender.length;
-
   let loadMoreBtn = document.getElementById("load-more-foods");
   if (filtered.length > renderedCount) {
     if (!loadMoreBtn) {
@@ -104,9 +154,25 @@ function renderFoods(reset = false) {
       loadMoreBtn.addEventListener("click", () => renderFoods(false));
       container.parentElement.appendChild(loadMoreBtn);
     }
-  } else if (loadMoreBtn) {
+  }
+
+  else if (loadMoreBtn) {
     loadMoreBtn.remove();
   }
+
+  loadMoreBtn = document.getElementById("load-more-foods");
+
+  if (window.innerWidth <= 768) {
+      if (loadMoreBtn) {
+        container.style.marginBottom = "0"; 
+        loadMoreBtn.style.marginBottom = "35vh";
+      } else {
+        container.style.marginBottom = "35vh";
+      }
+    } else {
+      container.style.marginBottom = "1.5rem";
+      if (loadMoreBtn) loadMoreBtn.style.marginBottom = "1.5rem";
+    }
 }
 
 function createFoodCard(food) {
@@ -153,6 +219,17 @@ function createFoodCard(food) {
   card.appendChild(img);
   card.appendChild(info);
   card.appendChild(btn);
+
+  if (document.getElementById("is-admin")) {
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("edit-btn");
+    editBtn.textContent = "✏️";
+    editBtn.title = "Edit item";
+    editBtn.addEventListener("click", () => {
+      window.location.href = `/foods/${food.id}`;
+    });
+    card.appendChild(editBtn);
+  }
 
   return card;
 }
@@ -261,4 +338,9 @@ function renderBasketSidebar() {
   checkoutBtn.onclick = () => {
     window.location.href = "/basket";
   };
+  if (items.length === 0) {
+    sidebar.classList.remove("active");
+  } else {
+    sidebar.classList.add("active");
+  }
 }
