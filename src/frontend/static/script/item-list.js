@@ -33,18 +33,15 @@ function initItemListPage() {
   renderBasketSidebar();
   const header = document.querySelector(".site-header");
   if (header) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-          document.body.classList.remove("header-hidden");
-        } else {
-          document.body.classList.add("header-hidden");
-        }
-      },
-      { root: null, threshold: 0 }
-    );
-    observer.observe(header);
+    function updateSidebarOffset() {
+      const rect = header.getBoundingClientRect();
+      const visibleHeight = Math.max(0, rect.bottom - Math.max(0, rect.top));
+      document.documentElement.style.setProperty("--sidebar-top", visibleHeight + "px");
+    }
+
+    window.addEventListener("scroll", updateSidebarOffset);
+    window.addEventListener("resize", updateSidebarOffset);
+    updateSidebarOffset(); // run once on load
   }
 }
 
