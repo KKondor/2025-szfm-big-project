@@ -1,21 +1,37 @@
 .chatbot-container {
   max-width: 700px;
   margin: 2rem auto;
-  background: var(--cardbg);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
   padding: 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 4px 15px var(--box_shadow);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  height: 70vh;
+  height: 75vh;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .chatbot-container h2 {
   text-align: center;
   margin-bottom: 1rem;
   color: var(--text);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .chat-window {
@@ -25,81 +41,137 @@
   flex-direction: column;
   gap: 0.75rem;
   padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   scroll-behavior: smooth;
 }
 
+/* Modern scrollbar */
+.chat-window::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
 .message {
-  padding: 0.6rem 1rem;
-  border-radius: 12px;
+  padding: 0.7rem 1.1rem;
+  border-radius: 18px;
   max-width: 80%;
   word-wrap: break-word;
-  line-height: 1.4;
+  line-height: 1.45;
+  animation: msgFade 0.35s ease;
 }
 
+@keyframes msgFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bot bubble */
 .message.bot {
   align-self: flex-start;
-  background: var(--brand);
+  background: linear-gradient(135deg, var(--brand), #6caaff);
   color: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
+/* User bubble */
 .message.user {
   align-self: flex-end;
-  background: var(--brand-2);
+  background: linear-gradient(135deg, var(--brand-2), #6be5bf);
   color: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 #chat-form {
   display: flex;
   margin-top: 1rem;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 #user-input {
   flex: 1;
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--cardbg);
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text);
   outline: none;
-  transition: border-color 0.2s;
+  transition: 0.25s ease;
+  backdrop-filter: blur(6px);
 }
 
 #user-input:focus {
   border-color: var(--brand);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 #chat-form button {
-  background: var(--brand);
+  background: linear-gradient(135deg, var(--brand), #4f8bff);
   color: white;
   font-weight: 600;
   border: none;
-  border-radius: 12px;
-  padding: 0 1.5rem;
+  border-radius: 16px;
+  padding: 0 1.6rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: transform 0.2s ease, background 0.25s ease;
 }
 
 #chat-form button:hover {
-  background: var(--brand-2);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--brand-2), #50dba5);
 }
 
 @media (max-width: 768px) {
   .chatbot-container {
-    height: 80vh;
+    height: 85vh;
     padding: 1rem;
   }
 
-  #user-input {
-    padding: 0.6rem;
+  #chat-form button {
+    padding: 0 1.2rem;
+  }
+}
+
+.typing span {
+  height: 8px;
+  width: 8px;
+  margin: 0 2px;
+  background: white;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1.4s infinite both;
+}
+
+.typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
   }
 
-  #chat-form button {
-    padding: 0 1rem;
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.2;
   }
 }
