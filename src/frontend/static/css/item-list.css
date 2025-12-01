@@ -323,6 +323,36 @@ body.header-hidden {
   transition: background 0.2s ease;
 }
 
+.item-list {
+  margin-left: 1rem;
+}
+
+.filter-bar {
+  margin-left: 1rem;
+}
+
+#load-more-foods {
+  margin-left: 1rem;
+}
+
+.basket-sidebar.active~.content .item-list {
+  margin-left: calc(min(80vw, 320px) + 1rem);
+}
+
+.basket-sidebar.active~.content .filter-bar {
+  margin-left: calc(min(80vw, 320px) + 1rem);
+}
+
+.basket-sidebar.active~.content #load-more-foods {
+  margin-left: calc(min(80vw, 320px) + 1rem);
+}
+
+.item-list,
+.filter-bar,
+#load-more-foods {
+  transition: margin-left 0.25s ease;
+}
+
 #load-more-foods:hover {
   background: var(--brand-2);
 }
@@ -339,9 +369,36 @@ body.header-hidden {
     padding-bottom: 3rem;
   }
 
-   #load-more-foods {
+  #load-more-foods {
     margin: 1rem;
-    width: calc(100% - 2rem);            
+    width: calc(100% - 2rem);
+  }
+
+  .item-list,
+  .filter-bar{
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  .basket-sidebar.active ~ .content .item-list {
+    margin-left: 0;
+    margin-bottom: 35vh;
+  }
+
+  .basket-sidebar.active ~ .content #load-more-foods {
+    margin: 1rem;
+    margin-bottom: 35vh;
+  }
+
+  .basket-sidebar.active ~ .content .filter-bar {
+    margin-left: 0;
+  }
+
+  body.sidebar-active .item-list {
+    margin-bottom: 35vh;
+  }
+  body.has-load-more .item-list {
+    margin-bottom: 0 !important;
   }
 
   .item-card img {

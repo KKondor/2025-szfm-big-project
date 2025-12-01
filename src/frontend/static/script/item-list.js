@@ -41,7 +41,7 @@ function initItemListPage() {
 
     window.addEventListener("scroll", updateSidebarOffset);
     window.addEventListener("resize", updateSidebarOffset);
-    updateSidebarOffset(); // run once on load
+    updateSidebarOffset();
   }
 }
 
@@ -154,25 +154,17 @@ function renderFoods(reset = false) {
       loadMoreBtn.addEventListener("click", () => renderFoods(false));
       container.parentElement.appendChild(loadMoreBtn);
     }
-  }
-
-  else if (loadMoreBtn) {
-    loadMoreBtn.remove();
+    document.body.classList.add("has-load-more");
+  } else {
+    if (loadMoreBtn) loadMoreBtn.remove();
+    document.body.classList.remove("has-load-more");
   }
 
   loadMoreBtn = document.getElementById("load-more-foods");
 
-  if (window.innerWidth <= 768) {
-      if (loadMoreBtn) {
-        container.style.marginBottom = "0"; 
-        loadMoreBtn.style.marginBottom = "35vh";
-      } else {
-        container.style.marginBottom = "35vh";
-      }
-    } else {
-      container.style.marginBottom = "1.5rem";
-      if (loadMoreBtn) loadMoreBtn.style.marginBottom = "1.5rem";
-    }
+  const sidebar = document.getElementById("basket-sidebar");
+
+
 }
 
 function createFoodCard(food) {
@@ -340,7 +332,9 @@ function renderBasketSidebar() {
   };
   if (items.length === 0) {
     sidebar.classList.remove("active");
+    document.body.classList.remove("sidebar-active");
   } else {
     sidebar.classList.add("active");
+    document.body.classList.add("sidebar-active");
   }
 }

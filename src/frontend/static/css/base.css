@@ -35,6 +35,24 @@ body {
   top: 0;
   z-index: 100;
 }
+/*
+.site-header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;                  
+  left: 0;
+  width: calc(min(80vw, 320px) + 2rem);        
+  height: 1px;                   
+  background: var(--bg_from);    
+  pointer-events: none;
+}*/
+
+/* Disable the mask on mobile, since the sidebar docks at the bottom */
+@media (max-width: 768px) {
+  .site-header::after {
+    display: none;
+  }
+}
 
 .site-header a {
   color: var(--text);
