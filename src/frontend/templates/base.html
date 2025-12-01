@@ -20,7 +20,7 @@
       {% elif is_user() %}
       <a href="{{ url_for('main.profile') }}">Profile</a>
       {% endif %}
-
+      <a href ="{{url_for('main.chatbot')}}">Chatbot</a>
       {% if session.get('user_id') %}
       <a href="{{ url_for('auth_bp.logout') }}">Logout</a>
       {% endif %}

@@ -47,7 +47,6 @@
   scroll-behavior: smooth;
 }
 
-/* Modern scrollbar */
 .chat-window::-webkit-scrollbar {
   width: 6px;
 }
@@ -78,7 +77,6 @@
   }
 }
 
-/* Bot bubble */
 .message.bot {
   align-self: flex-start;
   background: linear-gradient(135deg, var(--brand), #6caaff);
@@ -86,7 +84,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-/* User bubble */
 .message.user {
   align-self: flex-end;
   background: linear-gradient(135deg, var(--brand-2), #6be5bf);
@@ -131,6 +128,10 @@
 #chat-form button:hover {
   transform: translateY(-2px);
   background: linear-gradient(135deg, var(--brand-2), #50dba5);
+}
+
+.typing.hidden {
+  display: none;
 }
 
 @media (max-width: 768px) {

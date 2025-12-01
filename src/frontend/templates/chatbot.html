@@ -12,16 +12,20 @@
   <h2>AI Chatbot</h2>
 
   <div class="chat-window" id="chat-window">
+    <!--Ez amit a bot vissza adat. Az alap első választ amit a promtból kap azt is írd ki-->
     <div class="message bot">Hello! How can I help you today?</div>
+    <!--Ezt kell készíteni amikor a user egy üzenetet küld-->
     <div class="message user">Hi! I have a question about your services.</div>
+    <!--Ez akkor legyen itt amikor a user küldött valamit de az ai még nem adott vissza választ. Amikor nem kell akkor add hozzá a hidden class-t-->
     <div class="message bot typing">
       <span></span><span></span><span></span>
     </div>
   </div>
 
+  <!--Vagy enter vagy button nyomásra küldi a botnak és csinál egy message user-t-->
   <form id="chat-form">
-    <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off" />
-    <button type="submit">Send</button>
+    <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off" name="message"/>
+    <button type="submit" id="send-btn">Send</button>
   </form>
 </section>
 
