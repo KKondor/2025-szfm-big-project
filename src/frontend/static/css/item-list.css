@@ -302,6 +302,24 @@
   transform: scale(1.2);
 }
 
+#load-more-foods {
+  display: block;
+  margin-left: calc(min(80vw, 320px) + 1rem);
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#load-more-foods:hover {
+  background: var(--brand-2);
+}
+
 @media (max-width: 768px) {
   .item-list {
     margin-left: 0;
@@ -312,6 +330,11 @@
     flex-direction: column;
     text-align: center;
     padding-bottom: 3rem;
+  }
+
+   #load-more-foods {
+    margin: 1rem;
+    width: calc(100% - 2rem);            
   }
 
   .item-card img {

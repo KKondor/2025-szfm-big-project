@@ -142,9 +142,25 @@ function renderFoods(reset = false) {
       loadMoreBtn.addEventListener("click", () => renderFoods(false));
       container.parentElement.appendChild(loadMoreBtn);
     }
-  } else if (loadMoreBtn) {
+  }
+
+  else if (loadMoreBtn) {
     loadMoreBtn.remove();
   }
+
+  loadMoreBtn = document.getElementById("load-more-foods");
+
+  if (window.innerWidth <= 768) {
+      if (loadMoreBtn) {
+        container.style.marginBottom = "0"; 
+        loadMoreBtn.style.marginBottom = "35vh";
+      } else {
+        container.style.marginBottom = "35vh";
+      }
+    } else {
+      container.style.marginBottom = "1.5rem";
+      if (loadMoreBtn) loadMoreBtn.style.marginBottom = "1.5rem";
+    }
 }
 
 function createFoodCard(food) {
