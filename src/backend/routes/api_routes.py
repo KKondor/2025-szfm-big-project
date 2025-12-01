@@ -2,9 +2,8 @@
 API routes for user authentication, food management, and orders.
 """
 from flask import Blueprint, request, jsonify, session
-from services import users_service, foods_service, orders_service, auth_service
-from repository.users import User, Role
-from repository.orders import OrderStatus
+from services import users_service, foods_service, orders_service, auth_service, chatbot_service
+from repository.users import User
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -84,13 +83,12 @@ def api_change_password():
         if not email or not new_password:
             return jsonify({'success': False, 'message': 'Email and new password required'}), 400
 
-        auth_service.change_password(email, new_password)
-        return jsonify({'success': True, 'message': 'Password changed successfully.'}), 200
-
-    except ValueError as ve:
-        return jsonify({'success': False, 'message': str(ve)}), 400
-    except RuntimeError as re:
-        return jsonify({'success': False, 'message': str(re)}), 500
+        result = auth_service.change_password(email, new_password)
+        
+        if result == "A jelszó sikeresen megváltozott.":
+            return jsonify({'success': True, 'message': result}), 200
+        else:
+            return jsonify({'success': False, 'message': result}), 400
     except Exception as e:
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
 
@@ -319,6 +317,7 @@ def api_update_order_status(order_id):
         if new_status not in ['pending', 'completed', 'cancelled']:
             return jsonify({'success': False, 'message': 'Status must be "pending", "completed", or "cancelled"'}), 400
 
+        from repository.orders import OrderStatus
         orders_service.update_order_status(order_id, OrderStatus(new_status))
         return jsonify({'success': True, 'message': 'Order status updated successfully'}), 200
     except ValueError as e:
@@ -397,13 +396,51 @@ def api_change_user_role(user_id):
         if new_role_value not in ['user', 'admin']:
             return jsonify({'success': False, 'message': 'Role must be "user" or "admin"'}), 400
 
-        
+        from backend.repository.users import Role
         new_role = Role(new_role_value)
-        users_service.change_user_role(user_id, new_role)
-        return jsonify({'success': True, 'message': 'Password change successful'}), 200
-            
-    except ValueError as ve:
-            return jsonify({'success': False, 'message': ve}), 400
-    except RuntimeError as re:
-            return jsonify({'success': False, 'message': re}), 500
+        result = users_service.change_user_role(user_id, new_role)
 
+        if result == "A jogosultság sikeresen módosítva.":
+            return jsonify({'success': True, 'message': result}), 200
+        else:
+            return jsonify({'success': False, 'message': result}), 400
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+
+@api_bp.route('/chatbot/clear-history', methods=['POST'])
+def api_clear_chatbot_history():
+    """Clear chatbot conversation history for the current user."""
+    try:
+        user_id = session.get('user_id')
+        if not user_id:
+            return jsonify({'success': False, 'message': 'User must be logged in'}), 401
+
+        chatbot_service.clear_history(user_id)
+        return jsonify({
+            'success': True,
+            'message': 'Conversation history cleared'
+        }), 200
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+
+
+@api_bp.route('/chatbot/message', methods=['POST'])
+def api_chatbot_message():
+    """Send a message to the AI chatbot and return its reply."""
+    try:
+        user_id = session.get('user_id')
+        if not user_id:
+            return jsonify({'success': False, 'message': 'User must be logged in'}), 401
+
+        data = request.get_json(silent=True) or {}
+        message = data.get('message') or data.get('text')
+        if not message:
+            return jsonify({'success': False, 'message': 'No message provided'}), 400
+
+        reply = chatbot_service.send_message(user_id, message)
+        return jsonify({'success': True, 'reply': reply}), 200
+    except ValueError as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
