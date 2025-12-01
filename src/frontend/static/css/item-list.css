@@ -184,9 +184,9 @@
   transform: scale(0.95);
 }
 
+/*Terrible fix but it is something*/
 .basket-sidebar {
   position: fixed;
-  margin-top: 7.5rem;
   top: 0;
   left: 0;
   width: min(80vw, 320px);
@@ -207,6 +207,7 @@
 }
 
 .basket-sidebar h2 {
+  margin-top: 7.5rem;
   font-size: clamp(1.1rem, 2vw, 1.25rem);
   margin-bottom: 1rem;
   border-bottom: thick solid var(--border);
