@@ -4,7 +4,7 @@ API routes for user authentication, food management, and orders.
 import os
 from flask import Blueprint, request, jsonify, session, current_app as app
 from werkzeug.utils import secure_filename
-from services import users_service, foods_service, orders_service, auth_service
+from services import users_service, foods_service, orders_service, auth_service, chatbot_service
 from repository.users import User, Role
 from repository.orders import OrderStatus
 
