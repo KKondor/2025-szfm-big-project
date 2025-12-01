@@ -31,6 +31,21 @@ function initItemListPage() {
 
   loadFoods().catch(err => console.error("Food load error:", err));
   renderBasketSidebar();
+  const header = document.querySelector(".site-header");
+  if (header) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          document.body.classList.remove("header-hidden");
+        } else {
+          document.body.classList.add("header-hidden");
+        }
+      },
+      { root: null, threshold: 0 }
+    );
+    observer.observe(header);
+  }
 }
 
 async function loadFoods() {
