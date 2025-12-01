@@ -36,6 +36,9 @@ DB_NAME=restaurant
 
 # Secret key for sessions
 SECRET_KEY=your-secret-key
+
+#
+AI_API_KEY = your-api-key
 ```
 To generate a strong secret key:
 ```bash
