@@ -323,3 +323,19 @@ def test_frontend_templates_exist():
         match = False
     report_result(description, expected, str(actual), match)
     assert match
+
+def test_frontend_css_files_present():
+    description = "Some common CSS files exist in static"
+    expected = "base.css and login.css present"
+    try:
+        base = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        css_dir = os.path.abspath(os.path.join(base, '..', 'frontend', 'static', 'css'))
+        files = ['base.css', 'login.css']
+        missing = [f for f in files if not os.path.exists(os.path.join(css_dir, f))]
+        actual = f"missing: {missing}"
+        match = len(missing) == 0
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
