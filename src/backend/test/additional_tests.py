@@ -41,4 +41,20 @@ def test_services_have_instances():
     except Exception as e:
         actual = str(e)
         match = False
-    report_result
+    report_result(description, expected, actual, match)
+    assert match
+
+def test_chatbot_service_interface():
+    description = "Chatbot service exposes methods"
+    expected = "has send_message and clear_history"
+    try:
+        from services import chatbot_service
+        has_send = callable(getattr(chatbot_service, 'send_message', None))
+        has_clear = callable(getattr(chatbot_service, 'clear_history', None))
+        actual = f"send_message: {has_send}, clear_history: {has_clear}"
+        match = has_send and has_clear
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
