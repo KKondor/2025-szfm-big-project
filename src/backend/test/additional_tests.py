@@ -133,3 +133,18 @@ def test_requirements_contains_flask():
         match = False
     report_result(description, expected, str(actual), match)
     assert match
+
+def test_services_module_init_exports():
+    description = "services package exports common symbols"
+    expected = "exports user_service, food_service"
+    try:
+        import services
+        has_user = hasattr(services, 'user_service')
+        has_food = hasattr(services, 'food_service')
+        actual = f"user_service: {has_user}, food_service: {has_food}"
+        match = has_user and has_food
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
