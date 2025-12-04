@@ -339,3 +339,16 @@ def test_frontend_css_files_present():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_api_blueprint_registered():
+    description = "API blueprint registered on Flask app"
+    expected = "'api' in app.blueprints"
+    try:
+        from app import app
+        actual = 'api' in app.blueprints
+        match = actual
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, str(actual), match)
+    assert match
