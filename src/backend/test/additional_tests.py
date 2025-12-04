@@ -193,3 +193,18 @@ def test_user_service_methods_exist():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_order_service_methods_exist():
+    description = "orders_service exposes create_order and get_order_by_user_id"
+    expected = "methods present"
+    try:
+        from services import order_service
+        has_create = hasattr(order_service, 'create_order')
+        has_get_user = hasattr(order_service, 'get_order_by_user_id')
+        actual = f"create: {has_create}, get_by_user: {has_get_user}"
+        match = has_create and has_get_user
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
