@@ -208,3 +208,18 @@ def test_order_service_methods_exist():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_auth_service_methods_exist():
+    description = "auth_service exposes register and login"
+    expected = "register and login exist"
+    try:
+        from services import auth_service
+        has_reg = hasattr(auth_service, 'register')
+        has_login = hasattr(auth_service, 'login')
+        actual = f"register: {has_reg}, login: {has_login}"
+        match = has_reg and has_login
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
