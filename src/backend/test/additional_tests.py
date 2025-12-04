@@ -309,3 +309,17 @@ def test_env_file_contains_ai_key():
         match = False
     report_result(description, expected, str(actual), match)
     assert match
+
+def test_frontend_templates_exist():
+    description = "Frontend templates directory exists"
+    expected = "src/frontend/templates exists"
+    try:
+        base = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        templates_path = os.path.abspath(os.path.join(base, '..', 'frontend', 'templates'))
+        actual = os.path.isdir(templates_path)
+        match = actual
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, str(actual), match)
+    assert match
