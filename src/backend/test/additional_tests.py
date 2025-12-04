@@ -86,3 +86,18 @@ def test_chatbot_clear_history_no_error():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_chatbot_set_and_clear_history():
+    description = "Setting then clearing conversation history removes key"
+    expected = "key removed"
+    try:
+        from services import chatbot_service
+        chatbot_service.conversation_history[123456] = object()
+        chatbot_service.clear_history(123456)
+        actual = str(123456 in chatbot_service.conversation_history)
+        match = 123456 not in chatbot_service.conversation_history
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
