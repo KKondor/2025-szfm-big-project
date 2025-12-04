@@ -163,3 +163,18 @@ def test_api_routes_module_contains_chatbot_endpoints():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_food_service_methods_exist():
+    description = "foods_service exposes CRUD methods"
+    expected = "create_food, get_food, get_all_food, update_food, delete_food"
+    try:
+        from services import food_service
+        methods = ['create_food','get_food','get_all_food','update_food','delete_food']
+        missing = [m for m in methods if not hasattr(food_service, m)]
+        actual = f"missing: {missing}"
+        match = len(missing) == 0
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
