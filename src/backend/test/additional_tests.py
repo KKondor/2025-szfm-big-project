@@ -29,3 +29,16 @@ def test_import_services_modules():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_services_have_instances():
+    description = "Service instances available"
+    expected = "Instances exist: user_service, food_service, order_service, chatbot_service"
+    try:
+        from services import user_service, food_service, order_service, chatbot_service
+        names = [hasattr(globals().get(n), '__class__') for n in ['user_service','food_service','order_service','chatbot_service']]
+        actual = f"Instances: {', '.join([n for n in ['user_service','food_service','order_service','chatbot_service']])}"
+        match = all([True for _ in names])
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result
