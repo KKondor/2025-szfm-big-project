@@ -262,3 +262,16 @@ def test_repository_order_status_exists():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_basic_flask_app_importable():
+    description = "Flask app importable"
+    expected = "app object is importable"
+    try:
+        from app import app
+        actual = type(app).__name__
+        match = True
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
