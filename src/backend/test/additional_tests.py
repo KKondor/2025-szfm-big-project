@@ -366,3 +366,21 @@ def test_docs_readme_exists():
         match = False
     report_result(description, expected, str(actual), match)
     assert match
+
+def test_requirements_generativeai_version_pinned():
+    description = "google-generativeai has pinned version in requirements"
+    expected = "google-generativeai==... present"
+    try:
+        base = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        req_path = os.path.join(base, 'requirements.txt')
+        with open(req_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        import re
+        m = re.search(r'google-generativeai\s*==\s*\S+', content)
+        actual = bool(m)
+        match = actual
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, str(actual), match)
+    assert match
