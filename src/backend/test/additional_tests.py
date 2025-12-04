@@ -117,3 +117,19 @@ def test_requirements_contains_generativeai():
         match = False
     report_result(description, expected, str(actual), match)
     assert match
+
+def test_requirements_contains_flask():
+    description = "requirements.txt lists Flask"
+    expected = "dependency present"
+    try:
+        base = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        req_path = os.path.join(base, 'requirements.txt')
+        with open(req_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        actual = 'Flask' in content
+        match = actual
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, str(actual), match)
+    assert match
