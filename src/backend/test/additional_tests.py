@@ -236,3 +236,16 @@ def test_repo_db_connect_exists():
         match = False
     report_result(description, expected, str(actual), match)
     assert match
+
+def test_repository_user_definitions():
+    description = "User dataclass and Role exist in repository.users"
+    expected = "User and Role present"
+    try:
+        from repository.users import User, Role
+        actual = f"User: {User.__name__}, Role: {Role.__name__}"
+        match = True
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
