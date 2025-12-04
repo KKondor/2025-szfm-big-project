@@ -275,3 +275,17 @@ def test_basic_flask_app_importable():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_static_images_directory_exists():
+    description = "Static images directory exists"
+    expected = "frontend/static/images directory present"
+    try:
+        base = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        images_dir = os.path.abspath(os.path.join(base, '..', 'frontend', 'static', 'images'))
+        actual = os.path.isdir(images_dir)
+        match = actual
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, str(actual), match)
+    assert match
