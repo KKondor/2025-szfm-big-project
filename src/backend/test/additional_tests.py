@@ -58,3 +58,16 @@ def test_chatbot_service_interface():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_chatbot_conversation_history_structure():
+    description = "Chatbot conversation_history is a dict"
+    expected = "dict type"
+    try:
+        from services import chatbot_service
+        actual = type(chatbot_service.conversation_history).__name__
+        match = isinstance(chatbot_service.conversation_history, dict)
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
