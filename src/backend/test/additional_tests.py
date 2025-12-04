@@ -223,3 +223,16 @@ def test_auth_service_methods_exist():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_repo_db_connect_exists():
+    description = "db_connect.get_connection exists"
+    expected = "function present"
+    try:
+        from repository.db_connect import get_connection
+        actual = callable(get_connection)
+        match = True if callable(get_connection) else False
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, str(actual), match)
+    assert match
