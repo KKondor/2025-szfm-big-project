@@ -148,3 +148,18 @@ def test_services_module_init_exports():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_api_routes_module_contains_chatbot_endpoints():
+    description = "api_routes defines chatbot endpoints"
+    expected = "api_chatbot_message and api_clear_chatbot_history exist"
+    try:
+        from routes import api_routes
+        has_msg = hasattr(api_routes, 'api_chatbot_message')
+        has_clear = hasattr(api_routes, 'api_clear_chatbot_history')
+        actual = f"msg: {has_msg}, clear: {has_clear}"
+        match = has_msg and has_clear
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
