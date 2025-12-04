@@ -352,3 +352,17 @@ def test_api_blueprint_registered():
         match = False
     report_result(description, expected, str(actual), match)
     assert match
+
+def test_docs_readme_exists():
+    description = "Project docs README exists"
+    expected = "docs/README.md present"
+    try:
+        repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+        readme = os.path.join(repo_root, 'docs', 'README.md')
+        actual = os.path.exists(readme)
+        match = actual
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, str(actual), match)
+    assert match
