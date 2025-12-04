@@ -1,0 +1,125 @@
+
+🔹 Import service modules
+   ➤ Elvárt eredmény: Modules import without ImportError
+   📥 Kapott eredmény: Imported
+   ✅ Egyezés: True
+
+🔹 Service instances available
+   ➤ Elvárt eredmény: Instances exist: user_service, food_service, order_service, chatbot_service
+   📥 Kapott eredmény: Instances: user_service, food_service, order_service, chatbot_service
+   ✅ Egyezés: True
+
+🔹 Chatbot service exposes methods
+   ➤ Elvárt eredmény: has send_message and clear_history
+   📥 Kapott eredmény: send_message: True, clear_history: True
+   ✅ Egyezés: True
+
+🔹 Chatbot conversation_history is a dict
+   ➤ Elvárt eredmény: dict type
+   📥 Kapott eredmény: dict
+   ✅ Egyezés: True
+
+🔹 Clear history no-op does not raise
+   ➤ Elvárt eredmény: no exception
+   📥 Kapott eredmény: cleared/ignored
+   ✅ Egyezés: True
+
+🔹 Setting then clearing conversation history removes key
+   ➤ Elvárt eredmény: key removed
+   📥 Kapott eredmény: False
+   ✅ Egyezés: True
+
+🔹 requirements.txt lists google-generativeai
+   ➤ Elvárt eredmény: dependency present
+   📥 Kapott eredmény: True
+   ✅ Egyezés: True
+
+🔹 requirements.txt lists Flask
+   ➤ Elvárt eredmény: dependency present
+   📥 Kapott eredmény: True
+   ✅ Egyezés: True
+
+🔹 services package exports common symbols
+   ➤ Elvárt eredmény: exports user_service, food_service
+   📥 Kapott eredmény: user_service: True, food_service: True
+   ✅ Egyezés: True
+
+🔹 api_routes defines chatbot endpoints
+   ➤ Elvárt eredmény: api_chatbot_message and api_clear_chatbot_history exist
+   📥 Kapott eredmény: msg: True, clear: True
+   ✅ Egyezés: True
+
+🔹 foods_service exposes CRUD methods
+   ➤ Elvárt eredmény: create_food, get_food, get_all_food, update_food, delete_food
+   📥 Kapott eredmény: missing: []
+   ✅ Egyezés: True
+
+🔹 users_service exposes expected methods
+   ➤ Elvárt eredmény: get_all_users and change_user_role exist
+   📥 Kapott eredmény: get_all: True, change_role: True
+   ✅ Egyezés: True
+
+🔹 orders_service exposes create_order and get_order_by_user_id
+   ➤ Elvárt eredmény: methods present
+   📥 Kapott eredmény: create: True, get_by_user: True
+   ✅ Egyezés: True
+
+🔹 auth_service exposes register and login
+   ➤ Elvárt eredmény: register and login exist
+   📥 Kapott eredmény: register: True, login: True
+   ✅ Egyezés: True
+
+🔹 db_connect.get_connection exists
+   ➤ Elvárt eredmény: function present
+   📥 Kapott eredmény: True
+   ✅ Egyezés: True
+
+🔹 User dataclass and Role exist in repository.users
+   ➤ Elvárt eredmény: User and Role present
+   📥 Kapott eredmény: User: User, Role: Role
+   ✅ Egyezés: True
+
+🔹 OrderStatus enum exists
+   ➤ Elvárt eredmény: OrderStatus present
+   📥 Kapott eredmény: OrderStatus
+   ✅ Egyezés: True
+
+🔹 Flask app importable
+   ➤ Elvárt eredmény: app object is importable
+   📥 Kapott eredmény: Flask
+   ✅ Egyezés: True
+
+🔹 Static images directory exists
+   ➤ Elvárt eredmény: frontend/static/images directory present
+   📥 Kapott eredmény: True
+   ✅ Egyezés: True
+
+🔹 Backend .env contains AI_API_KEY
+   ➤ Elvárt eredmény: AI_API_KEY present in .env
+   📥 Kapott eredmény: True
+   ✅ Egyezés: True
+
+🔹 Frontend templates directory exists
+   ➤ Elvárt eredmény: src/frontend/templates exists
+   📥 Kapott eredmény: True
+   ✅ Egyezés: True
+
+🔹 Some common CSS files exist in static
+   ➤ Elvárt eredmény: base.css and login.css present
+   📥 Kapott eredmény: missing: []
+   ✅ Egyezés: True
+
+🔹 API blueprint registered on Flask app
+   ➤ Elvárt eredmény: 'api' in app.blueprints
+   📥 Kapott eredmény: True
+   ✅ Egyezés: True
+
+🔹 Project docs README exists
+   ➤ Elvárt eredmény: docs/README.md present
+   📥 Kapott eredmény: False
+   ✅ Egyezés: False
+
+🔹 google-generativeai has pinned version in requirements
+   ➤ Elvárt eredmény: google-generativeai==... present
+   📥 Kapott eredmény: True
+   ✅ Egyezés: True
