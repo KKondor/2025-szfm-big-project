@@ -178,3 +178,18 @@ def test_food_service_methods_exist():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_user_service_methods_exist():
+    description = "users_service exposes expected methods"
+    expected = "get_all_users and change_user_role exist"
+    try:
+        from services import user_service
+        has_get_all = hasattr(user_service, 'get_all_users')
+        has_change = hasattr(user_service, 'change_user_role')
+        actual = f"get_all: {has_get_all}, change_role: {has_change}"
+        match = has_get_all and has_change
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
