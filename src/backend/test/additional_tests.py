@@ -249,3 +249,16 @@ def test_repository_user_definitions():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_repository_order_status_exists():
+    description = "OrderStatus enum exists"
+    expected = "OrderStatus present"
+    try:
+        from repository.orders import OrderStatus
+        actual = OrderStatus.__name__
+        match = True
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
