@@ -101,3 +101,19 @@ def test_chatbot_set_and_clear_history():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_requirements_contains_generativeai():
+    description = "requirements.txt lists google-generativeai"
+    expected = "dependency present"
+    try:
+        base = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        req_path = os.path.join(base, 'requirements.txt')
+        with open(req_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        actual = 'google-generativeai' in content
+        match = actual
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, str(actual), match)
+    assert match
