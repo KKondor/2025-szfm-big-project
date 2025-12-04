@@ -289,3 +289,23 @@ def test_static_images_directory_exists():
         match = False
     report_result(description, expected, str(actual), match)
     assert match
+
+def test_env_file_contains_ai_key():
+    description = "Backend .env contains AI_API_KEY"
+    expected = "AI_API_KEY present in .env"
+    try:
+        base = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        env_path = os.path.join(base, '.env')
+        if os.path.exists(env_path):
+            with open(env_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            actual = 'AI_API_KEY' in content
+            match = actual
+        else:
+            actual = 'no .env file'
+            match = False
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, str(actual), match)
+    assert match
