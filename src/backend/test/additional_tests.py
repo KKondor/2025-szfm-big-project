@@ -71,3 +71,18 @@ def test_chatbot_conversation_history_structure():
         match = False
     report_result(description, expected, actual, match)
     assert match
+
+def test_chatbot_clear_history_no_error():
+    description = "Clear history no-op does not raise"
+    expected = "no exception"
+    try:
+        from services import chatbot_service
+        # ensure key not present
+        chatbot_service.clear_history(999999)
+        actual = "cleared/ignored"
+        match = True
+    except Exception as e:
+        actual = str(e)
+        match = False
+    report_result(description, expected, actual, match)
+    assert match
