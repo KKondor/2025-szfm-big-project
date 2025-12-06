@@ -19,5 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    
+    form.addEventListener("submit", (e) => {
+        const pwd = passwordInput.value;
+        const result = validatePassword(pwd);
+
+        if (!result.isValid) {
+            e.preventDefault();
+            console.log("Validation failed", result.errors); // Ideiglenes log
+        }
+    });
+
 });
