@@ -15,4 +15,11 @@ function setupChatbot() {
   if (!chatWindow || !chatForm || !userInput) return;
 
   if (typingIndicator) typingIndicator.style.display = "none";
+
+
+
+
+  function scrollToBottom() {
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
 }
