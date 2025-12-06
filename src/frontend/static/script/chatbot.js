@@ -18,7 +18,19 @@ function setupChatbot() {
 
 
 
+  function appendMessage(text, sender) {
+    const msgDiv = document.createElement("div");
+    msgDiv.classList.add("message", sender);
+    msgDiv.textContent = text;
 
+    if (typingIndicator && typingIndicator.parentNode === chatWindow) {
+        chatWindow.insertBefore(msgDiv, typingIndicator);
+    } else {
+        chatWindow.appendChild(msgDiv);
+    }
+    scrollToBottom();
+  }
+  
   function scrollToBottom() {
     chatWindow.scrollTop = chatWindow.scrollHeight;
   }
