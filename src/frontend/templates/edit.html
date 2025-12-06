@@ -11,7 +11,7 @@
 <section class="edit-food-container">
   <h2>Edit Food: {{ food.name }}</h2>
 
-  <form class="edit-food-form" id="edit-food-form" enctype="multipart/form-data">
+  <form class="edit-food-form" id="edit-food-form" enctype="multipart/form-data" data-food-id="{{ food.id }}">
     <div class="form-group">
       <label for="food-name">Name</label>
       <input id="food-name" name="name" type="text" value="{{ food.name }}" required>
