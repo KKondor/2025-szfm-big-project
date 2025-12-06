@@ -23,6 +23,11 @@ function setupChatbot() {
 
     appendMessage(message, "user");
     userInput.value = "";
+
+    if (typingIndicator) {
+        typingIndicator.style.display = "flex";
+        scrollToBottom();
+    }
   });
 
   function appendMessage(text, sender) {
