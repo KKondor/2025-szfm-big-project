@@ -50,6 +50,7 @@ function setupChatbot() {
       if (typingIndicator) typingIndicator.style.display = "none";
       appendMessage("Error: Could not reach the server.", "bot");
     }
+  });
 
   function appendMessage(text, sender) {
     const msgDiv = document.createElement("div");
