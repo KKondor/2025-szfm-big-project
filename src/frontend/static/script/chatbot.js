@@ -16,7 +16,14 @@ function setupChatbot() {
 
   if (typingIndicator) typingIndicator.style.display = "none";
 
+  chatForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const message = userInput.value.trim();
+    if (!message) return;
 
+    appendMessage(message, "user");
+    userInput.value = "";
+  });
 
   function appendMessage(text, sender) {
     const msgDiv = document.createElement("div");
