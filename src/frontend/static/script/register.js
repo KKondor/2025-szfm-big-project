@@ -1,5 +1,9 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Register validation script initialized");
+    const form = document.getElementById("registerForm");
+    if (!form) return;
+
+    const passwordInput = document.getElementById("password");
+    const errorMessage = document.getElementById("error-message");
 });
