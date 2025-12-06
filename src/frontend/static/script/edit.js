@@ -12,6 +12,8 @@ function setupEditForm() {
   
   if (!form) return;
 
+  const foodId = form.dataset.foodId;
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     
