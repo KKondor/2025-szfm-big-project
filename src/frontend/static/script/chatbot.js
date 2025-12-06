@@ -28,6 +28,20 @@ function setupChatbot() {
         typingIndicator.style.display = "flex";
         scrollToBottom();
     }
+
+    try {
+      const res = await fetch(`${API_BASE}/chatbot/message`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message })
+      });
+
+      const data = await res.json().catch(() => ({}));
+      console.log("Response received", data);
+
+    } catch (err) {
+      console.error("Chatbot error:", err);
+    }
   });
 
   function appendMessage(text, sender) {
