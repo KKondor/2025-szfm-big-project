@@ -25,8 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!result.isValid) {
             e.preventDefault();
-            console.log("Validation failed", result.errors); // Ideiglenes log
+            errorMessage.innerHTML = "Password must meet all requirements:<br>";
+            if (!result.errors.hasLength) errorMessage.innerHTML += "- At least 6 characters<br>";
+            if (!result.errors.hasUpper) errorMessage.innerHTML += "- At least one uppercase letter<br>";
+            if (!result.errors.hasLower) errorMessage.innerHTML += "- At least one lowercase letter<br>";
+            if (!result.errors.hasNumber) errorMessage.innerHTML += "- At least one number<br>";
+            errorMessage.style.color = "red";
         }
     });
-
 });
