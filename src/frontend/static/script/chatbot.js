@@ -29,7 +29,7 @@ function setupChatbot() {
         scrollToBottom();
     }
 
-    try {
+   try {
       const res = await fetch(`${API_BASE}/chatbot/message`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,12 +37,19 @@ function setupChatbot() {
       });
 
       const data = await res.json().catch(() => ({}));
-      console.log("Response received", data);
 
+      if (typingIndicator) typingIndicator.style.display = "none";
+
+      if (res.ok && data.success) {
+        appendMessage(data.reply, "bot");
+      } else {
+        appendMessage("Sorry, I am having trouble connecting right now.", "bot");
+      }
     } catch (err) {
       console.error("Chatbot error:", err);
+      if (typingIndicator) typingIndicator.style.display = "none";
+      appendMessage("Error: Could not reach the server.", "bot");
     }
-  });
 
   function appendMessage(text, sender) {
     const msgDiv = document.createElement("div");
