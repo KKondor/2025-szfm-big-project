@@ -36,4 +36,28 @@ function setupEditForm() {
       alert("Error: " + err.message);
     }
   });
+
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", async () => {
+        if (!confirm("Are you sure you want to delete this food?")) return;
+
+        try {
+            const res = await fetch(`${API_BASE}/foods/${foodId}`, {
+                method: "DELETE"
+            });
+            const data = await res.json().catch(() => ({}));
+
+            if (!res.ok || !data.success) {
+                throw new Error(data.message || "Failed to delete food");
+            }
+
+            alert("Food deleted successfully.");
+            window.location.href = "/item-list.html"; 
+        } catch (err) {
+            console.error("Error deleting food:", err);
+            alert("Error: " + err.message);
+        }
+    });
+  }
+}
 }
