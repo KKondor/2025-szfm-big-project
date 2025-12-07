@@ -1,0 +1,39 @@
+🔹 Register: Jelszó validáció - Túl rövid jelszó
+   ➤ Elvárt eredmény: isValid: false
+   📥 Kapott eredmény: isValid: false
+   ✅ Egyezés: True
+
+🔹 Register: Jelszó validáció - Nincs nagybetű
+   ➤ Elvárt eredmény: hasUpper: false
+   📥 Kapott eredmény: hasUpper: false
+   ✅ Egyezés: True
+
+🔹 Register: Jelszó validáció - Nincs kisbetű
+   ➤ Elvárt eredmény: hasLower: false
+   📥 Kapott eredmény: hasLower: false
+   ✅ Egyezés: True
+
+🔹 Register: Jelszó validáció - Nincs szám
+   ➤ Elvárt eredmény: hasNumber: false
+   📥 Kapott eredmény: hasNumber: false
+   ✅ Egyezés: True
+
+🔹 Register: Jelszó validáció - Helyes erős jelszó
+   ➤ Elvárt eredmény: isValid: true
+   📥 Kapott eredmény: isValid: true
+   ✅ Egyezés: True
+
+🔹 Register: Jelszó validáció - Üres input mező
+   ➤ Elvárt eredmény: isValid: false
+   📥 Kapott eredmény: isValid: false
+   ✅ Egyezés: True
+
+🔹 Register: Jelszó validáció - Csak számok
+   ➤ Elvárt eredmény: isValid: false
+   📥 Kapott eredmény: isValid: false
+   ✅ Egyezés: True
+
+🔹 Register: DOM elemek jelenléte (form, input)
+   ➤ Elvárt eredmény: Elements found: true
+   📥 Kapott eredmény: Elements found: true
+   ✅ Egyezés: True
