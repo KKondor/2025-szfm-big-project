@@ -37,3 +37,43 @@
    ➤ Elvárt eredmény: Elements found: true
    📥 Kapott eredmény: Elements found: true
    ✅ Egyezés: True
+
+🔹 Chatbot: Üres üzenet küldésének tiltása
+   ➤ Elvárt eredmény: Error: Empty message
+   📥 Kapott eredmény: Error: Empty message
+   ✅ Egyezés: True
+
+🔹 Chatbot: API végpont helyessége
+   ➤ Elvárt eredmény: /api/chatbot/message
+   📥 Kapott eredmény: /api/chatbot/message
+   ✅ Egyezés: True
+
+🔹 Chatbot: Helyes üzenet küldése (Mock API)
+   ➤ Elvárt eredmény: Success: true
+   📥 Kapott eredmény: Success: true
+   ✅ Egyezés: True
+
+🔹 Chatbot: Válasz megjelenítése a DOM-ban
+   ➤ Elvárt eredmény: Message appended: true
+   📥 Kapott eredmény: Message appended: true
+   ✅ Egyezés: True
+
+🔹 Chatbot: Typing indikátor megjelenítése küldéskor
+   ➤ Elvárt eredmény: Display: flex
+   📥 Kapott eredmény: Display: flex
+   ✅ Egyezés: True
+
+🔹 Chatbot: Typing indikátor elrejtése válasz után
+   ➤ Elvárt eredmény: Display: none
+   📥 Kapott eredmény: Display: none
+   ✅ Egyezés: True
+
+🔹 Chatbot: Hálózati hiba kezelése
+   ➤ Elvárt eredmény: Error message displayed
+   📥 Kapott eredmény: Error message displayed
+   ✅ Egyezés: True
+
+🔹 Chatbot: Automatikus görgetés az aljára
+   ➤ Elvárt eredmény: scrollTop updated
+   📥 Kapott eredmény: scrollTop updated
+   ✅ Egyezés: True
