@@ -1064,6 +1064,18 @@ A frontend JavaScript modulok célja, hogy a rendszer használata gyors és kén
 - Interaktív elemek (gombok, tabok, kosár, admin műveletek) azonnali visszajelzést adnak.
 - A felhasználói élmény összhangban áll a nem-funkcionális követelményekkel (használhatóság, teljesítmény).
 
+#### 10.4.9. AI Chatbot kliensoldali logika (CHATBOT.JS)
+
+A `chatbot.js` modul felelős a felhasználó és az AI asszisztens közötti kommunikáció megjelenítéséért.
+
+**Fő funkciók:**
+
+- **Üzenetküldés:** A felhasználó által beírt szöveget a rendszer JSON formátumban POST kéréssel továbbítja a `/api/chatbot/message` végpontra.
+- **Vizuális visszajelzés (Typing indicator):** Amíg a szerver válaszol, egy animált "gépelés..." indikátor (`.typing` osztály) jelenik meg, jelezve a feldolgozást.
+- **Válasz megjelenítése:** A backendtől érkező választ (`data.reply`) a rendszer új üzenetbuborékként szúrja be a chatablakba.
+- **Automatikus görgetés:** Minden új üzenetnél a chatablak automatikusan az aljára görget, hogy a legfrissebb tartalom mindig látható legyen.
+- **Hibatűrés:** Hálózati hiba esetén a rendszer hibaüzenetet jelenít meg a chatben, és eltünteti a töltőanimációt.
+
 
 ## 11. Tesztterv
 
