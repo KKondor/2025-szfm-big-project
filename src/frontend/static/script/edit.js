@@ -32,7 +32,7 @@ function setupEditForm() {
       }
 
       alert("Food updated successfully.");
-      window.location.href = "/item-list.html"; 
+      window.location.href = `/item-list`; 
     } catch (err) {
       console.error("Error updating food:", err);
       alert("Error: " + err.message);
@@ -54,7 +54,7 @@ function setupEditForm() {
             }
 
             alert("Food deleted successfully.");
-            window.location.href = "/item-list.html"; 
+            window.location.href = "/item-list"; 
         } catch (err) {
             console.error("Error deleting food:", err);
             alert("Error: " + err.message);
