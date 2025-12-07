@@ -937,8 +937,9 @@ Felhasználó jogosultságának (szerepkörének) módosítása. **(Admin jogosu
 
 ### 10.4. Frontend javascript funkciók
 
-A rendszer frontendje különálló JavaScript modulokra épül, amelyek a kliensoldali logikát valósítják meg.  
-Ezek a modulok felelősek az ételek megjelenítéséért, a kosár kezeléséért, a rendelések továbbításáért, valamint az adminisztrációs és profil funkciók működtetéséért.
+A rendszer frontendje különálló, modularizált JavaScript fájlokra épül (`static/script/` mappa), amelyek a kliensoldali logikát valósítják meg. Ez a megközelítés biztosítja a kód átláthatóságát és a "Separation of Concerns" elv érvényesülését.
+
+A modulok felelősek az ételek megjelenítéséért, a kosár kezeléséért, a űrlapok validációjáért, valamint az aszinkron (AJAX/Fetch) kommunikációért a backend API-val.
 
 #### 10.4.1. Étel listázás és kategória szerinti szűrés (ITEM-LIST.JS)
 
