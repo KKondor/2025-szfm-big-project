@@ -1090,6 +1090,22 @@ A felhasználói élmény és a biztonság növelése érdekében a regisztráci
 - **Hibakezelés:** Amennyiben a jelszó nem felel meg, a `submit` esemény megállításra kerül (`e.preventDefault()`), és részletes hibaüzenet jelenik meg pirossal, felsorolva a hiányzó feltételeket.
 - **DOM manipuláció:** A szkript dinamikusan keresi meg az űrlap elemeit az ID-k alapján (`registerForm`, `password`, `error-message`).
 
+#### 10.4.11. Étel szerkesztés és törlés logikája (EDIT.JS)
+
+Az ételek módosításáért felelős logika külön JavaScript modulba került a karbantarthatóság érdekében.
+
+**Fő funkciók:**
+
+- **Adatok kinyerése:** A szkript a HTML `data-food-id` attribútumából olvassa ki az éppen szerkesztett étel azonosítóját.
+- **Módosítás (Update):**
+  - Az űrlap adatait `FormData` objektumként gyűjti össze (beleértve a fájlfeltöltést is).
+  - `PUT` kérést küld a `/api/foods/files/<id>` végpontra.
+  - Sikeres válasz esetén átirányítja a felhasználót az étlapra.
+- **Törlés (Delete):**
+  - A törlés gomb megnyomásakor megerősítő ablak (`confirm`) védi a véletlen törlést.
+  - `DELETE` kérést küld az API-nak.
+  - Sikeres törlés után visszanavigálja az admint a listanézetre.
+
 
 ## 11. Tesztterv
 
