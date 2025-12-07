@@ -34,7 +34,7 @@ A fejlesztendő rendszer célja, hogy a rendelési folyamat teljesen online, aut
 3. A kosárban ellenőrzi és véglegesíti a rendelést.  
 4. A backend rendszer eltárolja a rendelést és kiszámolja a végösszeget.  
 5. Az adminisztrátor a kezelőfelületen megtekinti az új rendeléseket és módosíthatja azok státuszát (pl. „Folyamatban”, „Kiszállítva”).  
-6. A felhasználó a profiloldalán követheti a rendelése státuszát, és AI chatbot segítségével kérhet információt vagy ajánlást.
+6. A felhasználó a profiloldalán követheti a rendelése státuszát. Az AI chatbot segítségével interaktív módon kérhet információt; a rendszer vizuális visszajelzést ad a válasz generálása közben.
 
 Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosít mindkét fél számára.
 
