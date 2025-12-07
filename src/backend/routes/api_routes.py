@@ -92,14 +92,23 @@ def api_change_password():
         if not email or not new_password:
             return jsonify({'success': False, 'message': 'Email and new password required'}), 400
 
-        result = auth_service.change_password(email, new_password)
-        
-        if result == "A jelszó sikeresen megváltozott.":
-            return jsonify({'success': True, 'message': result}), 200
-        else:
-            return jsonify({'success': False, 'message': result}), 400
+        # Call service — let it raise errors
+        auth_service.change_password(email, new_password)
+
+        # If no exception was thrown → success
+        return jsonify({'success': True, 'message': "Password change succesful."}), 200
+
+    except ValueError as e:
+        # User error (bad input or missing user)
+        return jsonify({'success': False, 'message': str(e)}), 400
+
+    except RuntimeError as e:
+        # DB/update error
+        return jsonify({'success': False, 'message': str(e)}), 500
+
     except Exception as e:
-        return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
+        # Unhandled unexpected error
+        return jsonify({'success': False, 'message': f"Server error: {str(e)}"}), 500
 
 # ==================== FOOD MANAGEMENT ENDPOINTS ====================
 
