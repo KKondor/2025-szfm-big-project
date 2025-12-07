@@ -1076,6 +1076,20 @@ A `chatbot.js` modul felelős a felhasználó és az AI asszisztens közötti ko
 - **Automatikus görgetés:** Minden új üzenetnél a chatablak automatikusan az aljára görget, hogy a legfrissebb tartalom mindig látható legyen.
 - **Hibatűrés:** Hálózati hiba esetén a rendszer hibaüzenetet jelenít meg a chatben, és eltünteti a töltőanimációt.
 
+#### 10.4.10. Regisztrációs űrlap validációja (REGISTER.JS)
+
+A felhasználói élmény és a biztonság növelése érdekében a regisztrációs űrlap kliensoldali validációval egészült ki.
+
+**Fő funkciók:**
+
+- **Jelszóerősség ellenőrzése:** A rendszer valós időben vagy küldéskor ellenőrzi, hogy a jelszó megfelel-e a követelményeknek:
+  - Legalább 6 karakter hosszú.
+  - Tartalmaz nagybetűt.
+  - Tartalmaz kisbetűt.
+  - Tartalmaz számot.
+- **Hibakezelés:** Amennyiben a jelszó nem felel meg, a `submit` esemény megállításra kerül (`e.preventDefault()`), és részletes hibaüzenet jelenik meg pirossal, felsorolva a hiányzó feltételeket.
+- **DOM manipuláció:** A szkript dinamikusan keresi meg az űrlap elemeit az ID-k alapján (`registerForm`, `password`, `error-message`).
+
 
 ## 11. Tesztterv
 
