@@ -77,3 +77,48 @@
    ➤ Elvárt eredmény: scrollTop updated
    📥 Kapott eredmény: scrollTop updated
    ✅ Egyezés: True
+
+🔹 Edit (Admin): Food ID kinyerése datasetből
+   ➤ Elvárt eredmény: ID: 123
+   📥 Kapott eredmény: ID: 123
+   ✅ Egyezés: True
+
+🔹 Edit (Admin): Törlés megerősítése (Cancel gomb)
+   ➤ Elvárt eredmény: API call prevented
+   📥 Kapott eredmény: API call prevented
+   ✅ Egyezés: True
+
+🔹 Edit (Admin): Törlés megerősítése (OK gomb)
+   ➤ Elvárt eredmény: API DELETE called
+   📥 Kapott eredmény: API DELETE called
+   ✅ Egyezés: True
+
+🔹 Edit (Admin): FormData objektum generálása
+   ➤ Elvárt eredmény: FormData created
+   📥 Kapott eredmény: FormData created
+   ✅ Egyezés: True
+
+🔹 Edit (Admin): Sikeres módosítás (PUT)
+   ➤ Elvárt eredmény: Success: true
+   📥 Kapott eredmény: Success: true
+   ✅ Egyezés: True
+
+🔹 Edit (Admin): Sikeres törlés (DELETE)
+   ➤ Elvárt eredmény: Success: true
+   📥 Kapott eredmény: Success: true
+   ✅ Egyezés: True
+
+🔹 Edit (Admin): Átirányítás siker esetén
+   ➤ Elvárt eredmény: window.location.href changed
+   📥 Kapott eredmény: window.location.href changed
+   ✅ Egyezés: True
+
+🔹 Global: API_BASE konstans ellenőrzése
+   ➤ Elvárt eredmény: /api
+   📥 Kapott eredmény: /api
+   ✅ Egyezés: True
+
+🔹 Global: Script betöltődés (DOMContentLoaded)
+   ➤ Elvárt eredmény: Event listener attached
+   📥 Kapott eredmény: Event listener attached
+   ✅ Egyezés: True
