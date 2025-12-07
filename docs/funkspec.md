@@ -58,7 +58,7 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
 - **Lépések:**
   1. Felhasználó megnyitja a regisztrációs oldalt  
   2. Adatok megadása (név, e-mail, jelszó)  
-  3. Backend validálja az adatokat
+  3. A rendszer kliens oldalon ellenőrzi a jelszó erősségét, majd a Backend validálja az adatokat
   4. Jelszó hash-elése, adatok mentése az adatbázisba
   5. Visszaigazolás a felhasználónak
 - **Utófeltétel:** Felhasználó fiókja létrejön, be tud lépni a rendszerbe.
@@ -66,6 +66,7 @@ Ez a folyamat gyorsabb, pontosabb és átláthatóbb rendeléskezelést biztosí
   - Ha a megadott e-mail már regisztrált, hibaüzenet jelenik meg.  
   - Ha a jelszó nem elég erős, felhasználót figyelmezteti a rendszer.  
   - Hibás adatbevitel esetén a rendszer újra kéri a helyes adatokat.
+  - Ha a jelszó nem felel meg a követelményeknek (hossz, karaktertípusok), a felület azonnal hibaüzenetet ad.
  
 #### UC2 – Bejelentkezés
 - **Szereplő:** Felhasználó  
