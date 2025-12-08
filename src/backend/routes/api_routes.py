@@ -92,7 +92,7 @@ def api_change_password():
         if not email or not new_password:
             return jsonify({'success': False, 'message': 'Email and new password required'}), 400
 
-                # Call service — let it raise errors
+        # Call service — let it raise errors
         auth_service.change_password(email, new_password)
 
         # If no exception was thrown → success
@@ -109,7 +109,6 @@ def api_change_password():
     except Exception as e:
         # Unhandled unexpected error
         return jsonify({'success': False, 'message': f"Server error: {str(e)}"}), 500
-
 
 # ==================== FOOD MANAGEMENT ENDPOINTS ====================
 
