@@ -937,8 +937,9 @@ Felhasználó jogosultságának (szerepkörének) módosítása. **(Admin jogosu
 
 ### 10.4. Frontend javascript funkciók
 
-A rendszer frontendje különálló JavaScript modulokra épül, amelyek a kliensoldali logikát valósítják meg.  
-Ezek a modulok felelősek az ételek megjelenítéséért, a kosár kezeléséért, a rendelések továbbításáért, valamint az adminisztrációs és profil funkciók működtetéséért.
+A rendszer frontendje különálló, modularizált JavaScript fájlokra épül (`static/script/` mappa), amelyek a kliensoldali logikát valósítják meg. Ez a megközelítés biztosítja a kód átláthatóságát és a "Separation of Concerns" elv érvényesülését.
+
+A modulok felelősek az ételek megjelenítéséért, a kosár kezeléséért, a űrlapok validációjáért, valamint az aszinkron (AJAX/Fetch) kommunikációért a backend API-val.
 
 #### 10.4.1. Étel listázás és kategória szerinti szűrés (ITEM-LIST.JS)
 
@@ -1063,6 +1064,48 @@ A frontend JavaScript modulok célja, hogy a rendszer használata gyors és kén
 - Valós idejű adatlekérés a backend API-k segítségével.
 - Interaktív elemek (gombok, tabok, kosár, admin műveletek) azonnali visszajelzést adnak.
 - A felhasználói élmény összhangban áll a nem-funkcionális követelményekkel (használhatóság, teljesítmény).
+
+#### 10.4.9. AI Chatbot kliensoldali logika (CHATBOT.JS)
+
+A `chatbot.js` modul felelős a felhasználó és az AI asszisztens közötti kommunikáció megjelenítéséért.
+
+**Fő funkciók:**
+
+- **Üzenetküldés:** A felhasználó által beírt szöveget a rendszer JSON formátumban POST kéréssel továbbítja a `/api/chatbot/message` végpontra.
+- **Vizuális visszajelzés (Typing indicator):** Amíg a szerver válaszol, egy animált "gépelés..." indikátor (`.typing` osztály) jelenik meg, jelezve a feldolgozást.
+- **Válasz megjelenítése:** A backendtől érkező választ (`data.reply`) a rendszer új üzenetbuborékként szúrja be a chatablakba.
+- **Automatikus görgetés:** Minden új üzenetnél a chatablak automatikusan az aljára görget, hogy a legfrissebb tartalom mindig látható legyen.
+- **Hibatűrés:** Hálózati hiba esetén a rendszer hibaüzenetet jelenít meg a chatben, és eltünteti a töltőanimációt.
+
+#### 10.4.10. Regisztrációs űrlap validációja (REGISTER.JS)
+
+A felhasználói élmény és a biztonság növelése érdekében a regisztrációs űrlap kliensoldali validációval egészült ki.
+
+**Fő funkciók:**
+
+- **Jelszóerősség ellenőrzése:** A rendszer valós időben vagy küldéskor ellenőrzi, hogy a jelszó megfelel-e a követelményeknek:
+  - Legalább 6 karakter hosszú.
+  - Tartalmaz nagybetűt.
+  - Tartalmaz kisbetűt.
+  - Tartalmaz számot.
+- **Hibakezelés:** Amennyiben a jelszó nem felel meg, a `submit` esemény megállításra kerül (`e.preventDefault()`), és részletes hibaüzenet jelenik meg pirossal, felsorolva a hiányzó feltételeket.
+- **DOM manipuláció:** A szkript dinamikusan keresi meg az űrlap elemeit az ID-k alapján (`registerForm`, `password`, `error-message`).
+
+#### 10.4.11. Étel szerkesztés és törlés logikája (EDIT.JS)
+
+Az ételek módosításáért felelős logika külön JavaScript modulba került a karbantarthatóság érdekében.
+
+**Fő funkciók:**
+
+- **Adatok kinyerése:** A szkript a HTML `data-food-id` attribútumából olvassa ki az éppen szerkesztett étel azonosítóját.
+- **Módosítás (Update):**
+  - Az űrlap adatait `FormData` objektumként gyűjti össze (beleértve a fájlfeltöltést is).
+  - `PUT` kérést küld a `/api/foods/files/<id>` végpontra.
+  - Sikeres válasz esetén átirányítja a felhasználót az étlapra.
+- **Törlés (Delete):**
+  - A törlés gomb megnyomásakor megerősítő ablak (`confirm`) védi a véletlen törlést.
+  - `DELETE` kérést küld az API-nak.
+  - Sikeres törlés után visszanavigálja az admint a listanézetre.
 
 
 ## 11. Tesztterv

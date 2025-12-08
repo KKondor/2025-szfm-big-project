@@ -39,6 +39,9 @@ SECRET_KEY=your-secret-key
 
 # API Key for the ai chatbot. 
 AI_API_KEY = your-api-key
+
+# On Using the openrouter branch (The chatbot_service.py contains the used model. Change if necesarry):
+OPENROUTER_API_KEY=your-key
 ```
 To generate a strong secret key:
 ```bash
